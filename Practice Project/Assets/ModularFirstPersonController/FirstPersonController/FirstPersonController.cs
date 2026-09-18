@@ -278,6 +278,7 @@ public class FirstPersonController : MonoBehaviour
         {
             if(isSprinting)
             {
+                //this is good to change the player fov when sprint
                 isZoomed = false;
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, sprintFOV, sprintFOVStepTime * Time.deltaTime);
 
