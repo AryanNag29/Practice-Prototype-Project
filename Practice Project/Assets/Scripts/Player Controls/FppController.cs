@@ -1,42 +1,93 @@
+using System.Security;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PrototypeProject
 {
+    [RequireComponent(typeof(CharacterController))]
+#if ENABLE_INPUT_SYSTEM
+    [RequireComponent(typeof(PlayerInput))]
+#endif
     public class FppController : MonoBehaviour
     {
         #region Reference
 
-        
-
         #endregion
-        
-        #region Variables
 
-        
+        #region Variables/Tools
+
+        [Header("Player")] [Tooltip("Movement Speed of Player in m/s")] [SerializeField]
+        private float moveSpeed = 4.0f;
+
+        [Tooltip("Sprint Speed of Player in m/s")] [SerializeField]
+        private float sprintSpeed = 6.0f;
+
+        [Tooltip("Rotation Speed of Player")] [SerializeField]
+        private float rotationSpeed = 1.0f;
+
+        [Tooltip("Acceleration and Decleration")] [SerializeField]
+        private float accelerationRate = 10f;
+
+        [SerializeField] private float decelerationRate = 10f;
+
+
+        [Space(10)] [Tooltip("The height the player can jump")] [SerializeField]
+        private float jumpHeight = 1.2f;
+
+        [Tooltip("Gravity rate for Player (g = 9.8 m/s)")] [SerializeField]
+        private float gravityRate = -15.0f;
+
+
+        [Space(10)] [Tooltip("Time interval for next jump. set to of to instantly jump again")] [SerializeField]
+        private float jumpTimeout = 0.1f;
+
+        [Tooltip("Time required to pass before entering the fall state. useful for walking down stairs")]
+        [SerializeField]
+        private float fallTimeout = 0.15f;
+
+        [Header("Player Grounded")]
+        [Tooltip("This is the check if the player is on the ground or not. required for jump")]
+        [SerializeField]
+        private bool isPlayerGrounded = true;
+
+        [Tooltip("Useful for rough Ground")] public float groundedOffset = -0.14f;
+
+        [Tooltip("The radius of the grounded check. should match the radius of the CharacterController")]
+        [SerializeField]
+        private float groundedRadius = 0.5f;
+
+        [Tooltip("What layer the character uses as ground checks")] [SerializeField]
+        private LayerMask groundLayer;
+
+        [Header("Cinemachine")]
+        [Tooltip("The follow target set in the cinemachine Virtual camera that will follow player")]
+        [SerializeField]
+        private GameObject cinemachineCameraTarget;
+
+        [Tooltip("How far in degrees can you move the camera up")] [SerializeField]
+        private float topCameraClamp = 90.0f;
+
+        [Tooltip("How far in degrees can you move the camera down")]
+        private float bottomCameraClamp = -90.0f;
 
         #endregion
 
         #region Struct
 
-        
-
         #endregion
-        
+
         #region Functions
 
-        
-
         #endregion
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-        
         }
 
         // Update is called once per frame
         void Update()
         {
-        
         }
     }
 }
