@@ -17,7 +17,8 @@ namespace PrototypeProject
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
-        private CharacterController _characterController;
+        private Animator _animator;
+        private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
@@ -81,9 +82,11 @@ namespace PrototypeProject
 
         #region Private Variable
 
+        private bool _hasAnimator;
         private const float _threshold = 0.01f;
 
         //cinemachine
+        private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
 
         //player
@@ -107,11 +110,11 @@ namespace PrototypeProject
         {
             get
             {
-                #if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM
                 return _playerInput.currentControlScheme == "KeyboardMouse";
-                #else
+#else
                 return false;
-                #endif
+#endif
             }
         }
 
@@ -130,19 +133,31 @@ namespace PrototypeProject
 
         private void LateUpdate()
         {
-            
         }
 
         #endregion
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        #region Start/Update
+
         void Start()
         {
+            _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
+            _hasAnimator = TryGetComponent(out _animator);
+            _controller = GetComponent<CharacterController>();
+            _input = GetComponent<StarterAssetsInputs>();
+#if ENABLE_INPUT_SYSTEM
+            _playerInput = GetComponent<PlayerInput>();
+#else
+            Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
+#endif
         }
 
-        // Update is called once per frame
+
         void Update()
         {
         }
+
+        #endregion
     }
 }
