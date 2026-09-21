@@ -80,6 +80,8 @@ namespace PrototypeProject
 
         #region Private Variable
 
+        private const float _threshold = 0.01f;
+
         //cinemachine
         private float _cinemachineTargetPitch;
 
@@ -99,6 +101,8 @@ namespace PrototypeProject
         #endregion
 
         #region Functions
+        
+        
 
         #endregion
 
