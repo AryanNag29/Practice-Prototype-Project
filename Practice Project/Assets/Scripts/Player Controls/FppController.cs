@@ -1,3 +1,4 @@
+using System;
 using System.Security;
 using StarterAssets;
 using UnityEngine;
@@ -101,8 +102,36 @@ namespace PrototypeProject
         #endregion
 
         #region Functions
-        
-        
+
+        private bool IsCurrentDeviceMouse
+        {
+            get
+            {
+                #if ENABLE_INPUT_SYSTEM
+                return _playerInput.currentControlScheme == "KeyboardMouse";
+                #else
+                return false;
+                #endif
+            }
+        }
+
+        #endregion
+
+        #region Awake/LateUpdate
+
+        private void Awake()
+        {
+            //get a reference to our main camera
+            if (_mainCamera == null)
+            {
+                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            }
+        }
+
+        private void LateUpdate()
+        {
+            
+        }
 
         #endregion
 
