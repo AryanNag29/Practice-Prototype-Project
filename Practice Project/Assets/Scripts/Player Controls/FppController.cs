@@ -1,4 +1,5 @@
 using System.Security;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,13 @@ namespace PrototypeProject
     public class FppController : MonoBehaviour
     {
         #region Reference
+
+#if ENABLE_INPUT_SYSTEM
+        private PlayerInput _playerInput;
+#endif
+        private CharacterController _characterController;
+        private StarterAssetsInputs _input;
+        private GameObject _mainCamera;
 
         #endregion
 
@@ -69,6 +77,20 @@ namespace PrototypeProject
 
         [Tooltip("How far in degrees can you move the camera down")]
         private float bottomCameraClamp = -90.0f;
+
+        #region Private Variable
+
+        //cinemachine
+        private float _cinemachineTargetPitch;
+
+        //player
+        private float _speed;
+
+        //timeout deltatime
+        private float _jumpTimeoutDelta;
+        private float _fallTimeoutDelta;
+
+        #endregion
 
         #endregion
 
