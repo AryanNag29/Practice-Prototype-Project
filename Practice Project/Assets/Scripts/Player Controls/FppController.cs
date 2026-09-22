@@ -96,6 +96,13 @@ namespace PrototypeProject
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
 
+        //animation IDs
+        private int _animIDSpeed;
+        private int _animIDGrounded;
+        private int _animIDJump;
+        private int _animIDFreeFall;
+        private int _animIDMotionSpeed;
+
         #endregion
 
         #endregion
