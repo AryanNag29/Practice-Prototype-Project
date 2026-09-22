@@ -60,6 +60,10 @@ namespace PrototypeProject
         [SerializeField]
         private bool isPlayerGrounded = true;
 
+        [Header("Player Grounded")]
+        [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
+        public bool Grounded = true;
+
         [Tooltip("Useful for rough Ground")] public float groundedOffset = -0.14f;
 
         [Tooltip("The radius of the grounded check. should match the radius of the CharacterController")]
@@ -127,10 +131,26 @@ namespace PrototypeProject
 
         private void AssignAnimationIDs()
         {
+            _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDGrounded = Animator.StringToHash("Grounded");
+            _animIDJump = Animator.StringToHash("Jump");
+            _animIDFreeFall = Animator.StringToHash("FreeFall");
+            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
         }
 
         private void GroundCheck()
         {
+            //set sphere positon, with offset 
+            Vector3 spherePositon = new Vector3(transform.position.x, transform.position.y - groundedOffset,
+                transform.position.z);
+            //to check the grouned is ture or not 
+            Grounded = Physics.CheckSphere(spherePositon, groundedRadius, groundLayer, QueryTriggerInteraction.Ignore);
+            
+            //update animator if using character
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDGrounded,Grounded);
+            }
         }
 
         private void CameraRotation()
