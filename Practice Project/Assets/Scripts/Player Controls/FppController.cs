@@ -118,6 +118,43 @@ namespace PrototypeProject
             }
         }
 
+        private void AssignAnimationIDs()
+        {
+        }
+
+        private void GroundCheck()
+        {
+        }
+
+        private void CameraRotation()
+        {
+        }
+
+        private void Move()
+        {
+        }
+
+        private void JumpAndGravity()
+        {
+        }
+
+        // private static float CLampAngle(float lfAngle, float lfMin, float lfMax)
+        // {
+        //     
+        // }
+
+        private void OnDrawGizmosSelected()
+        {
+        }
+
+        private void OnFootStep(AnimationEvent animationEvent)
+        {
+        }
+
+        private void OnLand(AnimationEvent animationEvent)
+        {
+        }
+
         #endregion
 
         #region Awake/LateUpdate
@@ -133,6 +170,7 @@ namespace PrototypeProject
 
         private void LateUpdate()
         {
+            CameraRotation();
         }
 
         #endregion
@@ -143,6 +181,7 @@ namespace PrototypeProject
         void Start()
         {
             _cinemachineTargetYaw = cinemachineCameraTarget.transform.rotation.eulerAngles.y;
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -151,11 +190,20 @@ namespace PrototypeProject
 #else
             Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
+            AssignAnimationIDs();
+
+            // reset out timeout on start
+            _jumpTimeoutDelta = jumpTimeout;
+            _fallTimeoutDelta = fallTimeout;
         }
 
 
         void Update()
         {
+            _hasAnimator = TryGetComponent(out _animator);
+            JumpAndGravity();
+            GroundCheck();
+            Move();
         }
 
         #endregion
