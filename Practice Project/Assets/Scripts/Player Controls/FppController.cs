@@ -84,6 +84,12 @@ namespace PrototypeProject
         [Tooltip("How far in degrees can you move the camera down")]
         private float bottomCameraClamp = -90.0f;
 
+        [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
+        public float CameraAngleOverride = 0.0f;
+
+        [Tooltip("For locking the camera position on all axis")]
+        public bool LockCameraPosition = false;
+
         #region Private Variable
 
         private bool _hasAnimator;
@@ -145,16 +151,33 @@ namespace PrototypeProject
                 transform.position.z);
             //to check the grouned is ture or not 
             Grounded = Physics.CheckSphere(spherePositon, groundedRadius, groundLayer, QueryTriggerInteraction.Ignore);
-            
+
             //update animator if using character
             if (_hasAnimator)
             {
-                _animator.SetBool(_animIDGrounded,Grounded);
+                _animator.SetBool(_animIDGrounded, Grounded);
             }
         }
 
         private void CameraRotation()
         {
+            //if there is an input and camera positon is not fixed
+            if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
+            {
+                //Don't multiply mouse input by Time.DeltaTime;
+                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+
+                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
+                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
+            }
+
+            //clamp out rotation so our values are limited 360 degrees
+            _cinemachineTargetYaw = CLampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+            _cinemachineTargetPitch = CLampAngle(_cinemachineTargetPitch, bottomCameraClamp, topCameraClamp);
+
+            //cinemachine will follow this target
+            cinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+                _cinemachineTargetYaw, 0.0f);
         }
 
         private void Move()
@@ -165,10 +188,12 @@ namespace PrototypeProject
         {
         }
 
-        // private static float CLampAngle(float lfAngle, float lfMin, float lfMax)
-        // {
-        //     
-        // }
+        private static float CLampAngle(float lfAngle, float lfMin, float lfMax)
+        {
+            if (lfAngle < -360f) lfAngle += 360f;
+            if (lfAngle > 360f) lfAngle -= 360f;
+            return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        }
 
         private void OnDrawGizmosSelected()
         {
