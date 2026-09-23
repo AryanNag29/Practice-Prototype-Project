@@ -35,11 +35,12 @@ namespace PrototypeProject
         [Tooltip("Rotation Speed of Player")] [SerializeField]
         private float rotationSpeed = 1.0f;
 
-        [Tooltip("Acceleration and Decleration")] [SerializeField]
-        private float accelerationRate = 10f;
+        [Tooltip("Acceleration and deceleration")]
+        public float SpeedChangeRate = 10.0f;
 
-        [SerializeField] private float decelerationRate = 10f;
-
+        public AudioClip LandingAudioClip;
+        public AudioClip[] FootstepAudioClips;
+        [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
         [Space(10)] [Tooltip("The height the player can jump")] [SerializeField]
         private float jumpHeight = 1.2f;
@@ -101,6 +102,11 @@ namespace PrototypeProject
 
         //player
         private float _speed;
+        private float _animationBlend;
+        private float _targetRotation = 0.0f;
+        private float _rotationVelocity;
+        private float _verticalVelocity;
+        private float _terminalVelocity = 53.0f;
 
         //timeout deltatime
         private float _jumpTimeoutDelta;
@@ -197,6 +203,28 @@ namespace PrototypeProject
             float speedOffset = 0.1f;
             //analog movement is use to how far the stick is pressed.gradual movement 
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+
+            //accelaration  or decleration to target speed
+            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+                currentHorizontalSpeed > targetSpeed + speedOffset)
+            {
+                //create curved result rather then a linear one giving a more organic speed change
+                //note T in lerp in clamped, so we don't need to clamp our speed
+                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                    Time.deltaTime * SpeedChangeRate);
+
+                //round speed to 3 decimal places
+                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+            }
+            // if current horizontal speed is == targetspeed
+            else
+            {
+                _speed = targetSpeed;
+            }
+
+            // //this is to change the speed and blend rate of the animation according to the player speed
+            // _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            // if (_animationBlend < 0.01f) _animationBlend = 0f;
         }
 
         private void JumpAndGravity()
