@@ -225,6 +225,9 @@ namespace PrototypeProject
             //this is to change the speed and blend rate of the animation according to the player speed
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
+            
+            //normalize input direction
+            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
         }
 
         private void JumpAndGravity()
