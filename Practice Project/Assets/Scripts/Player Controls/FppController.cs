@@ -222,9 +222,9 @@ namespace PrototypeProject
                 _speed = targetSpeed;
             }
 
-            // //this is to change the speed and blend rate of the animation according to the player speed
-            // _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            // if (_animationBlend < 0.01f) _animationBlend = 0f;
+            //this is to change the speed and blend rate of the animation according to the player speed
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            if (_animationBlend < 0.01f) _animationBlend = 0f;
         }
 
         private void JumpAndGravity()
