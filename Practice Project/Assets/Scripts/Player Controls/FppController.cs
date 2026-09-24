@@ -262,6 +262,19 @@ namespace PrototypeProject
 
         private void JumpAndGravity()
         {
+            if (Grounded)
+            {
+                //reset the fall timeout timer
+                _fallTimeoutDelta = fallTimeout;
+                
+                //update animator if using character
+                //if character is grounded then making the turning off the jump and fall animation
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDJump,false);
+                    _animator.SetBool(_animIDFreeFall,false);
+                }
+            }
         }
 
         private static float CLampAngle(float lfAngle, float lfMin, float lfMax)
