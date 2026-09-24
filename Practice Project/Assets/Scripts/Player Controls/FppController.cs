@@ -31,9 +31,8 @@ namespace PrototypeProject
 
         [Tooltip("Sprint Speed of Player in m/s")] [SerializeField]
         private float sprintSpeed = 6.0f;
-        
-        [Tooltip("How fast the character turns to face movement direction")]
-        [Range(0.0f, 0.3f)]
+
+        [Tooltip("How fast the character turns to face movement direction")] [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
 
         [Tooltip("Rotation Speed of Player")] [SerializeField]
@@ -229,10 +228,10 @@ namespace PrototypeProject
             //this is to change the speed and blend rate of the animation according to the player speed
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
-            
+
             //normalize input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-            
+
             //note: vector2's != operator uses approximation so is not floating point error prone, and is cheaper then magnitude
             // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
@@ -241,22 +240,22 @@ namespace PrototypeProject
                                   _mainCamera.transform.eulerAngles.y;
                 float rotaion = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
-                
+
                 //rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotaion, 0.0f);
             }
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-            
+
             //move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-            
+
             //update animator if using character
             if (_hasAnimator)
             {
-                _animator.SetFloat(_animIDSpeed,_animationBlend);
-                _animator.SetFloat(_animIDMotionSpeed,inputMagnitude);
+                _animator.SetFloat(_animIDSpeed, _animationBlend);
+                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
 
@@ -266,22 +265,67 @@ namespace PrototypeProject
             {
                 //reset the fall timeout timer
                 _fallTimeoutDelta = fallTimeout;
-                
+
                 //update animator if using character
                 //if character is grounded then making the turning off the jump and fall animation
                 if (_hasAnimator)
                 {
-                    _animator.SetBool(_animIDJump,false);
-                    _animator.SetBool(_animIDFreeFall,false);
+                    _animator.SetBool(_animIDJump, false);
+                    _animator.SetBool(_animIDFreeFall, false);
                 }
-                
+
                 //stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
                 {
                     _verticalVelocity = -2f;
                 }
-                
-                
+
+                //Jump
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                {
+                    //the square root of H * -2 * 6 = how much velocity needed to reach desire height
+                    _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravityRate);
+
+                    //update jump animation for character if using jump is true
+                    if (_hasAnimator)
+                    {
+                        _animator.SetBool(_animIDJump, true);
+                    }
+                }
+
+                //jump timeout
+                if (_jumpTimeoutDelta >= 0.0f)
+                {
+                    _jumpTimeoutDelta -= Time.deltaTime;
+                }
+            }
+            else
+            {
+                //reset the jump timeout timer
+                _jumpTimeoutDelta = jumpTimeout;
+
+                //fall timeout
+                if (_fallTimeoutDelta >= 0.0f)
+                {
+                    _fallTimeoutDelta -= Time.deltaTime;
+                }
+                else
+                {
+                    //update fall animation for character
+                    if (_hasAnimator)
+                    {
+                        _animator.SetBool(_animIDFreeFall, true);
+                    }
+                }
+
+                //if we are not grounded, do not jump
+                _input.jump = false;
+            }
+
+            //apply gravity over time if under terminal (Multiply by delta time twice liner to linearaly speed up over time)
+            if (_verticalVelocity < _terminalVelocity)
+            {
+                _verticalVelocity += gravityRate * Time.deltaTime; //delta is to make the gravityrate frame independent and time dependent
             }
         }
 
