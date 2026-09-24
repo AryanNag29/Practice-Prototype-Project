@@ -2,7 +2,10 @@ using System;
 using System.Security;
 using StarterAssets;
 using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+#endif
+using Random = System.Random;
 
 namespace PrototypeProject
 {
@@ -350,6 +353,15 @@ namespace PrototypeProject
 
         private void OnFootStep(AnimationEvent animationEvent)
         {
+            if (animationEvent.animatorClipInfo.weight > 0.5f)
+            {
+                //check the length of the footstep audio clip if it is > 0s
+                if (FootstepAudioClips.Length > 0)
+                {
+                    var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
+                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index],transform.TransformPoint(_controller.center));
+                }
+            }
         }
 
         private void OnLand(AnimationEvent animationEvent)
