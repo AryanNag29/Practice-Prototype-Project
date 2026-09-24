@@ -338,6 +338,7 @@ namespace PrototypeProject
 
         private void OnDrawGizmosSelected()
         {
+            
         }
 
         private void OnFootStep(AnimationEvent animationEvent)
