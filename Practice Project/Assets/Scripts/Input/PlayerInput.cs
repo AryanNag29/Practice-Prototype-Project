@@ -4,76 +4,79 @@ using Cursor = UnityEngine.UIElements.Cursor;
 using UnityEngine.InputSystem;
 #endif
 
-namespace PrototypeProject
+namespace StarterAssets
 {
-    public class PlayerInput : MonoBehaviour
+    namespace PrototypeProject
     {
-        #region Variables
+        public class PlayerInput : MonoBehaviour
+        {
+            #region Variables
 
-        [Header("Player Input Values")] public Vector2 move;
-        public Vector2 look;
-        public bool jump;
-        public bool sprint;
+            [Header("Player Input Values")] public Vector2 move;
+            public Vector2 look;
+            public bool jump;
+            public bool sprint;
 
-        [Header("Movement Setting")] public bool analogMovement;
+            [Header("Movement Setting")] public bool analogMovement;
 
-        [Header("Mouse Cursor Settings")] public bool cursorLocked = true;
-        public bool cursorInputForLook = true;
+            [Header("Mouse Cursor Settings")] public bool cursorLocked = true;
+            public bool cursorInputForLook = true;
 
-        #endregion
+            #endregion
 
-        #region Functions
+            #region Functions
 
 #if ENABLE_INPUT_SYSTEM
-        public void OnMove(InputValue value)
-        {
-            MoveInput(value.Get<Vector2>());
-        }
-
-        public void OnLook(InputValue value)
-        {
-            if (cursorInputForLook)
+            public void OnMove(InputValue value)
             {
-                LookInput(value.Get<Vector2>());
+                MoveInput(value.Get<Vector2>());
             }
-        }
 
-        public void OnJump(InputValue value)
-        {
-            JumpInput(value.isPressed);
-        }
+            public void OnLook(InputValue value)
+            {
+                if (cursorInputForLook)
+                {
+                    LookInput(value.Get<Vector2>());
+                }
+            }
 
-        public void OnSprint(InputValue value)
-        {
-            SprintInput(value.isPressed);
-        }
+            public void OnJump(InputValue value)
+            {
+                JumpInput(value.isPressed);
+            }
+
+            public void OnSprint(InputValue value)
+            {
+                SprintInput(value.isPressed);
+            }
 #endif
 
-        public void MoveInput(Vector2 newMoveDirection)
-        {
-            move = newMoveDirection;
-        }
+            public void MoveInput(Vector2 newMoveDirection)
+            {
+                move = newMoveDirection;
+            }
 
-        public void LookInput(Vector2 newLookDirection)
-        {
-            look = newLookDirection;
-        }
+            public void LookInput(Vector2 newLookDirection)
+            {
+                look = newLookDirection;
+            }
 
-        public void JumpInput(bool newJumpState)
-        {
-            jump = newJumpState;
-        }
+            public void JumpInput(bool newJumpState)
+            {
+                jump = newJumpState;
+            }
 
-        public void SprintInput(bool newSprintState)
-        {
-            sprint = newSprintState;
-        }
+            public void SprintInput(bool newSprintState)
+            {
+                sprint = newSprintState;
+            }
 
-        public void setCursorState(bool newState)
-        {
-            UnityEngine.Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-        }
+            public void setCursorState(bool newState)
+            {
+                UnityEngine.Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+            }
 
-        #endregion
+            #endregion
+        }
     }
 }
