@@ -56,16 +56,11 @@ namespace PrototypeProject
 
 
         [Space(10)] [Tooltip("Time interval for next jump. set to of to instantly jump again")] [SerializeField]
-        private float jumpTimeout = 0.1f;
+        private float jumpTimeout = 0.5f;
 
         [Tooltip("Time required to pass before entering the fall state. useful for walking down stairs")]
         [SerializeField]
         private float fallTimeout = 0.15f;
-
-        [Header("Player Grounded")]
-        [Tooltip("This is the check if the player is on the ground or not. required for jump")]
-        [SerializeField]
-        private bool isPlayerGrounded = true;
 
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
@@ -75,7 +70,7 @@ namespace PrototypeProject
 
         [Tooltip("The radius of the grounded check. should match the radius of the CharacterController")]
         [SerializeField]
-        private float groundedRadius = 0.5f;
+        private float groundedRadius = 0.28f;
 
         [Tooltip("What layer the character uses as ground checks")] [SerializeField]
         private LayerMask groundLayer;
@@ -328,7 +323,9 @@ namespace PrototypeProject
             //apply gravity over time if under terminal (Multiply by delta time twice liner to linearaly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
-                _verticalVelocity += gravityRate * Time.deltaTime; //delta is to make the gravityrate frame independent and time dependent
+                _verticalVelocity +=
+                    gravityRate *
+                    Time.deltaTime; //delta is to make the gravityrate frame independent and time dependent
             }
         }
 
@@ -346,9 +343,11 @@ namespace PrototypeProject
 
             if (Grounded) Gizmos.color = transparentGreen;
             else Gizmos.color = transparentRed;
-            
+
             //when selected, draw a gizmos in the position of, and matching radius of the grounded collider
-            Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z),groundedRadius);
+            Gizmos.DrawSphere(
+                new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z),
+                groundedRadius);
         }
 
         private void OnFootStep(AnimationEvent animationEvent)
@@ -359,7 +358,8 @@ namespace PrototypeProject
                 if (FootstepAudioClips.Length > 0)
                 {
                     var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index],transform.TransformPoint(_controller.center));
+                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index],
+                        transform.TransformPoint(_controller.center));
                 }
             }
         }
@@ -368,7 +368,8 @@ namespace PrototypeProject
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center),FootstepAudioVolume);
+                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center),
+                    FootstepAudioVolume);
             }
         }
 
