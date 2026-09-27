@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
 #endif
 using Random = System.Random;
 
-namespace StarterAssets
-{
 
     namespace PrototypeProject
     {
@@ -21,7 +19,7 @@ namespace StarterAssets
             #region Reference
 
 #if ENABLE_INPUT_SYSTEM
-            private PlayerInput _playerInput;
+            public PlayerInput _playerInput;
 #endif
             private Animator _animator;
             private CharacterController _controller;
@@ -178,7 +176,7 @@ namespace StarterAssets
                 {
                     //Don't multiply mouse input by Time.DeltaTime;
                     float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-
+                
                     _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
                     _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
                 }
@@ -435,4 +433,3 @@ namespace StarterAssets
             #endregion
         }
     }
-}
