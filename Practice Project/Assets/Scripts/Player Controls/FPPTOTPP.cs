@@ -15,12 +15,15 @@ namespace PrototypeProject
         #endregion
 
         #region Variables
-
+        //present state of camera
         [SerializeField] private bool Fpp = true;
         [SerializeField] private bool Tpp = true;
+        //camera distance
         [SerializeField] private float tppDistance = 3.0f;
         [SerializeField] private float fppDistance = -0.5f;
+        //Fov variables
         [SerializeField] private float fovInFpp = 60.0f;
+        [SerializeField] private float fovInTpp = 40.0f;
         [SerializeField] private float sprintFov = 80.0f;
 
         #endregion
@@ -44,7 +47,7 @@ namespace PrototypeProject
             {
                 if (Input.GetKey(KeyCode.T))
                 {
-                    _camera.Lens.FieldOfView = 40f;
+                    _camera.Lens.FieldOfView = fovInTpp;
                     _follow.CameraDistance = tppDistance;
                     Fpp = true;
                     Tpp = false;
