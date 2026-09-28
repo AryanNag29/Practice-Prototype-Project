@@ -7,6 +7,7 @@ namespace PrototypeProject
     {
         #region Reference
 
+        private CinemachineCamera _camera;
         private CinemachineThirdPersonFollow _follow;
 
         #endregion
@@ -25,6 +26,7 @@ namespace PrototypeProject
             {
                 if (Input.GetKey(KeyCode.F))
                 {
+                    _camera.Lens.FieldOfView = 60f;
                     _follow.CameraDistance = -0.5f;
                 }
             }
@@ -33,6 +35,7 @@ namespace PrototypeProject
             {
                 if (Input.GetKey(KeyCode.T))
                 {
+                    _camera.Lens.FieldOfView = 40f;
                     _follow.CameraDistance = tppDistance;
                 }
             }
@@ -44,6 +47,7 @@ namespace PrototypeProject
         void Start()
         {
             _follow = GetComponent<CinemachineThirdPersonFollow>();
+            _camera = GetComponent<CinemachineCamera>();
         }
 
         // Update is called once per frame
