@@ -3,12 +3,9 @@ using UnityEngine;
 
 namespace PrototypeProject
 {
-    
-
     public class VirtualInput : MonoBehaviour
     {
-        [Header("Output")]
-        public StarterAssetsInputs StarterAssetsInputs;
+        [Header("Output")] public StarterAssetsInputs StarterAssetsInputs;
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
@@ -31,4 +28,3 @@ namespace PrototypeProject
         }
     }
 }
-
