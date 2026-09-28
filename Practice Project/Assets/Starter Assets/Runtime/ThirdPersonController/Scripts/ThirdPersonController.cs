@@ -24,6 +24,11 @@ namespace StarterAssets
 
         [Tooltip("How fast the character turns to face movement direction")] [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
+        
+        [Tooltip("Rotation speed of the character (Yaw Axis)")]
+        public float RotationSpeedYaw = 1.0f;
+        [Tooltip("Rotation speed of the character (Pitch Axis)")]
+        public float RotationSpeedPitch = 1.0f;
 
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
