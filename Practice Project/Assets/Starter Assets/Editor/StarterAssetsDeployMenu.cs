@@ -5,8 +5,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using Unity.Cinemachine;
 
-namespace StarterAssets
+namespace PrototypeProject
 {
+    
+
     // This class needs to be a scriptable object to support dynamic determination of StarterAssets install path
     public partial class StarterAssetsDeployMenu : ScriptableObject
     {
@@ -151,4 +153,5 @@ namespace StarterAssets
             prefabInstance.transform.localScale = Vector3.one;
         }
     }
+
 }

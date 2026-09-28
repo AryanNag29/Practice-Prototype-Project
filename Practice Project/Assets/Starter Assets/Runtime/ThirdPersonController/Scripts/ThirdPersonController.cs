@@ -6,10 +6,9 @@ using UnityEngine.InputSystem;
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
-namespace StarterAssets
+namespace PrototypeProject
 {
-    namespace PrototypeProject
-    {
+
         [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM
         [RequireComponent(typeof(PlayerInput))]
@@ -416,5 +415,5 @@ namespace StarterAssets
 
             #endregion
         }
-    }
+    
 }

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-namespace StarterAssets
+namespace PrototypeProject
 {
+	
+
 	public class BasicRigidBodyPush : MonoBehaviour
 	{
 		public LayerMask pushLayers;
@@ -36,3 +38,4 @@ namespace StarterAssets
 		}
 	}
 }
+

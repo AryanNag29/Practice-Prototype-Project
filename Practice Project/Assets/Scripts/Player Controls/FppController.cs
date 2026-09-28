@@ -10,6 +10,8 @@ using Random = System.Random;
 
     namespace PrototypeProject
     {
+      
+            
         [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM
         [RequireComponent(typeof(PlayerInput))]
@@ -432,4 +434,5 @@ using Random = System.Random;
 
             #endregion
         }
-    }
+    
+        }

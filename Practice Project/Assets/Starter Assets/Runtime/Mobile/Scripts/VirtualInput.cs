@@ -1,8 +1,10 @@
 using StarterAssets;
 using UnityEngine;
 
-namespace StarterAssets
+namespace PrototypeProject
 {
+    
+
     public class VirtualInput : MonoBehaviour
     {
         [Header("Output")]
@@ -29,3 +31,4 @@ namespace StarterAssets
         }
     }
 }
+
