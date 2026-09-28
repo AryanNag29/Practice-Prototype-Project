@@ -53,7 +53,8 @@ namespace PrototypeProject
                     Tpp = false;
                 }
             }
-
+            
+            //bug here (can't access the _input.sprint)
             if (Fpp)
             {
                 if (_inputs.sprint)
