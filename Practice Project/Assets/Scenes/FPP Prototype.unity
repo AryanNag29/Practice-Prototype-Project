@@ -294,6 +294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63917480d4e98f44f92a8e1948864112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.FPPTOTPP
+  _inputs: {fileID: 5420857362350527664}
+  Fpp: 1
+  Tpp: 1
+  tppDistance: 3
+  fppDistance: -0.5
+  fovInFpp: 60
+  fovInTpp: 40
+  sprintFov: 80
 --- !u!1001 &793002015
 PrefabInstance:
   m_ObjectHideFlags: 0
