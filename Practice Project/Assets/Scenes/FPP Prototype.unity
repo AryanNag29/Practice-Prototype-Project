@@ -291,12 +291,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.FPPTOTPP
   _inputs: {fileID: 5420857362350527664}
   tppDistance: 3
-  fppDistance: -0.2
+  fppDistance: -0.5
   fovInFpp: 60
   fovInTpp: 40
-  sprintFov: 80
-  fovlerpValue: 0.5
+  sprintFovFpp: 80
+  sprintFovTpp: 60
+  focusFovFpp: 20
   sprintInput: 0
+  focusInput: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3999,6 +4001,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  focus: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
