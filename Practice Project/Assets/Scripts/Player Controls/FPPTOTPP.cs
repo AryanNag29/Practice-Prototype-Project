@@ -30,7 +30,7 @@ namespace PrototypeProject
         [SerializeField] private float fovInTpp = 40.0f;
         [SerializeField] private float sprintFovFpp = 80.0f;
         [SerializeField] private float sprintFovTpp = 60.0f;
-        [SerializeField] private float fovlerpValue = 0.5f;
+        [SerializeField] private float fovlerpValue = 10.0f;
 
         //Inputs
         [SerializeField] private bool sprintInput;
@@ -71,12 +71,12 @@ namespace PrototypeProject
                 if (sprintInput)
                 {
                     _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovFpp, fovInFpp * fovlerpValue * Time.deltaTime);
+                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovFpp, fovlerpValue * Time.deltaTime);
                 }
                 else
                 {
                     _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFovFpp * fovlerpValue * Time.deltaTime);
+                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, fovlerpValue * Time.deltaTime);
                 }
             }
 
@@ -85,12 +85,12 @@ namespace PrototypeProject
                 if (sprintInput)
                 {
                     _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovTpp, fovInTpp * fovlerpValue * Time.deltaTime);
+                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovTpp, fovlerpValue * Time.deltaTime);
                 }
                 else
                 {
                     _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInTpp, sprintFovTpp * fovlerpValue * Time.deltaTime);
+                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInTpp, fovlerpValue * Time.deltaTime);
                 }
             }
         }
