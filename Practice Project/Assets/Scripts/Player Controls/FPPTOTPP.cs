@@ -23,7 +23,6 @@ namespace PrototypeProject
 
         //camera distance
         [SerializeField] private float tppDistance = 3.0f;
-
         [SerializeField] private float fppDistance = -0.5f;
 
         //Fov variables
