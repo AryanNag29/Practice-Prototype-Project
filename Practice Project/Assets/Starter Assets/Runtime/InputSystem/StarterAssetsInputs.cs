@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace PrototypeProject
 {
+    [System.Serializable]
     public class StarterAssetsInputs : MonoBehaviour
     {
         [Header("Character Input Values")] public Vector2 move;

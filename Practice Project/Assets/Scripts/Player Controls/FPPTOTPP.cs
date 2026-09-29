@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace PrototypeProject
 
         private CinemachineCamera _camera;
         private CinemachineThirdPersonFollow _follow;
-        [SerializeField]private StarterAssetsInputs _inputs;
+        [SerializeField] private StarterAssetsInputs _inputs;
 
         #endregion
 
@@ -61,28 +62,31 @@ namespace PrototypeProject
                 }
             }
 
-            // //bug here (can't access the _input.sprint)
-            // if (Fpp)
-            // {
-            //     if (_inputs.sprint)
-            //     {
-            //         _camera.Lens.FieldOfView =
-            //             Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFov * Time.deltaTime);
-            //     }
-            // }
+            //bug here (can't access the _input.sprint)
+            if (Fpp)
+            {
+                if (_inputs.sprint)
+                {
+                    _camera.Lens.FieldOfView =
+                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFov * Time.deltaTime);
+                }
+            }
         }
 
         #endregion
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        private void Awake()
+        {
+            _inputs = GetComponent<StarterAssetsInputs>();
+        }
+
         void Start()
         {
             _follow = GetComponent<CinemachineThirdPersonFollow>();
             _camera = GetComponent<CinemachineCamera>();
-            _inputs = GetComponent<StarterAssetsInputs>();
         }
 
-        // Update is called once per frame
+
         void Update()
         {
             FPPTOCPP();
