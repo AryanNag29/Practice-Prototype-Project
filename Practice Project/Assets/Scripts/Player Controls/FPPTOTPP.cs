@@ -10,16 +10,15 @@ namespace PrototypeProject
 
         private CinemachineCamera _camera;
         private CinemachineThirdPersonFollow _follow;
-        [SerializeField] private StarterAssetsInputs _inputs;
+        [SerializeField]private StarterAssetsInputs _inputs;
 
         #endregion
 
         #region Variables
 
         //present state of camera
-        [SerializeField] private bool Fpp = true;
-
-        [SerializeField] private bool Tpp = true;
+        public bool Fpp = true;
+        public bool Tpp = true;
 
         //camera distance
         [SerializeField] private float tppDistance = 3.0f;
@@ -29,6 +28,9 @@ namespace PrototypeProject
         [SerializeField] private float fovInFpp = 60.0f;
         [SerializeField] private float fovInTpp = 40.0f;
         [SerializeField] private float sprintFov = 80.0f;
+        
+        //Inputs
+        [SerializeField] private bool sprintInput;
 
         #endregion
 
@@ -36,6 +38,7 @@ namespace PrototypeProject
 
         public void FPPTOCPP()
         {
+            // sprintInput = _inputs.sprint;
             if (_follow.CameraDistance == tppDistance)
             {
                 if (Input.GetKey(KeyCode.F))
@@ -58,15 +61,15 @@ namespace PrototypeProject
                 }
             }
 
-            //bug here (can't access the _input.sprint)
-            if (Fpp)
-            {
-                if (_inputs.sprint)
-                {
-                    _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFov * Time.deltaTime);
-                }
-            }
+            // //bug here (can't access the _input.sprint)
+            // if (Fpp)
+            // {
+            //     if (_inputs.sprint)
+            //     {
+            //         _camera.Lens.FieldOfView =
+            //             Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFov * Time.deltaTime);
+            //     }
+            // }
         }
 
         #endregion

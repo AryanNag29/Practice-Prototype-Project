@@ -118,7 +118,7 @@ namespace PrototypeProject
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-
+        
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
@@ -152,7 +152,7 @@ namespace PrototypeProject
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-
+            
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -229,6 +229,11 @@ namespace PrototypeProject
                 _cinemachineTargetYaw, 0.0f);
         }
 
+        private void CameraFov()
+        {
+            
+        }
+        
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
