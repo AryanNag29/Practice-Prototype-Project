@@ -31,17 +31,21 @@ namespace PrototypeProject
         [SerializeField] private float sprintFovFpp = 80.0f;
         [SerializeField] private float sprintFovTpp = 60.0f;
         [SerializeField] private float fovlerpValue = 10.0f;
-
+        [SerializeField] private float focusFovFpp = 20f;
+        
         //Inputs
         [SerializeField] private bool sprintInput;
+        [SerializeField] private bool focusInput;
 
         #endregion
 
         #region Function
 
         public void FPPTOCPP()
-        {
+        {   
+            //value transfer
             sprintInput = _inputs.sprint;
+            focusInput = _inputs.focus;
             // sprintInput = _inputs.sprint;
             if (_follow.CameraDistance == tppDistance)
             {
@@ -77,6 +81,23 @@ namespace PrototypeProject
                 {
                     _camera.Lens.FieldOfView =
                         Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, fovlerpValue * Time.deltaTime);
+                }
+            }
+
+            if (Fpp)
+            {
+                if (focusInput)
+                {
+                    _camera.Lens.FieldOfView =
+                        Mathf.Lerp(_camera.Lens.FieldOfView, focusFovFpp, fovlerpValue * Time.deltaTime);
+                }
+                else
+                {
+                    if (focusInput)
+                    {
+                        _camera.Lens.FieldOfView =
+                            Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, fovlerpValue * Time.deltaTime);
+                    }
                 }
             }
 

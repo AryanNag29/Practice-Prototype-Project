@@ -43,7 +43,7 @@ namespace PrototypeProject
             SprintInput(value.isPressed);
         }
 
-        public void onFocus(InputValue value)
+        public void OnFocus(InputValue value)
         {
             FocusInput(value.isPressed);
         }
