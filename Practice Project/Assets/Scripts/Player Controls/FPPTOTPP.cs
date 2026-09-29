@@ -18,8 +18,8 @@ namespace PrototypeProject
         #region Variables
 
         //present state of camera
-        public bool Fpp = true;
-        public bool Tpp = true;
+        private bool Fpp = false;
+        private bool Tpp = true;
 
         //camera distance
         [SerializeField] private float tppDistance = 3.0f;
@@ -28,8 +28,10 @@ namespace PrototypeProject
         //Fov variables
         [SerializeField] private float fovInFpp = 60.0f;
         [SerializeField] private float fovInTpp = 40.0f;
-        [SerializeField] private float sprintFov = 80.0f;
-        
+        [SerializeField] private float sprintFovFpp = 80.0f;
+        [SerializeField] private float sprintFovTpp = 60.0f;
+        [SerializeField] private float fovlerpValue = 0.5f;
+
         //Inputs
         [SerializeField] private bool sprintInput;
 
@@ -39,6 +41,7 @@ namespace PrototypeProject
 
         public void FPPTOCPP()
         {
+            sprintInput = _inputs.sprint;
             // sprintInput = _inputs.sprint;
             if (_follow.CameraDistance == tppDistance)
             {
@@ -57,18 +60,37 @@ namespace PrototypeProject
                 {
                     _camera.Lens.FieldOfView = fovInTpp;
                     _follow.CameraDistance = tppDistance;
-                    Fpp = true;
-                    Tpp = false;
+                    Fpp = false;
+                    Tpp = true;
                 }
             }
 
             //bug here (can't access the _input.sprint)
             if (Fpp)
             {
-                if (_inputs.sprint)
+                if (sprintInput)
                 {
                     _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFov * Time.deltaTime);
+                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovFpp, fovInFpp * fovlerpValue * Time.deltaTime);
+                }
+                else
+                {
+                    _camera.Lens.FieldOfView =
+                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, sprintFovFpp * fovlerpValue * Time.deltaTime);
+                }
+            }
+
+            if (Tpp)
+            {
+                if (sprintInput)
+                {
+                    _camera.Lens.FieldOfView =
+                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovTpp, fovInTpp * fovlerpValue * Time.deltaTime);
+                }
+                else
+                {
+                    _camera.Lens.FieldOfView =
+                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInTpp, sprintFovTpp * fovlerpValue * Time.deltaTime);
                 }
             }
         }
