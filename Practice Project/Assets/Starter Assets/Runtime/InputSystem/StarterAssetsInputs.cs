@@ -12,6 +12,7 @@ namespace PrototypeProject
         public Vector2 look;
         public bool jump;
         public bool sprint;
+        public bool focus;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -41,6 +42,11 @@ namespace PrototypeProject
         {
             SprintInput(value.isPressed);
         }
+
+        public void onFocus(InputValue value)
+        {
+            FocusInput(value.isPressed);
+        }
 #endif
 
 
@@ -62,6 +68,11 @@ namespace PrototypeProject
         public void SprintInput(bool newSprintState)
         {
             sprint = newSprintState;
+        }
+
+        public void FocusInput(bool newFocusState)
+        {
+            focus = newFocusState;
         }
 
         private void OnApplicationFocus(bool hasFocus)

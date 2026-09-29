@@ -231,11 +231,11 @@
                 },
                 {
                     "name": "",
-                    "id": "02152a24-53d1-4536-89f6-57183ef76b7b",
-                    "path": "",
+                    "id": "ae6b4f87-c2df-42d4-859a-c7829490ff4f",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";KeyboardMouse",
                     "action": "Focus",
                     "isComposite": false,
                     "isPartOfComposite": false
