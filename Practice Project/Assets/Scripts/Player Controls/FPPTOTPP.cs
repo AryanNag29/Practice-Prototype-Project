@@ -77,7 +77,8 @@ namespace PrototypeProject
 
         private void Awake()
         {
-            _inputs = GetComponent<StarterAssetsInputs>();
+            //fixed it if the get component is not workind because object disappear in runtime just use this 
+            _inputs = FindFirstObjectByType<StarterAssetsInputs>();
         }
 
         void Start()
