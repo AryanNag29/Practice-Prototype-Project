@@ -99,6 +99,7 @@ namespace PrototypeProject
 
         private void Awake()
         {
+            //this is useful for many situation remember it {Also it get object in runtime}
             //fixed it if the get component is not workind because object disappear in runtime just use this 
             _inputs = FindFirstObjectByType<StarterAssetsInputs>();
         }
