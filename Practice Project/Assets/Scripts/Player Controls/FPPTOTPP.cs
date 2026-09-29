@@ -20,6 +20,7 @@ namespace PrototypeProject
         //present state of camera
         private bool Fpp = false;
         private bool Tpp = true;
+        private float fovlerpValue = 10.0f;
 
         //camera distance
         [SerializeField] private float tppDistance = 3.0f;
@@ -30,7 +31,6 @@ namespace PrototypeProject
         [SerializeField] private float fovInTpp = 40.0f;
         [SerializeField] private float sprintFovFpp = 80.0f;
         [SerializeField] private float sprintFovTpp = 60.0f;
-        [SerializeField] private float fovlerpValue = 10.0f;
         [SerializeField] private float focusFovFpp = 20f;
         
         //Inputs
