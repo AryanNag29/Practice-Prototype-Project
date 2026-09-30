@@ -98,11 +98,8 @@ namespace PrototypeProject
                 }
                 else
                 {
-                    if (focusInput)
-                    {
                         _camera.Lens.FieldOfView =
                             Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, fovlerpValue * Time.deltaTime);
-                    }
                 }
             }
 
