@@ -46,27 +46,32 @@ namespace PrototypeProject
             //value transfer
             sprintInput = _inputs.sprint;
             focusInput = _inputs.focus;
+            
             // sprintInput = _inputs.sprint;
             if (_follow.CameraDistance == tppDistance)
             {
-                if (Input.GetKey(KeyCode.F))
+                if (_inputs.fpp)
                 {
                     _camera.Lens.FieldOfView = fovInFpp;
                     _follow.CameraDistance = fppDistance;
                     Fpp = true;
                     Tpp = false;
                 }
+                //make the inputs false ones button is used
+                _inputs.fpp = false;
             }
 
             if (_follow.CameraDistance == fppDistance)
             {
-                if (Input.GetKey(KeyCode.T))
+                if (_inputs.tpp)
                 {
                     _camera.Lens.FieldOfView = fovInTpp;
                     _follow.CameraDistance = tppDistance;
                     Fpp = false;
                     Tpp = true;
                 }
+
+                _inputs.tpp = false;
             }
 
             //bug here (can't access the _input.sprint)

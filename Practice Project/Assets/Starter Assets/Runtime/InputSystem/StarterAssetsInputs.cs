@@ -13,6 +13,8 @@ namespace PrototypeProject
         public bool jump;
         public bool sprint;
         public bool focus;
+        public bool fpp;
+        public bool tpp;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -36,6 +38,16 @@ namespace PrototypeProject
         public void OnJump(InputValue value)
         {
             JumpInput(value.isPressed);
+        }
+
+        public void OnTpp(InputValue value)
+        {
+            TppInput(value.isPressed);
+        }
+
+        public void OnFpp(InputValue value)
+        {
+            FppInput(value.isPressed);
         }
 
         public void OnSprint(InputValue value)
@@ -63,6 +75,16 @@ namespace PrototypeProject
         public void JumpInput(bool newJumpState)
         {
             jump = newJumpState;
+        }
+
+        public void TppInput(bool newTppState)
+        {
+            tpp = newTppState;
+        }
+
+        public void FppInput(bool newFppState)
+        {
+            fpp = newFppState;
         }
 
         public void SprintInput(bool newSprintState)
