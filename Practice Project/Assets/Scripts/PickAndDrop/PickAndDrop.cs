@@ -7,6 +7,7 @@ namespace PrototypeProject
         #region References
 
         [SerializeField]private FPPTOTPP _cameraChange;
+        private StarterAssetsInputs _inputs;
 
         #endregion
 
@@ -17,7 +18,7 @@ namespace PrototypeProject
         #endregion
 
         #region Functions
-
+        
         
 
         #endregion
@@ -27,6 +28,7 @@ namespace PrototypeProject
         void Start()
         {
             _cameraChange = FindFirstObjectByType<FPPTOTPP>();
+            _inputs = GetComponent<StarterAssetsInputs>();
         }
 
         // Update is called once per frame
