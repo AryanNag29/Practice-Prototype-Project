@@ -20,7 +20,7 @@ namespace PrototypeProject
 
         #region Functions
 
-        private void OnHitGrabable()
+        private void OnHitGrabbable()
         {
             if (_cameraChange.Fpp)
             {
@@ -49,7 +49,7 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
-            OnHitGrabable();
+            OnHitGrabbable();
         }
     }
 }
