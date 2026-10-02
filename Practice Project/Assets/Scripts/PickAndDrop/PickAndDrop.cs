@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace PrototypeProject
 {
+    //in this we are going to use raycast from camera to object and see if it hits objects
     public class PickAndDrop : MonoBehaviour
     {
         #region References
