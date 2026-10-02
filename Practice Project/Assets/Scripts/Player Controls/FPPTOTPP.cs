@@ -18,8 +18,8 @@ namespace PrototypeProject
         #region Variables
 
         //present state of camera
-        private bool Fpp = false;
-        private bool Tpp = true;
+        public bool Fpp = false;
+        public bool Tpp = true;
         private float fovlerpValue = 10.0f;
 
         //camera distance
@@ -41,7 +41,7 @@ namespace PrototypeProject
 
         #region Function
 
-        public void FPPTOCPP()
+        public void FppTOTpp()
         {   
             //value transfer
             sprintInput = _inputs.sprint;
@@ -136,7 +136,7 @@ namespace PrototypeProject
 
         void Update()
         {
-            FPPTOCPP();
+            FppTOTpp();
         }
     }
 }
