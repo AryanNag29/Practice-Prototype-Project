@@ -15,6 +15,7 @@ namespace PrototypeProject
         public bool focus;
         public bool fpp;
         public bool tpp;
+        public bool pickDrop;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -22,6 +23,8 @@ namespace PrototypeProject
         public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
+        
+        //vector 2 movement 
         public void OnMove(InputValue value)
         {
             MoveInput(value.Get<Vector2>());
@@ -34,7 +37,8 @@ namespace PrototypeProject
                 LookInput(value.Get<Vector2>());
             }
         }
-
+        
+        //tap button
         public void OnJump(InputValue value)
         {
             JumpInput(value.isPressed);
@@ -42,10 +46,8 @@ namespace PrototypeProject
 
         public void OnTpp(InputValue value)
         {
-            if (value.isPressed)
-            {
-                TppInput();
-            }
+            TppInput(value.isPressed);
+
         }
 
         public void OnFpp(InputValue value)
@@ -53,6 +55,16 @@ namespace PrototypeProject
             FppInput(value.isPressed);
         }
 
+        public void OnPickDrop(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                PickDropInput();
+            }
+        }
+        
+        
+        //hold button
         public void OnSprint(InputValue value)
         {
             SprintInput(value.isPressed);
@@ -64,7 +76,7 @@ namespace PrototypeProject
         }
 #endif
 
-
+        //vector 2 movement 
         public void MoveInput(Vector2 newMoveDirection)
         {
             move = newMoveDirection;
@@ -74,22 +86,30 @@ namespace PrototypeProject
         {
             look = newLookDirection;
         }
-
+        
+        //tap button
         public void JumpInput(bool newJumpState)
         {
             jump = newJumpState;
         }
 
-        public void TppInput()
+        public void TppInput(bool newTppState)
         {
-            tpp = !tpp;
+            tpp = newTppState;
         }
+        
 
         public void FppInput(bool newFppState)
         {
             fpp = newFppState;
         }
 
+        public void PickDropInput()
+        {
+            pickDrop = !pickDrop;
+        }
+        
+        //hold button
         public void SprintInput(bool newSprintState)
         {
             sprint = newSprintState;

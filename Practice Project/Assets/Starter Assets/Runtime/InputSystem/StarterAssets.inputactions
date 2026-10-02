@@ -68,6 +68,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PickDrop",
+                    "type": "Button",
+                    "id": "ff30fa05-6927-400c-93db-55bb15a216c8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -310,6 +319,17 @@
                     "processors": "",
                     "groups": ";KeyboardMouse",
                     "action": "Tpp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f9c9b5e6-d641-4bd4-9c18-1201a081c5fc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "PickDrop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
