@@ -42,7 +42,10 @@ namespace PrototypeProject
 
         public void OnTpp(InputValue value)
         {
-            TppInput(value.isPressed);
+            if (value.isPressed)
+            {
+                TppInput();
+            }
         }
 
         public void OnFpp(InputValue value)
@@ -77,9 +80,9 @@ namespace PrototypeProject
             jump = newJumpState;
         }
 
-        public void TppInput(bool newTppState)
+        public void TppInput()
         {
-            tpp = newTppState;
+            tpp = !tpp;
         }
 
         public void FppInput(bool newFppState)
