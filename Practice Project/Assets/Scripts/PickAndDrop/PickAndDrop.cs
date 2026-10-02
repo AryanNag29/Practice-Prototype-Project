@@ -7,24 +7,38 @@ namespace PrototypeProject
     {
         #region References
 
-        [SerializeField]private FPPTOTPP _cameraChange;
+        [SerializeField] private Transform _mainCamera;
+        [SerializeField] private FPPTOTPP _cameraChange;
+        [SerializeField] private LayerMask _pickObjectMask;
         private StarterAssetsInputs _inputs;
 
         #endregion
 
         #region Variables
 
-        
-
         #endregion
 
         #region Functions
-        
-        
+
+        private void OnHitGrabable()
+        {
+            if (_cameraChange.Fpp)
+            {
+                if (_inputs.pickDrop)
+                {
+                    float pickUpDistance = 2f;
+                    if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit, pickUpDistance,
+                            _pickObjectMask))
+                    {
+                        Debug.Log(hit.transform);
+                    }
+                }
+            }
+        }
 
         #endregion
-        
-        
+
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -35,7 +49,7 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
-        
+            OnHitGrabable();
         }
     }
 }
