@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace PrototypeProject
@@ -30,7 +31,11 @@ namespace PrototypeProject
                     if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit, pickUpDistance,
                             _pickObjectMask))
                     {
-                        Debug.Log(hit.transform);
+                        //only respond if that object have object grabbable script 
+                        if (hit.transform.TryGetComponent(out ObjectGrabbable objectGrabbable))
+                        {
+                            Debug.Log(objectGrabbable);
+                        }
                     }
                 }
             }
