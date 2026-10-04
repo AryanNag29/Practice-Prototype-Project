@@ -49,7 +49,6 @@ namespace PrototypeProject
                             if (hit.transform.TryGetComponent(out _objectGrabbable))
                             {
                                 _objectGrabbable.Grab(_objectGrabPointTransform);
-                                Debug.Log(_objectGrabbable);
                             }
                         }
                     }
