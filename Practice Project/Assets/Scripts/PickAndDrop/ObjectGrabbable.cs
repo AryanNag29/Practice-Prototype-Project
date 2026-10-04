@@ -13,7 +13,8 @@ namespace PrototypeProject
         #endregion
 
         #region Variables
-        
+
+        private float lerpGrab = 20.0f;
         #endregion
 
         #region Functions
@@ -57,7 +58,7 @@ namespace PrototypeProject
         {
             if (objectGrabPointTransform != null)
             {
-                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, 20f * Time.deltaTime);
+                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
         }
