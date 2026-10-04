@@ -22,7 +22,15 @@ namespace PrototypeProject
         #endregion
 
         #region Functions
-
+        
+        /// <summary>
+        /// On Hit Grabbable Function
+        /// condition: player should be in fpp mode
+        /// condition: player pickdrop key should be true
+        /// condition: object grabbable should be null (can't pick two objects)
+        /// ray cast from camera to the object which contain grabbable script
+        /// Condition: if object grabbable is not null and pickdrop key is false then drop object
+        /// </summary>
         private void OnHitGrabbable()
         {
             if (_cameraChange.Fpp)
@@ -69,6 +77,7 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
+            //if player switch to tpp from fpp while grabbing any object drop it
             if (_objectGrabbable != null && _cameraChange.Tpp)
             {
                 _inputs.pickDrop = false;
