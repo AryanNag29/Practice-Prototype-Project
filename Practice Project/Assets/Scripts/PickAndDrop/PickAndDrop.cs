@@ -13,6 +13,7 @@ namespace PrototypeProject
         [SerializeField] private FPPTOTPP _cameraChange;
         [SerializeField] private LayerMask _pickObjectMask;
         private StarterAssetsInputs _inputs;
+        private ObjectGrabbable _objectGrabbable;
 
         #endregion
 
@@ -28,17 +29,29 @@ namespace PrototypeProject
             {
                 if (_inputs.pickDrop)
                 {
-                    float pickUpDistance = 2f;
-                    if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit, pickUpDistance,
-                            _pickObjectMask))
+                    if (_objectGrabbable == null)
                     {
-                        //only respond if that object have object grabbable script 
-                        if (hit.transform.TryGetComponent(out ObjectGrabbable objectGrabbable))
+                        //Not carring the object try to grab
+                        float pickUpDistance = 2f;
+                        if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit,
+                                pickUpDistance,
+                                _pickObjectMask))
                         {
-                            objectGrabbable.Grab(_objectGrabPointTransform);
-                            Debug.Log(objectGrabbable);
+                            //only respond if that object have object grabbable script 
+                            if (hit.transform.TryGetComponent(out _objectGrabbable))
+                            {
+                                _objectGrabbable.Grab(_objectGrabPointTransform);
+                                Debug.Log(_objectGrabbable);
+                            }
                         }
                     }
+                }
+
+                if (_objectGrabbable != null && !_inputs.pickDrop)
+                {
+                    //currently carring something, drop
+                    _objectGrabbable.Drop();
+                    _objectGrabbable = null;
                 }
             }
         }
@@ -56,6 +69,13 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
+            if (_objectGrabbable != null && _cameraChange.Tpp)
+            {
+                _inputs.pickDrop = false;
+                _objectGrabbable.Drop();
+                _objectGrabbable = null;
+            }
+
             OnHitGrabbable();
         }
     }

@@ -20,8 +20,18 @@ namespace PrototypeProject
 
         public void Grab(Transform objectGrabPointTransform)
         {
-            _rb.useGravity = false;
+            _rb.isKinematic = true;
+            _rb.detectCollisions = false;
+            _rb.useGravity = false; 
             this.objectGrabPointTransform = objectGrabPointTransform;
+        }
+
+        public void Drop()
+        {
+            this.objectGrabPointTransform = null;
+            _rb.useGravity = true;
+            _rb.detectCollisions = true;
+            _rb.isKinematic = false;
         }
 
         #endregion
@@ -32,7 +42,7 @@ namespace PrototypeProject
         {
             if (objectGrabPointTransform != null)
             {
-                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, 5 * Time.deltaTime);
+                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, 20f * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
         }
@@ -49,6 +59,8 @@ namespace PrototypeProject
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _rb.detectCollisions = true;
+            _rb.isKinematic = false;
         }
 
         // Update is called once per frame

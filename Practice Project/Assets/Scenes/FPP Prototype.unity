@@ -928,7 +928,7 @@ Transform:
   m_GameObject: {fileID: 1061511498}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.32, y: -0.14, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1071,7 +1071,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &1203018647
@@ -10992,6 +10992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458de50cb70d9b04c9a2c4d0a1fd7fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
+  _objectGrabPointTransform: {fileID: 1061511499}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
@@ -11009,6 +11010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458de50cb70d9b04c9a2c4d0a1fd7fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
+  _objectGrabPointTransform: {fileID: 1061511499}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
