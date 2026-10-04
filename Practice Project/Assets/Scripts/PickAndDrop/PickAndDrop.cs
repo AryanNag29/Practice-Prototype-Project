@@ -8,6 +8,7 @@ namespace PrototypeProject
     {
         #region References
 
+        [SerializeField] private Transform _objectGrabPointTransform;
         [SerializeField] private Transform _mainCamera;
         [SerializeField] private FPPTOTPP _cameraChange;
         [SerializeField] private LayerMask _pickObjectMask;
@@ -34,6 +35,7 @@ namespace PrototypeProject
                         //only respond if that object have object grabbable script 
                         if (hit.transform.TryGetComponent(out ObjectGrabbable objectGrabbable))
                         {
+                            objectGrabbable.Grab(_objectGrabPointTransform);
                             Debug.Log(objectGrabbable);
                         }
                     }
