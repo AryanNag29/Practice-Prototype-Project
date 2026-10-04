@@ -13,11 +13,19 @@ namespace PrototypeProject
         #endregion
 
         #region Variables
-
+        
         #endregion
 
         #region Functions
-
+        
+        /// <summary>
+        /// This is a Grab function for the player to Grab object when the "E" key is pressed
+        /// Rigid body Kinematic is on
+        /// rigid body detect collision is off
+        /// gravity is off
+        /// Storing object grab point transform position into the grabbable object
+        /// </summary>
+        /// <param name="objectGrabPointTransform"></param>
         public void Grab(Transform objectGrabPointTransform)
         {
             _rb.isKinematic = true;
@@ -26,6 +34,13 @@ namespace PrototypeProject
             this.objectGrabPointTransform = objectGrabPointTransform;
         }
 
+        /// <summary>
+        /// This is a drop function for the player to drop object when the "E" key is pressed
+        /// Rigid body Kinematic is off
+        /// rigid body detect collision is on
+        /// gravity is on
+        /// restoring grabbable object to it's current position
+        /// </summary>
         public void Drop()
         {
             this.objectGrabPointTransform = null;
