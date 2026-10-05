@@ -26,7 +26,7 @@ namespace PrototypeProject
         /// <summary>
         /// This is a Grab function for the player to Grab object when the "E" key is pressed
         /// Rigid body Kinematic is on
-        /// rigid body detect collision is off
+        /// player rigid body push off
         /// gravity is off
         /// Storing object grab point transform position into the grabbable object
         /// </summary>
@@ -42,7 +42,7 @@ namespace PrototypeProject
         /// <summary>
         /// This is a drop function for the player to drop object when the "E" key is pressed
         /// Rigid body Kinematic is off
-        /// rigid body detect collision is on
+        /// player rigid body on
         /// gravity is on
         /// restoring grabbable object to it's current position
         /// </summary>
