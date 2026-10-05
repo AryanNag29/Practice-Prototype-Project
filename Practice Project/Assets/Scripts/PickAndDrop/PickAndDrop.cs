@@ -9,6 +9,7 @@ namespace PrototypeProject
         #region References
 
         [SerializeField] private Transform _objectGrabPointTransform;
+        [SerializeField] private Transform _objectGrabPointTransformOnFocus;
         [SerializeField] private Transform _mainCamera;
         [SerializeField] private FPPTOTPP _cameraChange;
         [SerializeField] private LayerMask _pickObjectMask;
