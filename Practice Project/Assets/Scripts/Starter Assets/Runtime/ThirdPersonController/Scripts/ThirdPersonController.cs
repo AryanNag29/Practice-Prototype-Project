@@ -111,7 +111,6 @@ namespace PrototypeProject
         #endregion
 
         #region Reference
-
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif

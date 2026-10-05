@@ -307,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
+  _playerRigidBodyPush: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
+  _playerRigidBodyPush: {fileID: 0}
 --- !u!54 &1060425333
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1106,6 +1108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
+  _playerRigidBodyPush: {fileID: 0}
 --- !u!1 &1203018647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,6 +1604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
+  _playerRigidBodyPush: {fileID: 0}
 --- !u!54 &1852700095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10663,9 +10667,9 @@ GameObject:
   - component: {fileID: 5420857362350527664}
   - component: {fileID: 8616685847856548032}
   - component: {fileID: 8997996945927590520}
-  - component: {fileID: 8997996945927590521}
   - component: {fileID: 8997996945927590522}
   - component: {fileID: 8997996945927590523}
+  - component: {fileID: 8997996945927590524}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -11010,42 +11014,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8997996945927590521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616685847856548044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.StarterAssets::StarterAssets.ThirdPersonController
-  MoveSpeed: 2
-  SprintSpeed: 5.335
-  RotationSmoothTime: 0.12
-  RotationSpeedYaw: 0.6
-  RotationSpeedPitch: 0.7
-  SpeedChangeRate: 10
-  LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
-  FootstepAudioClips: []
-  FootstepAudioVolume: 0.5
-  JumpHeight: 1.2
-  Gravity: -15
-  JumpTimeout: 0.5
-  FallTimeout: 0.15
-  Grounded: 1
-  GroundedOffset: -0.14
-  GroundedRadius: 0.28
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  CinemachineCameraTarget: {fileID: 601090630}
-  TopClamp: 70
-  BottomClamp: -30
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
 --- !u!114 &8997996945927590522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11059,7 +11027,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
   _objectGrabPointTransform: {fileID: 1061511499}
-  _objectGrabPointTransformOnFocus: {fileID: 0}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
@@ -11078,12 +11045,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
   _objectGrabPointTransform: {fileID: 1061511499}
-  _objectGrabPointTransformOnFocus: {fileID: 1819721400}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &8997996945927590524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685847856548044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::PrototypeProject.ThirdPersonController
+  MoveSpeed: 2
+  SprintSpeed: 5.335
+  RotationSmoothTime: 0.12
+  RotationSpeedYaw: 1
+  RotationSpeedPitch: 1
+  SpeedChangeRate: 10
+  LandingAudioClip: {fileID: 0}
+  FootstepAudioClips: []
+  FootstepAudioVolume: 0.5
+  JumpHeight: 1.2
+  Gravity: -15
+  JumpTimeout: 0.5
+  FallTimeout: 0.15
+  Grounded: 1
+  GroundedOffset: -0.14
+  GroundedRadius: 0.28
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  CinemachineCameraTarget: {fileID: 0}
+  TopClamp: 70
+  BottomClamp: -30
+  CameraAngleOverride: 0
+  LockCameraPosition: 0
 --- !u!23 &9001781078495891977
 MeshRenderer:
   m_ObjectHideFlags: 0
