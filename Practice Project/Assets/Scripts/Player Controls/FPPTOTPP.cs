@@ -41,7 +41,16 @@ namespace PrototypeProject
         #endregion
 
         #region Function
-
+        /// <summary>
+        /// FppToTpp Function: this function switch camera to fpp to tpp and tpp to fpp
+        /// storing sprint bool input into sprint to see if player is sprinting (This is for fov change when player runs)
+        /// storing focusinput into focus bool (this is for fov change when player use focus)
+        /// change into fpp
+        /// change into tpp
+        /// fpp sprint fov change logic 
+        /// fpp focus logic(focus will only work on fpp mode)
+        /// tpp sprint fov change logic
+        /// </summary>
         public void FppTOTpp()
         {   
             //value transfer
@@ -124,7 +133,7 @@ namespace PrototypeProject
         private void Awake()
         {
             //this is useful for many situation remember it {Also it get object in runtime}
-            //fixed it if the get component is not workind because object disappear in runtime just use this 
+            //fixed it if the get component is not working because object disappear in runtime just use this 
             _inputs = FindFirstObjectByType<StarterAssetsInputs>();
         }
 
