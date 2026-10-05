@@ -87,9 +87,9 @@ namespace PrototypeProject
             _rb.detectCollisions = true;
             _rb.isKinematic = false;
             _inputs = FindFirstObjectByType<StarterAssetsInputs>();
-            // //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
-            // GameObject targetTransform = GameObject.FindGameObjectWithTag("OnFocusGrabPoint");
-            // objectGrabPointTransformOnFocus = targetTransform.transform;
+            //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
+            GameObject targetTransform = GameObject.FindGameObjectWithTag("OnFocusGrabPoint");
+            objectGrabPointTransformOnFocus = targetTransform.transform;
         }
 
         // Update is called once per frame
