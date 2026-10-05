@@ -11,6 +11,7 @@ namespace PrototypeProject
 
         private CinemachineCamera _camera;
         private CinemachineThirdPersonFollow _follow;
+        //lol now i understand why the fpp to cpp can't get this _input because it's on different folder and i was accessing it with get component method
         [SerializeField] private StarterAssetsInputs _inputs;
 
         #endregion
