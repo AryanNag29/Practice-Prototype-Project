@@ -1,6 +1,6 @@
 {
     "name": "Unity.StarterAssets.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "PrototypeProject",
     "references": [
         "Unity.StarterAssets",
         "Unity.Cinemachine"

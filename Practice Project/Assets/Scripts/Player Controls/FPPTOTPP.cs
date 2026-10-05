@@ -1,8 +1,7 @@
 using System;
+using UnityEngine;
 using Unity.Cinemachine;
 using Unity.Mathematics;
-using UnityEngine;
-
 namespace PrototypeProject
 {
     public class FPPTOTPP : MonoBehaviour

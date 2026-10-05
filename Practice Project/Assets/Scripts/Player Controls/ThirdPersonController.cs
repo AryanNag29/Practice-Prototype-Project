@@ -111,6 +111,8 @@ namespace PrototypeProject
         #endregion
 
         #region Reference
+
+        private ObjectGrabbable _objectGrabbable;
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
@@ -152,7 +154,7 @@ namespace PrototypeProject
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+            _objectGrabbable = FindFirstObjectByType<ObjectGrabbable>();
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -228,11 +230,7 @@ namespace PrototypeProject
                 _cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
-
-        private void CameraFov()
-        {
-            
-        }
+        
         
         private void Move()
         {
