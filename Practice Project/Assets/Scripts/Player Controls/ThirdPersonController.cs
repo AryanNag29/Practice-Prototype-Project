@@ -237,6 +237,15 @@ namespace PrototypeProject
 
         private void Move()
         {
+            if (_objectGrabbable.objectGrabPointTransform != null && _input.focus)
+            {
+                _input.move.x = 0.0f;
+                _input.move.y = 0.0f;
+            }
+            else
+            {
+            }
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 

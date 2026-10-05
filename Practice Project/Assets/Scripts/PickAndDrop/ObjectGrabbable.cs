@@ -21,8 +21,8 @@ namespace PrototypeProject
         private float lerpGrab = 20.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
-        [SerializeField] private float RotationSpeedYaw = 5.0f;
-        [SerializeField] private float RotationSpeedPitch = 7.0f;
+        private float RotationSpeedYaw = 100;
+        private float RotationSpeedPitch = 120f;
         [SerializeField] private float _threshold = 0.01f;
 
         #endregion
@@ -79,10 +79,10 @@ namespace PrototypeProject
                     TargetPitch += _inputs.look.y * RotationSpeedPitch * Time.deltaTime;
                 }
         
-                // transform.rotation = Quaternion.Lerp(transform.rotation,transform.Rotate())
-                transform.Rotate(TargetPitch, TargetYaw, 0f);
+                Quaternion targetRotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime);
+                // transform.Rotate(TargetPitch, TargetYaw, 0f);
                 // _rb.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
-                // transform.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
             }
         }
 
@@ -134,6 +134,7 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
+            Debug.Log(_inputs.look.x);
             RotateGrabbableObjectOnFocus();
         }
 

@@ -63,7 +63,6 @@ namespace PrototypeProject
                     _objectGrabbable = null;
                 }
             }
-            Debug.Log(_objectGrabbable);
         }
 
         #endregion
