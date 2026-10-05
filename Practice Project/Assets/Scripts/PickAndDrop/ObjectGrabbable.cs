@@ -10,8 +10,9 @@ namespace PrototypeProject
 
         private Rigidbody _rb;
         private Transform objectGrabPointTransform;
-        private Transform objectGrabPointTransformOnFocus;
-        private StarterAssetsInputs _inputs;
+        [SerializeField]private Transform objectGrabPointTransformOnFocus;
+        [SerializeField]private StarterAssetsInputs _inputs;
+        [SerializeField] private BasicRigidBodyPush _playerRigidBodyPush;
 
         #endregion
 
@@ -33,7 +34,7 @@ namespace PrototypeProject
         public void Grab(Transform objectGrabPointTransform)
         {
             _rb.isKinematic = true;
-            _rb.detectCollisions = false;
+            _playerRigidBodyPush.canPush = false;
             _rb.useGravity = false; 
             this.objectGrabPointTransform = objectGrabPointTransform;
         }
@@ -49,7 +50,7 @@ namespace PrototypeProject
         {
             this.objectGrabPointTransform = null;
             _rb.useGravity = true;
-            _rb.detectCollisions = true;
+            _playerRigidBodyPush.canPush = true;
             _rb.isKinematic = false;
         }
 
@@ -84,9 +85,9 @@ namespace PrototypeProject
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            _rb.detectCollisions = true;
             _rb.isKinematic = false;
             _inputs = FindFirstObjectByType<StarterAssetsInputs>();
+            _playerRigidBodyPush = FindFirstObjectByType<BasicRigidBodyPush>();
             //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
             GameObject targetTransform = GameObject.FindGameObjectWithTag("OnFocusGrabPoint");
             objectGrabPointTransformOnFocus = targetTransform.transform;
