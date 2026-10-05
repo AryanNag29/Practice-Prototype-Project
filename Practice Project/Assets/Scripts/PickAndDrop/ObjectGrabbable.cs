@@ -1,4 +1,5 @@
 using System;
+using System.IO.Enumeration;
 using UnityEngine;
 
 namespace PrototypeProject
@@ -9,6 +10,8 @@ namespace PrototypeProject
 
         private Rigidbody _rb;
         private Transform objectGrabPointTransform;
+        private Transform objectGrabPointTransformOnFocus;
+        private StarterAssetsInputs _inputs;
 
         #endregion
 
@@ -56,9 +59,15 @@ namespace PrototypeProject
 
         private void FixedUpdate()
         {
-            if (objectGrabPointTransform != null)
+            if (objectGrabPointTransform != null && !_inputs.focus)
             {
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, lerpGrab * Time.deltaTime);
+                _rb.MovePosition(targetPosition);
+            }
+
+            if (objectGrabPointTransform != null && _inputs.focus)
+            {
+                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position, lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
         }
@@ -77,6 +86,10 @@ namespace PrototypeProject
         {
             _rb.detectCollisions = true;
             _rb.isKinematic = false;
+            _inputs = FindFirstObjectByType<StarterAssetsInputs>();
+            // //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
+            // GameObject targetTransform = GameObject.FindGameObjectWithTag("OnFocusGrabPoint");
+            // objectGrabPointTransformOnFocus = targetTransform.transform;
         }
 
         // Update is called once per frame

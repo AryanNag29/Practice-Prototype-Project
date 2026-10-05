@@ -46,13 +46,14 @@ namespace PrototypeProject
                                 pickUpDistance,
                                 _pickObjectMask))
                         {
-                            //only respond if that object have object grabbable script 
-                            if (hit.transform.TryGetComponent(out _objectGrabbable))
-                            {
-                                _objectGrabbable.Grab(_objectGrabPointTransform);
-                            }
+                                //only respond if that object have object grabbable script 
+                                if (hit.transform.TryGetComponent(out _objectGrabbable))
+                                {
+                                    _objectGrabbable.Grab(_objectGrabPointTransform);
+                                }
                         }
                     }
+                    
                 }
 
                 if (_objectGrabbable != null && !_inputs.pickDrop)
