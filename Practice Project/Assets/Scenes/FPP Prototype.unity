@@ -290,7 +290,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &361280751
@@ -305,13 +305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
   TargetYaw: 0
   TargetPitch: 0
-  RotationSpeedYaw: 10
-  RotationSpeedPitch: 20
   _threshold: 0.01
 --- !u!1 &410087039
 GameObject:
@@ -897,13 +896,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
   TargetYaw: 0
   TargetPitch: 0
-  RotationSpeedYaw: 10
-  RotationSpeedPitch: 20
   _threshold: 0.01
 --- !u!54 &1060425333
 Rigidbody:
@@ -929,7 +927,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &1061511498
@@ -1116,13 +1114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
   TargetYaw: 0
   TargetPitch: 0
-  RotationSpeedYaw: 10
-  RotationSpeedPitch: 20
   _threshold: 0.01
 --- !u!1 &1203018647
 GameObject:
@@ -1617,13 +1614,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
   TargetYaw: 0
   TargetPitch: 0
-  RotationSpeedYaw: 10
-  RotationSpeedPitch: 20
   _threshold: 0.01
 --- !u!54 &1852700095
 Rigidbody:
@@ -1649,7 +1645,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!4 &41556363931196503
