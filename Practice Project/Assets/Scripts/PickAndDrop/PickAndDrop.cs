@@ -50,6 +50,7 @@ namespace PrototypeProject
                                 {
                                     _objectGrabbable.Grab(_objectGrabPointTransform);
                                 }
+                              
                         }
                     }
                     
@@ -62,6 +63,7 @@ namespace PrototypeProject
                     _objectGrabbable = null;
                 }
             }
+            Debug.Log(_objectGrabbable);
         }
 
         #endregion

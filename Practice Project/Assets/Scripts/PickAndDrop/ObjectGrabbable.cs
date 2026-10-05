@@ -9,9 +9,9 @@ namespace PrototypeProject
         #region References
 
         private Rigidbody _rb;
-        private Transform objectGrabPointTransform;
-        [SerializeField]private Transform objectGrabPointTransformOnFocus;
-        [SerializeField]private StarterAssetsInputs _inputs;
+        public Transform objectGrabPointTransform;
+        [SerializeField] private Transform objectGrabPointTransformOnFocus;
+        [SerializeField] private StarterAssetsInputs _inputs;
         [SerializeField] private BasicRigidBodyPush _playerRigidBodyPush;
 
         #endregion
@@ -19,10 +19,16 @@ namespace PrototypeProject
         #region Variables
 
         private float lerpGrab = 20.0f;
+        [SerializeField] private float TargetYaw;
+        [SerializeField] private float TargetPitch;
+        [SerializeField] private float RotationSpeedYaw = 5.0f;
+        [SerializeField] private float RotationSpeedPitch = 7.0f;
+        [SerializeField] private float _threshold = 0.01f;
+
         #endregion
 
         #region Functions
-        
+
         /// <summary>
         /// This is a Grab function for the player to Grab object when the "E" key is pressed
         /// Rigid body Kinematic is on
@@ -33,9 +39,9 @@ namespace PrototypeProject
         /// <param name="objectGrabPointTransform"></param>
         public void Grab(Transform objectGrabPointTransform)
         {
-            _rb.isKinematic = true;
+            // _rb.isKinematic = true;
             _playerRigidBodyPush.canPush = false;
-            _rb.useGravity = false; 
+            _rb.useGravity = false;
             this.objectGrabPointTransform = objectGrabPointTransform;
         }
 
@@ -51,7 +57,33 @@ namespace PrototypeProject
             this.objectGrabPointTransform = null;
             _rb.useGravity = true;
             _playerRigidBodyPush.canPush = true;
-            _rb.isKinematic = false;
+            // _rb.isKinematic = false;
+        }
+
+        public void RotateGrabbableObjectOnFocus()
+        {
+            if (objectGrabPointTransform != null && !_inputs.focus)
+            {
+                if (_inputs.look.sqrMagnitude <= _threshold)
+                {
+                    TargetYaw = 0.0f;
+                    TargetPitch = 0.0f;
+                }
+            }
+            if (objectGrabPointTransform != null && _inputs.focus)
+            {
+                _rb.freezeRotation = false;
+                if (_inputs.look.sqrMagnitude >= _threshold)
+                {
+                    TargetYaw += _inputs.look.x * RotationSpeedYaw * Time.deltaTime;
+                    TargetPitch += _inputs.look.y * RotationSpeedPitch * Time.deltaTime;
+                }
+        
+                // transform.rotation = Quaternion.Lerp(transform.rotation,transform.Rotate())
+                transform.Rotate(TargetPitch, TargetYaw, 0f);
+                // _rb.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
+                // transform.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
+            }
         }
 
         #endregion
@@ -62,16 +94,19 @@ namespace PrototypeProject
         {
             if (objectGrabPointTransform != null && !_inputs.focus)
             {
-                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, lerpGrab * Time.deltaTime);
+                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
+                    lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
 
             if (objectGrabPointTransform != null && _inputs.focus)
             {
-                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position, lerpGrab * Time.deltaTime);
+                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
+                    lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
         }
+
 
         private void Awake()
         {
@@ -85,6 +120,9 @@ namespace PrototypeProject
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _rb.linearDamping = 5.0f;
+            _rb.angularDamping = 5.0f;
+            _rb.freezeRotation = false;
             _rb.isKinematic = false;
             _inputs = FindFirstObjectByType<StarterAssetsInputs>();
             _playerRigidBodyPush = FindFirstObjectByType<BasicRigidBodyPush>();
@@ -96,7 +134,9 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
+            RotateGrabbableObjectOnFocus();
         }
+
         #endregion
     }
 }
