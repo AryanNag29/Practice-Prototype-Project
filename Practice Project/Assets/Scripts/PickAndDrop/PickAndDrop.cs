@@ -40,7 +40,7 @@ namespace PrototypeProject
                 {
                     if (_objectGrabbable == null)
                     {
-                        //Not carring the object try to grab
+                        //Not carrying the object try to grab
                         float pickUpDistance = 2f;
                         if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit,
                                 pickUpDistance,
@@ -57,7 +57,7 @@ namespace PrototypeProject
 
                 if (_objectGrabbable != null && !_inputs.pickDrop)
                 {
-                    //currently carring something, drop
+                    //currently carrying something, drop
                     _objectGrabbable.Drop();
                     _objectGrabbable = null;
                 }
