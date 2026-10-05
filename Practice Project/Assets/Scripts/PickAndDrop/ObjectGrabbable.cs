@@ -18,7 +18,7 @@ namespace PrototypeProject
 
         #region Variables
 
-        private float lerpGrab = 20.0f;
+        private float lerpGrab = 10.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
         private float RotationSpeedYaw = 100;
@@ -40,6 +40,7 @@ namespace PrototypeProject
         public void Grab(Transform objectGrabPointTransform)
         {
             // _rb.isKinematic = true;
+            _rb.detectCollisions = false;
             _playerRigidBodyPush.canPush = false;
             _rb.useGravity = false;
             this.objectGrabPointTransform = objectGrabPointTransform;
@@ -55,6 +56,7 @@ namespace PrototypeProject
         public void Drop()
         {
             this.objectGrabPointTransform = null;
+            _rb.detectCollisions = true;
             _rb.useGravity = true;
             _playerRigidBodyPush.canPush = true;
             // _rb.isKinematic = false;
@@ -94,6 +96,7 @@ namespace PrototypeProject
         {
             if (objectGrabPointTransform != null && !_inputs.focus)
             {
+                _rb.interpolation = RigidbodyInterpolation.Interpolate;
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
@@ -101,6 +104,7 @@ namespace PrototypeProject
 
             if (objectGrabPointTransform != null && _inputs.focus)
             {
+                _rb.interpolation = RigidbodyInterpolation.None;
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
@@ -120,10 +124,12 @@ namespace PrototypeProject
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _rb.interpolation = RigidbodyInterpolation.Interpolate;
             _rb.linearDamping = 5.0f;
             _rb.angularDamping = 5.0f;
             _rb.freezeRotation = false;
             _rb.isKinematic = false;
+            _rb.detectCollisions = true;
             _inputs = FindFirstObjectByType<StarterAssetsInputs>();
             _playerRigidBodyPush = FindFirstObjectByType<BasicRigidBodyPush>();
             //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
