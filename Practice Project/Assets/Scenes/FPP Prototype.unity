@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 361280748}
   - component: {fileID: 361280747}
   - component: {fileID: 361280750}
+  - component: {fileID: 361280751}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -292,6 +293,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &361280751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361280745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransformOnFocus: {fileID: 0}
+  _inputs: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +891,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransformOnFocus: {fileID: 0}
+  _inputs: {fileID: 0}
 --- !u!54 &1060425333
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -947,6 +964,7 @@ GameObject:
   - component: {fileID: 1114062413}
   - component: {fileID: 1114062412}
   - component: {fileID: 1114062415}
+  - component: {fileID: 1114062416}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1074,6 +1092,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1114062416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114062410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransformOnFocus: {fileID: 0}
+  _inputs: {fileID: 0}
 --- !u!1 &1203018647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1442,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612500411}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1819721399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1819721400}
+  m_Layer: 0
+  m_Name: OnfocusGrabPoint
+  m_TagString: OnFocusGrabPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1819721400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819721399}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.054000042, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5542111179026866201}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852700089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,6 +1599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  objectGrabPointTransformOnFocus: {fileID: 0}
+  _inputs: {fileID: 0}
 --- !u!54 &1852700095
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5269,6 +5334,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1061511499}
+  - {fileID: 1819721400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5542111179026866204
@@ -10993,6 +11059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
   _objectGrabPointTransform: {fileID: 1061511499}
+  _objectGrabPointTransformOnFocus: {fileID: 0}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
@@ -11011,6 +11078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
   _objectGrabPointTransform: {fileID: 1061511499}
+  _objectGrabPointTransformOnFocus: {fileID: 1819721400}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:

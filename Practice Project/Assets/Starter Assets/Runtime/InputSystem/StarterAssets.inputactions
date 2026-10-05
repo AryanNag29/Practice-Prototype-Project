@@ -332,6 +332,17 @@
                     "action": "PickDrop",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c125be69-98d9-4f70-996c-a393bd615ac4",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickDrop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
