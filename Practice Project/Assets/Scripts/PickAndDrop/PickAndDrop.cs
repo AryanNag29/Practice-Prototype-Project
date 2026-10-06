@@ -33,6 +33,10 @@ namespace PrototypeProject
         /// </summary>
         private void OnHitGrabbable()
         {
+            if (_cameraChange.Tpp)
+            {
+                _inputs.pickDrop = false;
+            }
             if (_cameraChange.Fpp)
             {
                 if (_inputs.pickDrop)
