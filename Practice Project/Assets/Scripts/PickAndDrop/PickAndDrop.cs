@@ -22,7 +22,7 @@ namespace PrototypeProject
         #endregion
 
         #region Functions
-        
+
         /// <summary>
         /// On Hit Grabbable Function
         /// condition: player should be in fpp mode
@@ -37,6 +37,7 @@ namespace PrototypeProject
             {
                 _inputs.pickDrop = false;
             }
+
             if (_cameraChange.Fpp)
             {
                 if (_inputs.pickDrop)
@@ -49,15 +50,13 @@ namespace PrototypeProject
                                 pickUpDistance,
                                 _pickObjectMask))
                         {
-                                //only respond if that object have object grabbable script 
-                                if (hit.transform.TryGetComponent(out _objectGrabbable))
-                                {
-                                    _objectGrabbable.Grab(_objectGrabPointTransform);
-                                }
-                              
+                            //only respond if that object have object grabbable script 
+                            if (hit.transform.TryGetComponent(out _objectGrabbable))
+                            {
+                                _objectGrabbable.Grab(_objectGrabPointTransform);
+                            }
                         }
                     }
-                    
                 }
 
                 if (_objectGrabbable != null && !_inputs.pickDrop)
