@@ -30,11 +30,11 @@ namespace PrototypeProject
         #region Functions
 
         /// <summary>
-        /// This is a Grab function for the player to Grab object when the "E" key is pressed
-        /// Rigid body Kinematic is on
-        /// player rigid body push off
-        /// gravity is off
-        /// Storing object grab point transform position into the grabbable object
+        /// This is a Grab function for the player to Grab object when the "E" key is pressed.
+        /// Rigid body Kinematic is on.
+        /// player rigid body push off.
+        /// gravity is off.
+        /// Storing object grab point transform position into the grabbable object.
         /// </summary>
         /// <param name="objectGrabPointTransform"></param>
         public void Grab(Transform objectGrabPointTransform)
@@ -47,11 +47,11 @@ namespace PrototypeProject
         }
 
         /// <summary>
-        /// This is a drop function for the player to drop object when the "E" key is pressed
-        /// Rigid body Kinematic is off
-        /// player rigid body on
-        /// gravity is on
-        /// restoring grabbable object to it's current position
+        /// This is a drop function for the player to drop object when the "E" key is pressed.
+        /// Rigid body Kinematic is off.
+        /// player rigid body on.
+        /// gravity is on.
+        /// restoring grabbable object to it's current position.
         /// </summary>
         public void Drop()
         {
