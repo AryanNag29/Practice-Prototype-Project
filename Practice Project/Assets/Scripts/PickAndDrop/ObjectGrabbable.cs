@@ -9,7 +9,7 @@ namespace PrototypeProject
     {
         #region References
 
-        [SerializeField]private Camera _maincamera;
+        [SerializeField] private Camera _maincamera;
 #if ENABLE_INPUT_SYSTEM
         [SerializeField] private PlayerInput _playerInput;
 #endif
@@ -23,6 +23,7 @@ namespace PrototypeProject
 
         #region Variables
 
+        private Quaternion _currentRotation;
         private float TimeSinceGrab = 0f;
         private bool TimeOverSinceGrab = false;
         [SerializeField] private float mouseSensitivity = 0.5f;
@@ -118,7 +119,7 @@ namespace PrototypeProject
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
-                transform.rotation = _maincamera.transform.rotation;
+                transform.rotation = _maincamera.transform.rotation * _currentRotation;
             }
 
             //Timer
@@ -141,7 +142,7 @@ namespace PrototypeProject
             {
                 _rb.interpolation = RigidbodyInterpolation.None;
                 transform.position = objectGrabPointTransform.position;
-                transform.rotation = _maincamera.transform.rotation;
+                transform.rotation = _maincamera.transform.rotation * _currentRotation;
             }
 
             if (objectGrabPointTransform != null && _inputs.focus && _inputs.pickDrop && TimeOverSinceGrab)
@@ -150,6 +151,7 @@ namespace PrototypeProject
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
+                _currentRotation = Quaternion.Inverse(_maincamera.transform.rotation) * transform.rotation;
             }
         }
 
