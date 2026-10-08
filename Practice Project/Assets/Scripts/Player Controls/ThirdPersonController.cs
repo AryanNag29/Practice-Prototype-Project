@@ -225,7 +225,7 @@ namespace PrototypeProject
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-            if (_objectGrabbable.objectGrabPointTransform == null || !_input.focus)
+            if (!_input.pickDrop || !_input.focus)
             {
                 // Cinemachine will follow this target
                 CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
@@ -237,7 +237,7 @@ namespace PrototypeProject
 
         private void Move()
         {
-            if (_objectGrabbable.objectGrabPointTransform != null && _input.focus)
+            if (_input.pickDrop && _input.focus)
             {
                 _input.move.x = 0.0f;
                 _input.move.y = 0.0f;
