@@ -127,7 +127,6 @@ namespace PrototypeProject
             if (_inputs.pickDrop)
             {
                 TimeSinceGrab += 2.0f * Time.deltaTime;
-                Debug.Log(TimeSinceGrab);
                 if (TimeSinceGrab >= 0.65f)
                 {
                     TimeOverSinceGrab = true;
