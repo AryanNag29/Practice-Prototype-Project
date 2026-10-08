@@ -21,8 +21,9 @@ namespace PrototypeProject
         #endregion
 
         #region Variables
-        [SerializeField] private float mouseSensitivity = 0.5f;        
-        [SerializeField] private float controllerSensitivity = 90.0f;  
+
+        [SerializeField] private float mouseSensitivity = 0.5f;
+        [SerializeField] private float controllerSensitivity = 90.0f;
         private float lerpGrab = 10.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
@@ -106,21 +107,6 @@ namespace PrototypeProject
             }
         }
 
-        private void ControllerInputDivide()
-        {
-            if (_inputs.pickDrop && _inputs.focus)
-            {
-                if (!IsCurrentDeviceMouse)
-                {
-                    if (_inputs.look.x > 0.5f || _inputs.look.y > 0.5f)
-                    {
-                        _inputs.look.x /= 1000;
-                        _inputs.look.y /= 1000;
-                    }
-                }
-            }
-        }
-
         #endregion
 
         #region Awake/Fixed Update
@@ -142,8 +128,6 @@ namespace PrototypeProject
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
-
-            ControllerInputDivide();
         }
 
 
