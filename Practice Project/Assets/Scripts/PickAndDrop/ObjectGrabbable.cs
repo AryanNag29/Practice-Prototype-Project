@@ -24,7 +24,7 @@ namespace PrototypeProject
 
         [SerializeField] private float mouseSensitivity = 0.5f;
         [SerializeField] private float controllerSensitivity = 90.0f;
-        private float lerpGrab = 10.0f;
+        private float lerpGrab = 15.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
         private float RotationSpeedYaw = 1f;
@@ -107,11 +107,7 @@ namespace PrototypeProject
             }
         }
 
-        #endregion
-
-        #region Awake/Fixed Update
-
-        private void FixedUpdate()
+        public void GrabTransformation()
         {
             if (objectGrabPointTransform != null && !_inputs.focus)
             {
@@ -128,6 +124,15 @@ namespace PrototypeProject
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
+        }
+
+        #endregion
+
+        #region Awake/Fixed Update
+
+        private void FixedUpdate()
+        {
+           
         }
 
 
@@ -163,6 +168,7 @@ namespace PrototypeProject
         void Update()
         {
             RotateGrabbableObjectOnFocus();
+            GrabTransformation();
         }
 
         #endregion
