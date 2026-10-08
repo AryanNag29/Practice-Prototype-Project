@@ -27,7 +27,7 @@ namespace PrototypeProject
         private float lerpGrab = 10.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
-        private float RotationSpeedYaw = 1;
+        private float RotationSpeedYaw = 1f;
         private float RotationSpeedPitch = 1f;
         [SerializeField] private float _threshold = 0.01f;
 
