@@ -306,10 +306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
+  mouseSensitivity: 0.5
+  controllerSensitivity: 5
   TargetYaw: 0
   TargetPitch: 0
   _threshold: 0.01
@@ -898,10 +901,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
+  mouseSensitivity: 0.5
+  controllerSensitivity: 5
   TargetYaw: 0
   TargetPitch: 0
   _threshold: 0.01
@@ -1117,10 +1123,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
+  mouseSensitivity: 0.5
+  controllerSensitivity: 5
   TargetYaw: 0
   TargetPitch: 0
   _threshold: 0.01
@@ -1618,10 +1627,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
   _inputs: {fileID: 0}
   _playerRigidBodyPush: {fileID: 0}
+  mouseSensitivity: 0.5
+  controllerSensitivity: 5
   TargetYaw: 0
   TargetPitch: 0
   _threshold: 0.01
