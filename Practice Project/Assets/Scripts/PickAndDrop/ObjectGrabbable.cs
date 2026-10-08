@@ -27,8 +27,8 @@ namespace PrototypeProject
         private float lerpGrab = 10.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
-        private float RotationSpeedYaw = 100;
-        private float RotationSpeedPitch = 120f;
+        private float RotationSpeedYaw = 1;
+        private float RotationSpeedPitch = 1f;
         [SerializeField] private float _threshold = 0.01f;
 
         #endregion
@@ -84,12 +84,12 @@ namespace PrototypeProject
                 _rb.freezeRotation = false;
                 if (_inputs.look.sqrMagnitude >= _threshold)
                 {
-                    TargetYaw += _inputs.look.x * RotationSpeedYaw * Time.deltaTime;
-                    TargetPitch += _inputs.look.y * RotationSpeedPitch * Time.deltaTime;
+                    float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                    TargetYaw += _inputs.look.x * RotationSpeedYaw * deltaTimeMultiplier;
+                    TargetPitch += _inputs.look.y * RotationSpeedPitch * deltaTimeMultiplier;
                 }
 
-                Quaternion targetRotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
                 // transform.Rotate(TargetPitch, TargetYaw, 0f);
                 // _rb.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
             }
