@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,31 +39,34 @@ namespace PrototypeProject
             if (_cameraChange.Tpp)
             {
                 _inputs.pickDrop = false;
+                ResetOutliner(_currentRenderer);
             }
 
             if (_cameraChange.Fpp)
             {
                 if (_objectGrabbable == null)
                 {
-                    //Not carrying the object try to grab
+                    // Not carrying the object, try to grab
                     float pickUpDistance = 2f;
                     if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit,
                             pickUpDistance,
                             _pickObjectMask))
                     {
-                        //only respond if that object have object grabbable script 
-                        if (hit.transform.TryGetComponent(out _objectGrabbable))
+                        // Use a local variable to detect instead of overwriting _objectGrabbable
+                        if (hit.transform.TryGetComponent(out ObjectGrabbable detectedGrabbable))
                         {
-                            Debug.Log(_objectGrabbable);
-                            //This is to get the material component
                             _outliner = hit.collider.GetComponent<Renderer>();
+
+                            // If we hovered over a different object, clear the old outline first
+                            if (_currentRenderer != null && _currentRenderer != _outliner)
+                            {
+                                ResetOutliner(_currentRenderer);
+                            }
+
                             if (_outliner != null && _outliner.sharedMaterials.Length > 1)
                             {
-                                //shared gameobject material
                                 Material[] _OutMat = _outliner.materials;
-
                                 _OutMat[1].SetFloat("_OutlinerScale", 1.1f);
-
                                 _outliner.materials = _OutMat;
 
                                 _currentRenderer = _outliner;
@@ -70,7 +74,9 @@ namespace PrototypeProject
 
                             if (_inputs.pickDrop)
                             {
+                                _objectGrabbable = detectedGrabbable;
                                 _objectGrabbable.Grab(_objectGrabPointTransform);
+                                ResetOutliner(_currentRenderer);
                             }
                         }
                         else
@@ -83,14 +89,12 @@ namespace PrototypeProject
                     {
                         // Raycast hit nothing in the air
                         ResetOutliner(_currentRenderer);
-                        //if hit air then you can't press pickup
                         _inputs.pickDrop = false;
                     }
                 }
-
-                if (_objectGrabbable != null && !_inputs.pickDrop)
+                else if (!_inputs.pickDrop)
                 {
-                    //currently carrying something, drop
+                    // Currently carrying something, drop
                     _objectGrabbable.Drop();
                     _objectGrabbable = null;
                 }
@@ -105,7 +109,7 @@ namespace PrototypeProject
         {
             if (targetRenderer == null) return;
 
-            if (targetRenderer != null && targetRenderer.sharedMaterials.Length > 1)
+            if (targetRenderer.sharedMaterials.Length > 1)
             {
                 Material[] mats = targetRenderer.materials;
                 mats[1].SetFloat("_OutlinerScale", 0f);
@@ -113,6 +117,17 @@ namespace PrototypeProject
             }
 
             _currentRenderer = null;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit,
+                    2f,
+                    _pickObjectMask))
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(_mainCamera.position, hit.point);
+            }
         }
 
         #endregion
