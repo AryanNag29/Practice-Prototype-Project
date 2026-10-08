@@ -22,9 +22,11 @@ namespace PrototypeProject
 
         #region Variables
 
+        private float TimeSinceGrab = 0f;
+        private bool TimeOverSinceGrab = false;
         [SerializeField] private float mouseSensitivity = 0.5f;
         [SerializeField] private float controllerSensitivity = 90.0f;
-        private float lerpGrab = 15.0f;
+        private float lerpGrab = 10.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
         private float RotationSpeedYaw = 1f;
@@ -109,7 +111,7 @@ namespace PrototypeProject
 
         public void GrabTransformation()
         {
-            if (objectGrabPointTransform != null && !_inputs.focus)
+            if (objectGrabPointTransform != null && !_inputs.focus && !TimeOverSinceGrab)
             {
                 _rb.interpolation = RigidbodyInterpolation.Interpolate;
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
@@ -117,7 +119,28 @@ namespace PrototypeProject
                 _rb.MovePosition(targetPosition);
             }
 
-            if (objectGrabPointTransform != null && _inputs.focus)
+            //Timer
+            if (_inputs.pickDrop)
+            {
+                TimeSinceGrab += 2.0f * Time.deltaTime;
+                Debug.Log(TimeSinceGrab);
+                if (TimeSinceGrab >= 0.65f)
+                {
+                    TimeOverSinceGrab = true;
+                }
+            }
+            else if (!_inputs.pickDrop)
+            {
+                TimeSinceGrab = 0.0f;
+                TimeOverSinceGrab = false;
+            }
+
+            if (objectGrabPointTransform != null && _inputs.pickDrop && TimeOverSinceGrab && !_inputs.focus)
+            {
+                transform.position = objectGrabPointTransform.position;
+            }
+
+            if (objectGrabPointTransform != null && _inputs.focus && _inputs.pickDrop && TimeOverSinceGrab)
             {
                 _rb.interpolation = RigidbodyInterpolation.None;
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
@@ -130,9 +153,8 @@ namespace PrototypeProject
 
         #region Awake/Fixed Update
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-           
         }
 
 
