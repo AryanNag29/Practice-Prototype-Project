@@ -120,7 +120,6 @@ namespace PrototypeProject
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
                 //using current rotation and main camera rotation to object rotation 
-
                 transform.rotation = _maincamera.transform.rotation * _currentRotation;
             }
 
@@ -180,6 +179,9 @@ namespace PrototypeProject
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            //cheaky method to fix the rotation of the grabbable object (Error 0 * t = 0 will make things 0) now fixed it with 1 * t = t
+            _currentRotation = Quaternion.Euler(1, 1, 1);
+            
             _rb.interpolation = RigidbodyInterpolation.Interpolate;
             _rb.linearDamping = 5.0f;
             _rb.angularDamping = 5.0f;
