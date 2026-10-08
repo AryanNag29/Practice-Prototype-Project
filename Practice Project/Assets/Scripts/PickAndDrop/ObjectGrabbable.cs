@@ -139,6 +139,7 @@ namespace PrototypeProject
 
             if (objectGrabPointTransform != null && _inputs.pickDrop && TimeOverSinceGrab && !_inputs.focus)
             {
+                _rb.interpolation = RigidbodyInterpolation.None;
                 transform.position = objectGrabPointTransform.position;
                 transform.rotation = _maincamera.transform.rotation;
             }
