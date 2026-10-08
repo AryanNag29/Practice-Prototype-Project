@@ -23,12 +23,21 @@ namespace PrototypeProject
 
         #region Variables
 
-        private Quaternion _currentRotation;
+        //Grab Timer
         private float TimeSinceGrab = 0f;
+
         private bool TimeOverSinceGrab = false;
+
+        //Grab sensi
         [SerializeField] private float mouseSensitivity = 0.5f;
+
         [SerializeField] private float controllerSensitivity = 90.0f;
+
+        //grab lerp (t)
         private float lerpGrab = 10.0f;
+
+        //Grab Rotation
+        private Quaternion _currentRotation;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
         private float RotationSpeedYaw = 1f;
@@ -99,6 +108,9 @@ namespace PrototypeProject
             }
         }
 
+        /// <summary>
+        /// Get The current device status if it's keyboard or gamepad
+        /// </summary>
         public bool IsCurrentDeviceMouse
         {
             get
@@ -180,7 +192,7 @@ namespace PrototypeProject
         {
             //cheaky method to fix the rotation of the grabbable object (Error 0 * t = 0 will make things 0) now fixed it with 1 * t = t
             _currentRotation = Quaternion.Euler(1.0f, 1.0f, 1.0f);
-            
+
             _rb.interpolation = RigidbodyInterpolation.Interpolate;
             _rb.linearDamping = 5.0f;
             _rb.angularDamping = 5.0f;
