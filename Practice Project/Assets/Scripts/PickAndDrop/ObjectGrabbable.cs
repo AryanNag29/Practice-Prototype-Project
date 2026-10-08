@@ -140,7 +140,6 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(_inputs.look.x);
             RotateGrabbableObjectOnFocus();
         }
 

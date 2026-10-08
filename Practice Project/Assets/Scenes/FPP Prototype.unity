@@ -11047,6 +11047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
   _objectGrabPointTransform: {fileID: 1061511499}
+  _outliner: {fileID: 0}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
@@ -11065,6 +11066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.PickAndDrop
   _objectGrabPointTransform: {fileID: 1061511499}
+  _outliner: {fileID: -6465566751694194690, guid: de6f5683f74105144922f6a727287ca7, type: 3}
   _mainCamera: {fileID: 5542111179026866201}
   _cameraChange: {fileID: 776446908}
   _pickObjectMask:
