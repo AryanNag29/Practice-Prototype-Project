@@ -9,6 +9,7 @@ namespace PrototypeProject
     {
         #region References
 
+        [SerializeField]private Camera _maincamera;
 #if ENABLE_INPUT_SYSTEM
         [SerializeField] private PlayerInput _playerInput;
 #endif
@@ -117,6 +118,7 @@ namespace PrototypeProject
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
+                transform.rotation = _maincamera.transform.rotation;
             }
 
             //Timer
@@ -138,6 +140,7 @@ namespace PrototypeProject
             if (objectGrabPointTransform != null && _inputs.pickDrop && TimeOverSinceGrab && !_inputs.focus)
             {
                 transform.position = objectGrabPointTransform.position;
+                transform.rotation = _maincamera.transform.rotation;
             }
 
             if (objectGrabPointTransform != null && _inputs.focus && _inputs.pickDrop && TimeOverSinceGrab)
@@ -184,6 +187,7 @@ namespace PrototypeProject
 #if ENABLE_INPUT_SYSTEM
             _playerInput = FindFirstObjectByType<PlayerInput>();
 #endif
+            _maincamera = FindFirstObjectByType<Camera>();
         }
 
         // Update is called once per frame
