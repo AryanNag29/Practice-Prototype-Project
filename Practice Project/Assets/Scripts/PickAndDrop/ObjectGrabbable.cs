@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.InputSystem;
 using System.IO.Enumeration;
 using UnityEngine;
 
@@ -8,6 +9,9 @@ namespace PrototypeProject
     {
         #region References
 
+#if ENABLE_INPUT_SYSTEM
+        [SerializeField] private PlayerInput _playerInput;
+#endif
         private Rigidbody _rb;
         public Transform objectGrabPointTransform;
         [SerializeField] private Transform objectGrabPointTransformOnFocus;
@@ -17,7 +21,8 @@ namespace PrototypeProject
         #endregion
 
         #region Variables
-
+        [SerializeField] private float mouseSensitivity = 0.5f;        
+        [SerializeField] private float controllerSensitivity = 90.0f;  
         private float lerpGrab = 10.0f;
         [SerializeField] private float TargetYaw;
         [SerializeField] private float TargetPitch;
@@ -72,6 +77,7 @@ namespace PrototypeProject
                     TargetPitch = 0.0f;
                 }
             }
+
             if (objectGrabPointTransform != null && _inputs.focus)
             {
                 _rb.freezeRotation = false;
@@ -80,11 +86,38 @@ namespace PrototypeProject
                     TargetYaw += _inputs.look.x * RotationSpeedYaw * Time.deltaTime;
                     TargetPitch += _inputs.look.y * RotationSpeedPitch * Time.deltaTime;
                 }
-        
+
                 Quaternion targetRotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 5.0f * Time.deltaTime);
                 // transform.Rotate(TargetPitch, TargetYaw, 0f);
                 // _rb.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
+            }
+        }
+
+        public bool IsCurrentDeviceMouse
+        {
+            get
+            {
+#if ENABLE_INPUT_SYSTEM
+                return _playerInput.currentControlScheme == "KeyboardMouse";
+#else
+				return false;
+#endif
+            }
+        }
+
+        private void ControllerInputDivide()
+        {
+            if (_inputs.pickDrop && _inputs.focus)
+            {
+                if (!IsCurrentDeviceMouse)
+                {
+                    if (_inputs.look.x > 0.5f || _inputs.look.y > 0.5f)
+                    {
+                        _inputs.look.x /= 1000;
+                        _inputs.look.y /= 1000;
+                    }
+                }
             }
         }
 
@@ -109,6 +142,8 @@ namespace PrototypeProject
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
             }
+
+            ControllerInputDivide();
         }
 
 
@@ -135,6 +170,9 @@ namespace PrototypeProject
             //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
             GameObject targetTransform = GameObject.FindGameObjectWithTag("OnFocusGrabPoint");
             objectGrabPointTransformOnFocus = targetTransform.transform;
+#if ENABLE_INPUT_SYSTEM
+            _playerInput = FindFirstObjectByType<PlayerInput>();
+#endif
         }
 
         // Update is called once per frame

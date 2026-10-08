@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PrototypeProject
 {
@@ -144,6 +145,7 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
+            Debug.Log("X: " + _inputs.look.x + "Y: " + _inputs.look.y);
             //if player switch to tpp from fpp while grabbing any object drop it
             if (_objectGrabbable != null && _cameraChange.Tpp)
             {
