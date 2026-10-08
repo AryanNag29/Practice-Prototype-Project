@@ -180,7 +180,7 @@ namespace PrototypeProject
         void Start()
         {
             //cheaky method to fix the rotation of the grabbable object (Error 0 * t = 0 will make things 0) now fixed it with 1 * t = t
-            _currentRotation = Quaternion.Euler(1, 1, 1);
+            _currentRotation = Quaternion.Euler(1.0f, 1.0f, 1.0f);
             
             _rb.interpolation = RigidbodyInterpolation.Interpolate;
             _rb.linearDamping = 5.0f;
