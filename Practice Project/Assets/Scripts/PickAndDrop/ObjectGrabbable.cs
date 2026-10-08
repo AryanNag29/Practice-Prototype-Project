@@ -119,10 +119,12 @@ namespace PrototypeProject
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
+                //using current rotation and main camera rotation to object rotation 
+
                 transform.rotation = _maincamera.transform.rotation * _currentRotation;
             }
 
-            //Timer
+            //Timer which determine if the object positon is where and use lerp according to it
             if (_inputs.pickDrop)
             {
                 TimeSinceGrab += 2.0f * Time.deltaTime;
@@ -142,6 +144,7 @@ namespace PrototypeProject
             {
                 _rb.interpolation = RigidbodyInterpolation.None;
                 transform.position = objectGrabPointTransform.position;
+                //using current rotation and main camera rotation to object rotation 
                 transform.rotation = _maincamera.transform.rotation * _currentRotation;
             }
 
@@ -151,6 +154,7 @@ namespace PrototypeProject
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
                     lerpGrab * Time.deltaTime);
                 _rb.MovePosition(targetPosition);
+                //storing current rotation
                 _currentRotation = Quaternion.Inverse(_maincamera.transform.rotation) * transform.rotation;
             }
         }
