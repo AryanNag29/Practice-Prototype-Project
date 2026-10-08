@@ -211,6 +211,8 @@ namespace PrototypeProject
 
         private void CameraRotation()
         {
+            if (!_input.pickDrop || !_input.focus)
+            {
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
@@ -225,8 +227,7 @@ namespace PrototypeProject
             _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
             _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-            if (!_input.pickDrop || !_input.focus)
-            {
+            
                 // Cinemachine will follow this target
                 CinemachineCameraTarget.transform.rotation = Quaternion.Euler(
                     _cinemachineTargetPitch + CameraAngleOverride,
