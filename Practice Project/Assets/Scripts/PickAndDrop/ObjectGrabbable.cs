@@ -17,7 +17,7 @@ namespace PrototypeProject
         public Transform objectGrabPointTransform;
         [SerializeField] private Transform objectGrabPointTransformOnFocus;
         [SerializeField] private StarterAssetsInputs _inputs;
-        [SerializeField] private BasicRigidBodyPush _playerRigidBodyPush;
+        public BasicRigidBodyPush _playerRigidBodyPush;
 
         #endregion
 
@@ -130,7 +130,8 @@ namespace PrototypeProject
                 _rb.interpolation = RigidbodyInterpolation.Interpolate;
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
                     lerpGrab * Time.deltaTime);
-                _rb.MovePosition(targetPosition);
+                transform.position = targetPosition;
+                // _rb.MovePosition(targetPosition);
                 //using current rotation and main camera rotation to object rotation 
                 transform.rotation = _maincamera.transform.rotation * _currentRotation;
             }
@@ -163,10 +164,25 @@ namespace PrototypeProject
                 _rb.interpolation = RigidbodyInterpolation.None;
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
                     lerpGrab * Time.deltaTime);
-                _rb.MovePosition(targetPosition);
+                transform.position = targetPosition;
                 //storing current rotation
                 _currentRotation = Quaternion.Inverse(_maincamera.transform.rotation) * transform.rotation;
             }
+        }
+
+        public void RigidBodyGrabSetting()
+        {
+            if (_inputs.pickDrop)
+            {
+                _rb.linearDamping = 5.0f;
+                _rb.angularDamping = 5.0f;
+            }
+            else
+            {
+                _rb.linearDamping = 0.0f;
+                _rb.angularDamping = 0.0f;
+            }
+            
         }
 
         #endregion
@@ -192,10 +208,9 @@ namespace PrototypeProject
         {
             //cheaky method to fix the rotation of the grabbable object (Error 0 * t = 0 will make things 0) now fixed it with 1 * t = t
             _currentRotation = Quaternion.Euler(1.0f, 1.0f, 1.0f);
-
             _rb.interpolation = RigidbodyInterpolation.Interpolate;
-            _rb.linearDamping = 5.0f;
-            _rb.angularDamping = 5.0f;
+            _rb.linearDamping = 0.0f;
+            _rb.angularDamping = 0.0f;
             _rb.freezeRotation = false;
             _rb.isKinematic = false;
             _rb.detectCollisions = true;
@@ -213,6 +228,7 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
+            RigidBodyGrabSetting();
             RotateGrabbableObjectOnFocus();
             GrabTransformation();
         }

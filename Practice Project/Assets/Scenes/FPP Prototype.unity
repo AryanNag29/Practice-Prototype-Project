@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _maincamera: {fileID: 0}
   _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
@@ -471,7 +472,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1061511499}
+  - {fileID: 1819721400}
   m_Father: {fileID: 8997996945927590518}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &622665742
@@ -901,6 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _maincamera: {fileID: 0}
   _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
@@ -962,12 +966,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061511498}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.32, y: -0.14, z: 0.7}
+  m_LocalRotation: {x: -0.000000010988103, y: 0.000000047938002, z: 5.267477e-16, w: 1}
+  m_LocalPosition: {x: 0.429, y: -0.066, z: 1.223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5542111179026866201}
+  m_Father: {fileID: 601090631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1114062410
 GameObject:
@@ -1123,6 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _maincamera: {fileID: 0}
   _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
@@ -1493,12 +1498,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819721399}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.054000042, z: 1}
+  m_LocalRotation: {x: -0.000000010988103, y: 0.000000047938002, z: 5.267477e-16, w: 1}
+  m_LocalPosition: {x: 0.429, y: -0.066, z: 1.223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5542111179026866201}
+  m_Father: {fileID: 601090631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1852700089
 GameObject:
@@ -1627,6 +1632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd734557471247d469880a6bc5063202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.ObjectGrabbable
+  _maincamera: {fileID: 0}
   _playerInput: {fileID: 0}
   objectGrabPointTransform: {fileID: 0}
   objectGrabPointTransformOnFocus: {fileID: 0}
@@ -5368,9 +5374,7 @@ Transform:
   m_LocalPosition: {x: 7.5353904, y: 1.54, z: 23.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1061511499}
-  - {fileID: 1819721400}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5542111179026866204
