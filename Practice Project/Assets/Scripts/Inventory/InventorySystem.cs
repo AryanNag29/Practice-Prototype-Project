@@ -1,9 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
+    //Dictionary use to grab item more easily from reference data
+    private Dictionary<InventoryItemData, InventoryItem> m_itemDirectory;
+    private List<InventoryItem> inventory { get; set; }
+
+
+    #region Functions
+    
+    /// <summary>
+    /// we are trying to add an item on our inventory which is present in stack already.
+    /// if it doesn't we will create new instance of that item and add it to our inventory
+    /// </summary>
+    /// <param name="referenceData"></param>
+    public void Add(InventoryItemData referenceData)
+    {
+        if (m_itemDirectory.TryGetValue(referenceData, out InventoryItem value))
+        {
+            value.AddToStack();
+        }
+        else
+        {
+            InventoryItem newItem = new InventoryItem(referenceData);
+            inventory.Add(newItem);
+            m_itemDirectory.Add(referenceData,newItem);
+        }
+    }
+    
+    /// <summary>
+    /// Removing is just the inverse of the add.
+    /// and when our stack reach 0 we will remove the item from the inventory
+    /// </summary>
+    /// <param name="referenceData"></param>
+    public void Remove(InventoryItemData referenceData)
+    {
+        if (m_itemDirectory.TryGetValue(referenceData, out InventoryItem value))
+        {
+            value.RemoveFromStack();
+            if (value.stackSize == 0)
+            {
+                inventory.Remove(value);
+                m_itemDirectory.Remove(referenceData);
+            }
+        }
+    }
+
+    #endregion
     
     
+    private void Awake()
+    {
+        inventory = new List<InventoryItem>();
+        m_itemDirectory = new Dictionary<InventoryItemData, InventoryItem>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
