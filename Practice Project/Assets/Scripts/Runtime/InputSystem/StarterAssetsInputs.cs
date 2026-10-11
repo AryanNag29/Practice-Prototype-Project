@@ -16,6 +16,7 @@ namespace PrototypeProject
         public bool fpp;
         public bool tpp;
         public bool pickDrop;
+        public bool InventoryMove;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -62,6 +63,11 @@ namespace PrototypeProject
                 PickDropInput();
             }
         }
+
+        public void OnMoveInventory(InputValue value)
+        {
+            MoveInventoryInput(value.isPressed);
+        }
         
         
         //hold button
@@ -107,6 +113,11 @@ namespace PrototypeProject
         public void PickDropInput()
         {
             pickDrop = !pickDrop;
+        }
+
+        public void MoveInventoryInput(bool newInventoryMoveState)
+        {
+            InventoryMove = newInventoryMoveState;
         }
         
         //hold button
