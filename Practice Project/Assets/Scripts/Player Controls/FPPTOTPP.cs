@@ -86,7 +86,7 @@ namespace PrototypeProject
             //bug here (can't access the _input.sprint) //now fixed it was due to starter input assambly file 
             if (Fpp)
             {
-                if (sprintInput)
+                if (sprintInput && MoveInputReturn())
                 {
                     _camera.Lens.FieldOfView =
                         Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovFpp, fovlerpValue * Time.deltaTime);
@@ -114,7 +114,7 @@ namespace PrototypeProject
 
             if (Tpp)
             {
-                if (sprintInput)
+                if (sprintInput && MoveInputReturn())
                 {
                     _camera.Lens.FieldOfView =
                         Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovTpp, fovlerpValue * Time.deltaTime);
@@ -124,6 +124,18 @@ namespace PrototypeProject
                     _camera.Lens.FieldOfView =
                         Mathf.Lerp(_camera.Lens.FieldOfView, fovInTpp, fovlerpValue * Time.deltaTime);
                 }
+            }
+        }
+
+        public bool MoveInputReturn()
+        {
+            if (_inputs.move.x > 0.01f || _inputs.move.y > 0.01f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
