@@ -83,7 +83,7 @@ namespace PrototypeProject
                 _inputs.tpp = false;
             }
 
-            //bug here (can't access the _input.sprint)
+            //bug here (can't access the _input.sprint) //now fixed it was due to starter input assambly file 
             if (Fpp)
             {
                 if (sprintInput)
