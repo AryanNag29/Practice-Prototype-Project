@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2196944c7548234ab7e6d5957be419b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::InventorySystem
+  inventory: []
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -9197,6 +9198,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3683842485553875505, guid: 9aa97933547744f4da54fe78d2304e8c, type: 3}
+      propertyPath: referenceItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 960651b876183704c96af485247de164, type: 2}
     - target: {fileID: 5346703768406048715, guid: 9aa97933547744f4da54fe78d2304e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.745
@@ -10374,6 +10379,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2094514947052365413, guid: 61cebb01586eca349bc0930c66516c15, type: 3}
+      propertyPath: referenceItem
+      value: 
+      objectReference: {fileID: 11400000, guid: cc79c78bc00476f4ea93d771b68a46bf, type: 2}
     - target: {fileID: 4070083647687224726, guid: 61cebb01586eca349bc0930c66516c15, type: 3}
       propertyPath: m_Name
       value: Cube Prefab
