@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.StarterAssets::InventoryItemData
   id: InventoryItem_Sphere
   displayName: Sphere
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  icon: {fileID: 6977829799311990860, guid: 70569afb8696a6a478f25f5192306ccb, type: 3}
+  prefab: {fileID: 7993157744684656135, guid: 9aa97933547744f4da54fe78d2304e8c, type: 3}

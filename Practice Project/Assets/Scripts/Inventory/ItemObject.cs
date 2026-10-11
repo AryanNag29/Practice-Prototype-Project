@@ -5,7 +5,7 @@ public class ItemObject : MonoBehaviour
     #region References
 
     public InventoryItemData referenceItem;
-    public InventorySystem _inventorySystem;
+
 
     #endregion
 
@@ -13,7 +13,7 @@ public class ItemObject : MonoBehaviour
 
     public void OnHandlePickupItem()
     {
-        _inventorySystem.Add(referenceItem);
+        InventorySystem.current.Add(referenceItem);
         Destroy(gameObject);
     }
 
@@ -23,7 +23,7 @@ public class ItemObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _inventorySystem = GetComponent<InventorySystem>();
+       
     }
 
     // Update is called once per frame

@@ -7,7 +7,10 @@ public class InventorySystem : MonoBehaviour
 {
     //Dictionary use to grab item more easily from reference data
     private Dictionary<InventoryItemData, InventoryItem> m_itemDirectory;
-    private List<InventoryItem> inventory { get; set; }
+    [SerializeField]
+    private List<InventoryItem> inventory = new List<InventoryItem>();
+    
+    public static InventorySystem current { get; private set; }
 
 
     #region Functions
@@ -54,6 +57,12 @@ public class InventorySystem : MonoBehaviour
     
     private void Awake()
     {
+        if (current != null && current != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        current = this;
         inventory = new List<InventoryItem>();
         m_itemDirectory = new Dictionary<InventoryItemData, InventoryItem>();
     }

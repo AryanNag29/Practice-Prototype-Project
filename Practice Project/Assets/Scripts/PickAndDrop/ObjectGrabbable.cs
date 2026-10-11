@@ -182,7 +182,26 @@ namespace PrototypeProject
                 _rb.linearDamping = 0.0f;
                 _rb.angularDamping = 0.0f;
             }
+        }
+
+        public void MoveInventory()
+        {
+            if (objectGrabPointTransform == null)
+            {
+                _inputs.InventoryMove = false;
+            }
             
+            if (!_inputs.InventoryMove) return;
+            
+            //Only works when inventorymove is pressed
+            // Search this object AND its children/parents
+            ItemObject item = GetComponentInChildren<ItemObject>();
+            if (item == null)
+            {
+                item = GetComponentInParent<ItemObject>();
+            }
+
+            item.OnHandlePickupItem();
         }
 
         #endregion
@@ -231,6 +250,7 @@ namespace PrototypeProject
             RigidBodyGrabSetting();
             RotateGrabbableObjectOnFocus();
             GrabTransformation();
+            MoveInventory();
         }
 
         #endregion

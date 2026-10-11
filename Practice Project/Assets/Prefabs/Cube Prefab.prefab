@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2024878236275610852}
   - component: {fileID: 8554598034542789678}
   - component: {fileID: 5145054042366893272}
+  - component: {fileID: 2094514947052365413}
   m_Layer: 0
   m_Name: Cube Prefab
   m_TagString: GrabbableObjects
@@ -165,3 +166,16 @@ MonoBehaviour:
   TargetYaw: 0
   TargetPitch: 0
   _threshold: 0.01
+--- !u!114 &2094514947052365413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4070083647687224726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e31046b9da86e246808eb7ea8a0cef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::ItemObject
+  referenceItem: {fileID: 0}
