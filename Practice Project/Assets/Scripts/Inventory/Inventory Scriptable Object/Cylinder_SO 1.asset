@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cylinder_SO 1
   m_EditorClassIdentifier: Unity.StarterAssets::InventoryItemData
   id: InventoryItem_SphereTest
-  displayName: Cylinder
+  displayName: Sphere
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   prefab: {fileID: 3422254562981477897, guid: 125d1f4b907229343a1af1941198655b, type: 3}

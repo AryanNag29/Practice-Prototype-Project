@@ -4,12 +4,12 @@ using System.IO;
 
 namespace PrototypeProject
 {
-
+//Unity GUI programming is pretty sick i will learn it 
 public class GrabbablePropSetupWindow : EditorWindow
 {
     // --- Identity ---
-    private string propDisplayName = "Cylinder";
-    private string propId = "prop_01";
+    private string propDisplayName = "";
+    private string propId = "";
     private Sprite propIcon;
 
     // --- Inputs ---
@@ -31,10 +31,10 @@ public class GrabbablePropSetupWindow : EditorWindow
     private const string PREFAB_SAVE_FOLDER = "Assets/Prefabs";
     private const string DATA_SAVE_FOLDER = "Assets/Scripts/Inventory/Inventory Scriptable Object";
 
-    [MenuItem("Tools/Auto Prop Setup")]
+    [MenuItem("Tools/Grabbable Object Setup / Inventory")]
     public static void ShowWindow()
     {
-        GrabbablePropSetupWindow window = GetWindow<GrabbablePropSetupWindow>("Auto Prop Setup");
+        GrabbablePropSetupWindow window = GetWindow<GrabbablePropSetupWindow>("Grabbable Object Setup / Inventory");
         window.minSize = new Vector2(320, 560);
     }
 
