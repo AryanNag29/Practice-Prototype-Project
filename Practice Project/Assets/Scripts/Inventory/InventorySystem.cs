@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
+    #region Storage
+
     //Dictionary use to grab item more easily from reference data
     private Dictionary<InventoryItemData, InventoryItem> m_itemDirectory;
-    [SerializeField]
-    private List<InventoryItem> inventory = new List<InventoryItem>();
-    
+
+    [SerializeField] private List<InventoryItem> inventory = new List<InventoryItem>();
+
+    // this is to call this class as singleton class during runtime
     public static InventorySystem current { get; private set; }
+    
+    #endregion
 
 
     #region Functions
