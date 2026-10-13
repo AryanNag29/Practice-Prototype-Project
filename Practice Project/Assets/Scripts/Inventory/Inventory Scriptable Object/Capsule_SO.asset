@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.StarterAssets::InventoryItemData
   id: InventoryItem_Capsule
   displayName: Capsule
-  icon: {fileID: 6977829799311990860, guid: 70569afb8696a6a478f25f5192306ccb, type: 3}
+  icon: {fileID: 21300000, guid: ff7bfa7addf40784d86f62b8e4a034a6, type: 3}
   prefab: {fileID: 4236044842982204781, guid: d404e21071c11e84da317edfa2597f01, type: 3}

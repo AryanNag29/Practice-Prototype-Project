@@ -178,4 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31046b9da86e246808eb7ea8a0cef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::ItemObject
-  referenceItem: {fileID: 0}
+  referenceItem: {fileID: 11400000, guid: 5c4cca01007f85e4fba78a45da5c32fc, type: 2}
