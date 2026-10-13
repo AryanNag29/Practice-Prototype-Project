@@ -19,6 +19,16 @@ namespace PrototypeProject
         private GameObject sourceModel;
         private Material outlinerMaterial;
         
+        //These are the checklist that you can add in your grabbable object prefab setup
+        //Checklist Toggles
+        private bool setTag = true;
+        private bool addRigidBody = true;
+        private bool addCollider = true;
+        private bool addObjectGrabbable = true;
+        private bool addItemObject = true;
+        private bool applyOutlinerMaterial = true;
+        private bool createPrefab = true;
+        private bool createScriptableObject = true;
 
         #endregion
     }
