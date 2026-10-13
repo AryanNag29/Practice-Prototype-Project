@@ -186,12 +186,11 @@ namespace PrototypeProject
 
         public void MoveInventory()
         {
-            if (objectGrabPointTransform == null)
-            {
-                _inputs.InventoryMove = false;
-            }
+            if (objectGrabPointTransform == null) return;
             
             if (!_inputs.InventoryMove) return;
+            //This was causing race condition previously 
+            _inputs.InventoryMove = false;
             
             //Only works when inventorymove is pressed
             // Search this object AND its children/parents
@@ -200,7 +199,6 @@ namespace PrototypeProject
             {
                 item = GetComponentInParent<ItemObject>();
             }
-
             item.OnHandlePickupItem();
         }
 
