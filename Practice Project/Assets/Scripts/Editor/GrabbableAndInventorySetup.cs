@@ -21,13 +21,22 @@ namespace PrototypeProject
         
         //These are the checklist that you can add in your grabbable object prefab setup
         //Checklist Toggles
+        
+        //set object tag to "GrabbableObject"
         private bool setTag = true;
+        //Add rigid body into it
         private bool addRigidBody = true;
+        //add colliders in that object;
         private bool addCollider = true;
+        //add object grabbable script
         private bool addObjectGrabbable = true;
+        //add the itemobject script
         private bool addItemObject = true;
+        //apply the outliner material by putting it into mesh renderer
         private bool applyOutlinerMaterial = true;
+        //create prefab and saving it into prefab folder
         private bool createPrefab = true;
+        //create scriptable object of that object and saving it into SO folder
         private bool createScriptableObject = true;
 
         #endregion
