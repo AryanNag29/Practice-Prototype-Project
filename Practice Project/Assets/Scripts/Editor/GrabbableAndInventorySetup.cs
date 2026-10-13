@@ -38,6 +38,12 @@ namespace PrototypeProject
         private bool createPrefab = true;
         //create scriptable object of that object and saving it into SO folder
         private bool createScriptableObject = true;
+            
+        //Paths for those folder and names for tag
+        //Paths And Names
+        private const string TargetTag = "GrabbableObject";
+        private const string Prefab_Save_Folder = "Assets/Prefabs";
+        private const string Data_Save_Folder = "Assets/Scripts/Inventory/Inventory Scriptable Object";
 
         #endregion
     }
