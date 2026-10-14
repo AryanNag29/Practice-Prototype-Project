@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -64,6 +65,22 @@ namespace PrototypeProject
                 GetWindow<GrabbablePropSetupWindow>("Grabbable And Inventory Object Setup");
             //This is window size for that tool window
             window.minSize = new Vector2(320, 560);
+        }
+
+        private void OnEnable()
+        {
+            //Auto-locate outlinerMat in the project if empty
+            if (outlinerMaterial == null)
+            {
+                //This is to find the asset outliner of type material
+                string[] guide = AssetDatabase.FindAssets("OutlinerMat, t:Material");
+                //if it find more then one material of same type it will select the first one
+                if (guide.Length > 0)
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(guide[0]);
+                    outlinerMaterial = AssetDatabase.LoadAssetAtPath<Material>(path);
+                }
+            }
         }
 
         #endregion
