@@ -31,10 +31,10 @@ public class GrabbablePropSetupWindow : EditorWindow
     private const string PREFAB_SAVE_FOLDER = "Assets/Prefabs";
     private const string DATA_SAVE_FOLDER = "Assets/Scripts/Inventory/Inventory Scriptable Object";
 
-    [MenuItem("Tools/Grabbable Object Setup / Inventory")]
+    [MenuItem("Tools/Grabbable And Inventory Object Setup")]
     public static void ShowWindow()
     {
-        GrabbablePropSetupWindow window = GetWindow<GrabbablePropSetupWindow>("Grabbable Object Setup / Inventory");
+        GrabbablePropSetupWindow window = GetWindow<GrabbablePropSetupWindow>("Grabbable And Inventory Object Setup ");
         window.minSize = new Vector2(320, 560);
     }
 
