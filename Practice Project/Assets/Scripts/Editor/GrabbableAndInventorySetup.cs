@@ -58,11 +58,11 @@ namespace PrototypeProject
         #region Functions
 
         //This function is to show the tool window in the scene under tools
-        [MenuItem("Tools/Grabbable And Inventory Object Setup")]
+        [MenuItem("Tools/Grabbable & Inventory Object Setup")]
         public static void ShowWindow()
         {
             GrabbablePropSetupWindow window =
-                GetWindow<GrabbablePropSetupWindow>("Grabbable And Inventory Object Setup");
+                GetWindow<GrabbablePropSetupWindow>("Grabbable & Inventory Object Setup");
             //This is window size for that tool window
             window.minSize = new Vector2(320, 560);
         }
