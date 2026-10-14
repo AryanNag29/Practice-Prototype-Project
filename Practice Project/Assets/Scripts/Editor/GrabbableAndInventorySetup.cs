@@ -83,6 +83,27 @@ namespace PrototypeProject
             }
         }
 
+        private void OnGUI()
+        {
+            //Title
+            //layout space between gui
+            EditorGUILayout.Space(6);
+            //Lebel for the tool
+            GUILayout.Label("Auto Grabbable Object Setup Tool",EditorStyles.boldLabel);
+            //space
+            EditorGUILayout.Space(4);
+            
+            //1. Identity
+            //Label for identity
+            GUILayout.Label("Item Identity",EditorStyles.boldLabel);
+            //whatever display name will be it will store in propDisplayName
+            propDisplayName = EditorGUILayout.TextField("Display Name", propDisplayName);
+            //id store in propid
+            propId = EditorGUILayout.TextField("Item ID", propId);
+            //propicon of gameobject type will change to sprite and then whatever icon will be put it will store in gameobject
+            propIcon = (Sprite)EditorGUILayout.ObjectField("Item Icon", propIcon, typeof(Sprite), false);
+        }
+
         #endregion
     }
 }
