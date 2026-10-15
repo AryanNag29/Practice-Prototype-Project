@@ -157,7 +157,9 @@ namespace PrototypeProject
             GUILayout.Label("Auto Prop Setup", EditorStyles.centeredGreyMiniLabel);
         }
         
-
+        /// <summary>
+        /// This will execute the setup for prop
+        /// </summary>
         private void ExecuteSetup()
         {
             
