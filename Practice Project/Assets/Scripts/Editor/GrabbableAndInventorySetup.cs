@@ -175,8 +175,18 @@ namespace PrototypeProject
              //2. Tag as GrabbableObject
              if (setTag)
              {
+                 //Adding the tag of the instance 
                  instance.tag = TargetTag;
              }
+             
+             //3. add Rigidbody
+             if (addRigidBody && !instance.TryGetComponent<Rigidbody>(out _))
+             {
+                 //Adding rigidbody component to instance
+                 instance.AddComponent<Rigidbody>();
+             }
+             
+             
         }
 
         private void EnsureFolder(string relativePath)
