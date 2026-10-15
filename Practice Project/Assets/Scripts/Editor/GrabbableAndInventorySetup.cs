@@ -138,8 +138,28 @@ namespace PrototypeProject
             GUILayout.Label("Change will create assets on disk and configue the scene object.",miniWarn);
             
             EditorGUILayout.Space(4);
-            
-            
+
+            GUI.backgroundColor = new Color(0.25f, 0.75f, 0.35f);
+            //GUI apply button
+            if (GUILayout.Button("Apply Setup", GUILayout.Height(36)))
+            {
+                if (sourceModel == null)
+                {
+                    //If source model is empty it will show this warning
+                    EditorUtility.DisplayDialog("Missing Model", "Please assign a 3D Model / Mesh First.", "OK");
+                    return;
+                }
+                ExecuteSetup();
+            }
+
+            GUI.backgroundColor = Color.white;
+            EditorGUILayout.Space(4);
+            GUILayout.Label("Auto Prop Setup", EditorStyles.centeredGreyMiniLabel);
+        }
+        
+
+        private void ExecuteSetup()
+        {
             
         }
 
