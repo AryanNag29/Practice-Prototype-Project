@@ -113,9 +113,9 @@ namespace PrototypeProject
                 (GameObject)EditorGUILayout.ObjectField("3D Model/ Mesh", sourceModel, typeof(GameObject), false);
             outlinerMaterial =
                 (Material)EditorGUILayout.ObjectField("Outliner Material", outlinerMaterial, typeof(Material), false);
-            
+
             EditorGUILayout.Space(8);
-            
+
             //3. Setup Steps
             //Setting Toggle for the given booleans 
             GUILayout.Label("Setup Steps", EditorStyles.boldLabel);
@@ -125,18 +125,18 @@ namespace PrototypeProject
             addObjectGrabbable = EditorGUILayout.Toggle("Add ObjectGrabbable Script", addObjectGrabbable);
             addItemObject = EditorGUILayout.Toggle("Add ItemObject Script(Inventory)", addItemObject);
             applyOutlinerMaterial = EditorGUILayout.Toggle("Add Outliner On Grabbable Object", applyOutlinerMaterial);
-            
+
             EditorGUILayout.Space(4);
 
             createPrefab = EditorGUILayout.Toggle("Save to Asset/Prefab", createPrefab);
             createScriptableObject = EditorGUILayout.Toggle("Save to Inventory SO Folder", createScriptableObject);
-            
+
             EditorGUILayout.Space(14);
-            
+
             //GuiStyle
             GUIStyle miniWarn = new GUIStyle(EditorStyles.miniLabel) { wordWrap = true };
-            GUILayout.Label("Change will create assets on disk and configue the scene object.",miniWarn);
-            
+            GUILayout.Label("Change will create assets on disk and configue the scene object.", miniWarn);
+
             EditorGUILayout.Space(4);
 
             GUI.backgroundColor = new Color(0.25f, 0.75f, 0.35f);
@@ -149,6 +149,7 @@ namespace PrototypeProject
                     EditorUtility.DisplayDialog("Missing Model", "Please assign a 3D Model / Mesh First.", "OK");
                     return;
                 }
+
                 ExecuteSetup();
             }
 
@@ -156,54 +157,72 @@ namespace PrototypeProject
             EditorGUILayout.Space(4);
             GUILayout.Label("Auto Prop Setup", EditorStyles.centeredGreyMiniLabel);
         }
-        
+
         /// <summary>
         /// This will execute the setup for prop
         /// </summary>
         private void ExecuteSetup()
         {
-             EnsureFolder(Prefab_Save_Folder);
-             EnsureFolder(Data_Save_Folder);
-             
-             //1. Instantiate the model into the scene
-             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(sourceModel);
-             // if there instance is null then it will instance the source model in the scene
-             if (instance == null) instance = Instantiate(sourceModel);
-             //set the name of the instance to the name of prop display name if prop Display name is empty or null
-             instance.name = string.IsNullOrEmpty(propDisplayName) ? sourceModel.name : propDisplayName;
-             
-             //2. Tag as GrabbableObject
-             if (setTag)
-             {
-                 //Adding the tag of the instance 
-                 instance.tag = TargetTag;
-             }
-             
-             //3. add Rigidbody
-             if (addRigidBody && !instance.TryGetComponent<Rigidbody>(out _))
-             {
-                 //Adding rigidbody component to instance
-                 instance.AddComponent<Rigidbody>();
-             }
-             
-             //4. Add BoxCollider if no collider exist in hierarchy
-             if (addCollider && instance.GetComponentInChildren<Collider>() == null)
-             {
-                 //adding the box collider to the gameobject if it does not have any collider
-                 instance.AddComponent<BoxCollider>();
-             }
+            EnsureFolder(Prefab_Save_Folder);
+            EnsureFolder(Data_Save_Folder);
 
-             if (addObjectGrabbable && !instance.TryGetComponent<ObjectGrabbable>())
-             {
-                 //adding grabbable object script to the instance
-                 instance.AddComponent<ObjectGrabbable>();
-             }
-             
+            //1. Instantiate the model into the scene
+            GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(sourceModel);
+            // if there instance is null then it will instance the source model in the scene
+            if (instance == null) instance = Instantiate(sourceModel);
+            //set the name of the instance to the name of prop display name if prop Display name is empty or null
+            instance.name = string.IsNullOrEmpty(propDisplayName) ? sourceModel.name : propDisplayName;
+
+            //2. Tag as GrabbableObject
+            if (setTag)
+            {
+                //Adding the tag of the instance 
+                instance.tag = TargetTag;
+            }
+
+            //3. add Rigidbody
+            if (addRigidBody && !instance.TryGetComponent<Rigidbody>(out _))
+            {
+                //Adding rigidbody component to instance
+                instance.AddComponent<Rigidbody>();
+            }
+
+            //4. Add BoxCollider if no collider exist in hierarchy
+            if (addCollider && instance.GetComponentInChildren<Collider>() == null)
+            {
+                //adding the box collider to the gameobject if it does not have any collider
+                instance.AddComponent<BoxCollider>();
+            }
+
+            //5. Add ObjectGrabbable script to the instance
+            if (addObjectGrabbable && !instance.TryGetComponent<ObjectGrabbable>())
+            {
+                //adding grabbable object script to the instance
+                instance.AddComponent<ObjectGrabbable>();
+            }
+
+            //6. Set material (Element 0 = base material and element 1 = outliner material)
+            if (applyOutlinerMaterial && outlinerMaterial != null)
+            {
+                //getting the component of the instance's meshrender as a child
+                MeshRenderer[] renderers = instance.GetComponentInChildren<MeshRenderer>();
+                //for eacch mr in the renderers it will run
+                foreach (MeshRenderer mr in renderers)
+                {
+                    //if there is base material then it will be null in the new prefab
+                    Material baseMat = (mr.sharedMaterials.Length > 0 && mr.sharedMaterials[0] != null)
+                        ? mr.sharedMaterials[0]
+                        : null;
+                    //setting the new materials as material[0] = baseMat and material[1] as outliner material
+                    mr.sharedMaterials = new Material[] { baseMat, outlinerMaterial };
+                    //tells Unity that a target object has changed so the editor knows to save it to disk.
+                    EditorUtility.SetDirty(mr);
+                }
+            }
         }
 
         private void EnsureFolder(string relativePath)
         {
-            
         }
 
         #endregion
