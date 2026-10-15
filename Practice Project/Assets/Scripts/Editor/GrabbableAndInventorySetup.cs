@@ -186,6 +186,18 @@ namespace PrototypeProject
                  instance.AddComponent<Rigidbody>();
              }
              
+             //4. Add BoxCollider if no collider exist in hierarchy
+             if (addCollider && instance.GetComponentInChildren<Collider>() == null)
+             {
+                 //adding the box collider to the gameobject if it does not have any collider
+                 instance.AddComponent<BoxCollider>();
+             }
+
+             if (addObjectGrabbable && !instance.TryGetComponent<ObjectGrabbable>())
+             {
+                 //adding grabbable object script to the instance
+                 instance.AddComponent<ObjectGrabbable>();
+             }
              
         }
 
