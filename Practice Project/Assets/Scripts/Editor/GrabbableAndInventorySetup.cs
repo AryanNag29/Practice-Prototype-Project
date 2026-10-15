@@ -162,6 +162,21 @@ namespace PrototypeProject
         /// </summary>
         private void ExecuteSetup()
         {
+             EnsureFolder(Prefab_Save_Folder);
+             EnsureFolder(Data_Save_Folder);
+             
+             //1. Instantiate the model into the scene
+             GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(sourceModel);
+             // if there instance is null then it will instance the source model in the scene
+             if (instance == null) instance = Instantiate(sourceModel);
+             //set the name of the instance to the name of prop display name if prop Display name is empty or null
+             instance.name = string.IsNullOrEmpty(propDisplayName) ? sourceModel.name : propDisplayName;
+             
+             
+        }
+
+        private void EnsureFolder(string relativePath)
+        {
             
         }
 
