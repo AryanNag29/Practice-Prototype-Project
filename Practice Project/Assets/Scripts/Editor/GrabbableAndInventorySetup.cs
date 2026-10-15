@@ -172,7 +172,11 @@ namespace PrototypeProject
              //set the name of the instance to the name of prop display name if prop Display name is empty or null
              instance.name = string.IsNullOrEmpty(propDisplayName) ? sourceModel.name : propDisplayName;
              
-             
+             //2. Tag as GrabbableObject
+             if (setTag)
+             {
+                 instance.tag = TargetTag;
+             }
         }
 
         private void EnsureFolder(string relativePath)
