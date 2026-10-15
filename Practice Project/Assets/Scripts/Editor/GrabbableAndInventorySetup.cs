@@ -117,6 +117,7 @@ namespace PrototypeProject
             EditorGUILayout.Space(8);
             
             //3. Setup Steps
+            //Setting Toggle for the given booleans 
             GUILayout.Label("Setup Steps", EditorStyles.boldLabel);
             setTag = EditorGUILayout.Toggle("Tag as 'Grabbable Object'", setTag);
             addRigidBody = EditorGUILayout.Toggle("Add RigidBody", addRigidBody);
@@ -126,8 +127,20 @@ namespace PrototypeProject
             applyOutlinerMaterial = EditorGUILayout.Toggle("Add Outliner On Grabbable Object", applyOutlinerMaterial);
             
             EditorGUILayout.Space(4);
-            
 
+            createPrefab = EditorGUILayout.Toggle("Save to Asset/Prefab", createPrefab);
+            createScriptableObject = EditorGUILayout.Toggle("Save to Inventory SO Folder", createScriptableObject);
+            
+            EditorGUILayout.Space(14);
+            
+            //GuiStyle
+            GUIStyle miniWarn = new GUIStyle(EditorStyles.miniLabel) { wordWrap = true };
+            GUILayout.Label("Change will create assets on disk and configue the scene object.",miniWarn);
+            
+            EditorGUILayout.Space(4);
+            
+            
+            
         }
 
         #endregion
