@@ -113,6 +113,21 @@ namespace PrototypeProject
                 (GameObject)EditorGUILayout.ObjectField("3D Model/ Mesh", sourceModel, typeof(GameObject), false);
             outlinerMaterial =
                 (Material)EditorGUILayout.ObjectField("Outliner Material", outlinerMaterial, typeof(Material), false);
+            
+            EditorGUILayout.Space(8);
+            
+            //3. Setup Steps
+            GUILayout.Label("Setup Steps", EditorStyles.boldLabel);
+            setTag = EditorGUILayout.Toggle("Tag as 'Grabbable Object'", setTag);
+            addRigidBody = EditorGUILayout.Toggle("Add RigidBody", addRigidBody);
+            addCollider = EditorGUILayout.Toggle("Add Collider(if missing)", addCollider);
+            addObjectGrabbable = EditorGUILayout.Toggle("Add ObjectGrabbable Script", addObjectGrabbable);
+            addItemObject = EditorGUILayout.Toggle("Add ItemObject Script(Inventory)", addItemObject);
+            applyOutlinerMaterial = EditorGUILayout.Toggle("Add Outliner On Grabbable Object", applyOutlinerMaterial);
+            
+            EditorGUILayout.Space(4);
+            
+
         }
 
         #endregion
