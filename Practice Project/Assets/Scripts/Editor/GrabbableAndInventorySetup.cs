@@ -233,7 +233,7 @@ namespace PrototypeProject
                 savedPrefab =
                     PrefabUtility.SaveAsPrefabAssetAndConnect(instance, prefabPath, InteractionMode.UserAction);
             }
-            
+
             //8. Create and save inventory ItemData ScriptableObject
             if (createScriptableObject)
             {
@@ -247,8 +247,8 @@ namespace PrototypeProject
                 //save name of the scriptable object
                 string dataPath = AssetDatabase.GenerateUniqueAssetPath($"{Data_Save_Folder}/{instance.name}_SO.asset");
                 //Create the scriptable object with this function first param (Gameobject, srting name)
-                AssetDatabase.CreateAsset(newItemData,dataPath);
-                
+                AssetDatabase.CreateAsset(newItemData, dataPath);
+
                 //9. Add ItemObject Script (Direct type reference from asset/script/inventory/)
                 ItemObject itemComp = null;
 
@@ -259,11 +259,37 @@ namespace PrototypeProject
                         itemComp = instance.AddComponent<ItemObject>();
                     }
                 }
-                
-                
 
+                //10. Assign ScriptableObject reference to itemObject's "Reference Item" field
+                if (itemComp != null)
+                {
+                    SerializedObject serializedItemComp = new SerializedObject(itemComp);
+                    //This is really cool way to check multiple variable or addresses if you are not confirmed the name
+                    SerializedProperty refItemProp = serializedItemComp.FindProperty("referenceItem") ??
+                                                     serializedItemComp.FindProperty("ReferenceItem") ??
+                                                     serializedItemComp.FindProperty("reference_Item");
+
+                    if (refItemProp != null)
+                    {
+                        refItemProp.objectReferenceValue = newItemData;
+                        //Apply new change in the properties
+                        serializedItemComp.ApplyModifiedProperties();
+                    }
+
+                    //to save the new change in the prefab
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(itemComp);
+                }
             }
-            
+            //save asset
+            AssetDatabase.SaveAssets();
+            //refresh assets
+            AssetDatabase.Refresh();
+
+            Selection.activeGameObject = instance;
+            //end dialog
+            EditorUtility.DisplayDialog("Complete",
+                $"Successfully configured '{instance.name}'!\n\nPrefab saved to:\n{Prefab_Save_Folder}\n\nSO saved to:\n{Data_Save_Folder}",
+                "OK");
         }
 
         private void EnsureFolder(string relativePath)
