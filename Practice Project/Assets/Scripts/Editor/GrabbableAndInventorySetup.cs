@@ -291,9 +291,14 @@ namespace PrototypeProject
                 $"Successfully configured '{instance.name}'!\n\nPrefab saved to:\n{Prefab_Save_Folder}\n\nSO saved to:\n{Data_Save_Folder}",
                 "OK");
         }
-
+        
+        //if the directory does not exist it will create one
         private void EnsureFolder(string relativePath)
         {
+            if (!Directory.Exists(relativePath))
+            {
+                Directory.CreateDirectory(relativePath);
+            }
         }
 
         #endregion
