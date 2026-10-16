@@ -195,7 +195,7 @@ namespace PrototypeProject
             }
 
             //5. Add ObjectGrabbable script to the instance
-            if (addObjectGrabbable && !instance.TryGetComponent<ObjectGrabbable>())
+            if (addObjectGrabbable && !instance.TryGetComponent<ObjectGrabbable>(out _))
             {
                 //adding grabbable object script to the instance
                 instance.AddComponent<ObjectGrabbable>();
@@ -205,7 +205,7 @@ namespace PrototypeProject
             if (applyOutlinerMaterial && outlinerMaterial != null)
             {
                 //getting the component of the instance's meshrender as a child
-                MeshRenderer[] renderers = instance.GetComponentInChildren<MeshRenderer>();
+                MeshRenderer[] renderers = instance.GetComponentsInChildren<MeshRenderer>();
                 //for eacch mr in the renderers it will run
                 foreach (MeshRenderer mr in renderers)
                 {
@@ -219,6 +219,12 @@ namespace PrototypeProject
                     EditorUtility.SetDirty(mr);
                 }
             }
+            
+            //7. Save as Prefab asset into Asset/Prefabs
+            //setting the prefab as null first
+            GameObject savedPrefab = null;
+            
+            
         }
 
         private void EnsureFolder(string relativePath)
