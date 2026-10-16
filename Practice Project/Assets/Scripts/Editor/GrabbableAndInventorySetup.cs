@@ -249,8 +249,19 @@ namespace PrototypeProject
                 //Create the scriptable object with this function first param (Gameobject, srting name)
                 AssetDatabase.CreateAsset(newItemData,dataPath);
                 
+                //9. Add ItemObject Script (Direct type reference from asset/script/inventory/)
+                ItemObject itemComp = null;
+
+                if (addItemObject)
+                {
+                    if (!instance.TryGetComponent(out itemComp))
+                    {
+                        itemComp = instance.AddComponent<ItemObject>();
+                    }
+                }
                 
                 
+
             }
             
         }
