@@ -219,11 +219,39 @@ namespace PrototypeProject
                     EditorUtility.SetDirty(mr);
                 }
             }
-            
+
             //7. Save as Prefab asset into Asset/Prefabs
             //setting the prefab as null first
             GameObject savedPrefab = null;
+            if (createPrefab)
+            {
+                //save prefab to the prefab folder
+                string prefabPath =
+                    AssetDatabase.GenerateUniqueAssetPath($"{Prefab_Save_Folder}/{instance.name}.prefab");
+
+                //Instance of the prefab in the scene
+                savedPrefab =
+                    PrefabUtility.SaveAsPrefabAssetAndConnect(instance, prefabPath, InteractionMode.UserAction);
+            }
             
+            //8. Create and save inventory ItemData ScriptableObject
+            if (createScriptableObject)
+            {
+                //Storing the data into the scriptable object 
+                InventoryItemData newItemData = ScriptableObject.CreateInstance<InventoryItemData>();
+                newItemData.id = propId;
+                newItemData.displayName = propDisplayName;
+                newItemData.icon = propIcon;
+                newItemData.prefab = savedPrefab != null ? savedPrefab : instance;
+
+                //save name of the scriptable object
+                string dataPath = AssetDatabase.GenerateUniqueAssetPath($"{Data_Save_Folder}/{instance.name}_SO.asset");
+                //Create the scriptable object with this function first param (Gameobject, srting name)
+                AssetDatabase.CreateAsset(newItemData,dataPath);
+                
+                
+                
+            }
             
         }
 
