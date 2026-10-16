@@ -50,7 +50,7 @@ namespace PrototypeProject
         //Paths for those folder and names for tag
         //Paths And Names
         private const string TargetTag = "GrabbableObject";
-        private const string Prefab_Save_Folder = "Assets/Prefabs";
+        private const string Prefab_Save_Folder = "Assets/Prefabs/Grabbable objects";
         private const string Data_Save_Folder = "Assets/Scripts/Inventory/Inventory Scriptable Object";
 
         #endregion
