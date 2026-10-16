@@ -61,8 +61,8 @@ namespace PrototypeProject
         [MenuItem("Tools/Grabbable & Inventory Object Setup")]
         public static void ShowWindow()
         {
-            GrabbablePropSetupWindow window =
-                GetWindow<GrabbablePropSetupWindow>("Grabbable & Inventory Object Setup");
+            GrabbableAndInventorySetup window =
+                GetWindow<GrabbableAndInventorySetup>("Grabbable & Inventory Object Setup");
             //This is window size for that tool window
             window.minSize = new Vector2(320, 560);
         }
