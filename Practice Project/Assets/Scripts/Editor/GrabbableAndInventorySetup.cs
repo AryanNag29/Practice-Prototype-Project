@@ -70,7 +70,7 @@ namespace PrototypeProject
         private void OnEnable()
         {
             //Auto-locate outlinerMat in the project if empty
-            if (outlinerMaterial == null)
+            if (outlinerMaterial  == null)
             {
                 //This is to find the asset outliner of type material
                 string[] guide = AssetDatabase.FindAssets("OutlinerMat, t:Material");
