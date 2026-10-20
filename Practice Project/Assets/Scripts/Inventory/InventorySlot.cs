@@ -22,7 +22,7 @@ public class InventorySlot : MonoBehaviour
     {
         //setting the inventory item icon
         m_Icon.sprite = item.data.icon;
-        m_label.text = item.data.name;
+        m_label.text = item.data.displayName;
         if (item.stackSize <= 1)
         {
             m_StackObj.SetActive(false);

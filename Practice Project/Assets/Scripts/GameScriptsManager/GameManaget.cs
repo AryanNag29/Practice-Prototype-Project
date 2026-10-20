@@ -24,7 +24,7 @@ public class GameManaget : MonoBehaviour
 
     public void OnUpdateInventory()
     {
-        foreach (Transform t in transform)
+        foreach (Transform t in inventoryPanel)
         {
           Destroy(t.gameObject);   
         }
@@ -44,8 +44,8 @@ public class GameManaget : MonoBehaviour
     {
         GameObject obj = Instantiate(itemslot);
         obj.transform.SetParent(inventoryPanel, false);
-        
-       InventorySlot slot = GetComponent<InventorySlot>();
+
+        InventorySlot slot = obj.GetComponent<InventorySlot>();
         // 3. Set the item data
         if (slot != null)
         {
