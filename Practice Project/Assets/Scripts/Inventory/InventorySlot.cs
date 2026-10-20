@@ -15,6 +15,25 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_StackLabel;
 
     #endregion
+
+    #region Functions
+
+    public void Set(InventoryItem item)
+    {
+        //setting the inventory item icon
+        m_Icon.sprite = item.data.icon;
+        m_label.text = item.data.name;
+        if (item.stackSize <= 1)
+        {
+            m_StackObj.SetActive(false);
+            return;
+        }
+
+        m_StackLabel.text = item.stackSize.ToString();
+        
+    }
+
+    #endregion
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

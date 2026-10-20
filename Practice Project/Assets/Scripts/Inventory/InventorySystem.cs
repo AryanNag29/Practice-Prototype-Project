@@ -10,10 +10,12 @@ public class InventorySystem : MonoBehaviour
     //Dictionary use to grab item more easily from reference data
     private Dictionary<InventoryItemData, InventoryItem> m_itemDirectory;
 
-    [SerializeField] private List<InventoryItem> inventory = new List<InventoryItem>();
+    public List<InventoryItem> inventory = new List<InventoryItem>();
 
     // this is to call this class as singleton class during runtime
     public static InventorySystem current { get; private set; }
+    //event
+    public event Action OnInventoryChangedEvent;
     
     #endregion
 
@@ -37,6 +39,7 @@ public class InventorySystem : MonoBehaviour
             inventory.Add(newItem);
             m_itemDirectory.Add(referenceData,newItem);
         }
+        OnInventoryChangedEvent?.Invoke();
     }
     
     /// <summary>
@@ -54,8 +57,10 @@ public class InventorySystem : MonoBehaviour
                 inventory.Remove(value);
                 m_itemDirectory.Remove(referenceData);
             }
+            OnInventoryChangedEvent?.Invoke();
         }
     }
+    
 
     #endregion
     
