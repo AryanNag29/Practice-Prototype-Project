@@ -6,7 +6,6 @@ public class ItemObject : MonoBehaviour
 
     public InventoryItemData referenceItem;
 
-
     #endregion
 
     #region Functions

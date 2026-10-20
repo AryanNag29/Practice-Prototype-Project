@@ -10,7 +10,7 @@ public class InventorySystem : MonoBehaviour
     //Dictionary use to grab item more easily from reference data
     private Dictionary<InventoryItemData, InventoryItem> m_itemDirectory;
 
-    public List<InventoryItem> inventory = new List<InventoryItem>();
+    public List<InventoryItem> inventory { get; private set; }
 
     // this is to call this class as singleton class during runtime
     public static InventorySystem current { get; private set; }
