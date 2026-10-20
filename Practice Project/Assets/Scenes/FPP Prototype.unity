@@ -226,6 +226,51 @@ Transform:
   - {fileID: 1612500412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &94010270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 94010271}
+  - component: {fileID: 94010272}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &94010271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94010270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &94010272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94010270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54afb7381abccfe45b58a7faa34e25ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::GameManaget
+  _inventory: {fileID: 396787360}
 --- !u!1001 &143418598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10428,6 +10473,11 @@ Transform:
   - {fileID: 6896772641958229809}
   m_Father: {fileID: 6264676005219719636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &597138290415687156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4332819733893731251, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
+  m_PrefabInstance: {fileID: 8497935884679996826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &648341005994877989
 Transform:
   m_ObjectHideFlags: 0
@@ -19255,6 +19305,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.28
       objectReference: {fileID: 0}
+    - target: {fileID: 2677676712921747349, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
+      propertyPath: m_Name
+      value: Icon
+      objectReference: {fileID: 0}
     - target: {fileID: 3239892998657432376, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
       propertyPath: m_text
       value: Paper
@@ -19294,6 +19348,10 @@ PrefabInstance:
     - target: {fileID: 3239892998657432376, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962610469440806884, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
+      propertyPath: m_Name
+      value: Stack_Bar
       objectReference: {fileID: 0}
     - target: {fileID: 4136178994334842222, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -19422,7 +19480,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4332819733893731251, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8537955253465074594}
   m_SourcePrefab: {fileID: 100100000, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
 --- !u!1 &8499335934084661273
 GameObject:
@@ -19461,6 +19522,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8843412397362966464, guid: f00a37ed478548941a47ccac2462c77b, type: 3}
   m_PrefabInstance: {fileID: 8497935884679996826}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8537955253465074594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597138290415687156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04711da5f3cd64c4eb3bee599032d25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::InventorySlot
 --- !u!114 &8616685847856548032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20044,3 +20117,4 @@ SceneRoots:
   - {fileID: 855636115}
   - {fileID: 5659687979988693126}
   - {fileID: 1170956888}
+  - {fileID: 94010271}
