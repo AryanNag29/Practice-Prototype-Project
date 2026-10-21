@@ -3327,6 +3327,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: dd54ed56e94ed8e4a9d9fbbdf108e645, type: 2}
+  - {fileID: 2100000, guid: 351a0f94813b723448328ccbfbd6ac27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3384,6 +3385,7 @@ GameObject:
   - component: {fileID: 410590222332355734}
   - component: {fileID: 410590222332355735}
   - component: {fileID: 410590222332355736}
+  - component: {fileID: 4545753976378698518}
   - component: {fileID: 4545753976378698517}
   m_Layer: 0
   m_Name: Door02_pr
@@ -4299,6 +4301,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: dd54ed56e94ed8e4a9d9fbbdf108e645, type: 2}
+  - {fileID: 2100000, guid: 351a0f94813b723448328ccbfbd6ac27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4342,6 +4345,7 @@ GameObject:
   - component: {fileID: 2039680109103812553}
   - component: {fileID: 2039680109103812552}
   - component: {fileID: 2039680109103812555}
+  - component: {fileID: 7636706418150741118}
   - component: {fileID: 7636706418150741117}
   m_Layer: 0
   m_Name: Door03_pr
@@ -4644,6 +4648,7 @@ GameObject:
   - component: {fileID: 2279372503792700772}
   - component: {fileID: 2279372503792700773}
   - component: {fileID: 2279372503792700770}
+  - component: {fileID: 6597500549866562772}
   - component: {fileID: 6597500549866562771}
   m_Layer: 0
   m_Name: Door04_pr
@@ -4686,6 +4691,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: dd54ed56e94ed8e4a9d9fbbdf108e645, type: 2}
+  - {fileID: 2100000, guid: 351a0f94813b723448328ccbfbd6ac27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6005,6 +6011,18 @@ LODGroup:
     - renderer: {fileID: 410590222332355735}
   m_Enabled: 1
   m_GlobalIlluminationLOD: 0
+--- !u!114 &4545753976378698518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410590222332355737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
 --- !u!4 &4605066315055276631
 Transform:
   m_ObjectHideFlags: 0
@@ -6558,6 +6576,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: dd54ed56e94ed8e4a9d9fbbdf108e645, type: 2}
+  - {fileID: 2100000, guid: 351a0f94813b723448328ccbfbd6ac27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6615,6 +6634,7 @@ GameObject:
   - component: {fileID: 5255902637032165508}
   - component: {fileID: 5255902637032165509}
   - component: {fileID: 5255902637032165510}
+  - component: {fileID: 5255902637032165512}
   - component: {fileID: 763530060427264545}
   m_Layer: 0
   m_Name: Door01_pr
@@ -6623,6 +6643,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 31
   m_IsActive: 1
+--- !u!114 &5255902637032165512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5255902637032165511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
 --- !u!4 &5304180711875307070
 Transform:
   m_ObjectHideFlags: 0
@@ -10972,6 +11004,18 @@ LODGroup:
     - renderer: {fileID: 2279372503792700773}
   m_Enabled: 1
   m_GlobalIlluminationLOD: 0
+--- !u!114 &6597500549866562772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2279372503792700771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
 --- !u!1 &6614844443221021504
 GameObject:
   m_ObjectHideFlags: 0
@@ -11578,6 +11622,7 @@ GameObject:
   - component: {fileID: 7620929508739252023}
   - component: {fileID: 7620929508739252022}
   - component: {fileID: 7620929508739252021}
+  - component: {fileID: 7620929508739252024}
   - component: {fileID: 2051272278338167939}
   m_Layer: 0
   m_Name: Door03_pr (1)
@@ -11634,6 +11679,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: dd54ed56e94ed8e4a9d9fbbdf108e645, type: 2}
+  - {fileID: 2100000, guid: 351a0f94813b723448328ccbfbd6ac27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11665,6 +11711,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7620929508739252020}
   m_Mesh: {fileID: 4300004, guid: 66e1e8886a45bf44893f8dc3927f6cbb, type: 3}
+--- !u!114 &7620929508739252024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620929508739252020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
 --- !u!205 &7636706418150741117
 LODGroup:
   m_ObjectHideFlags: 0
@@ -11685,6 +11743,18 @@ LODGroup:
     - renderer: {fileID: 2039680109103812552}
   m_Enabled: 1
   m_GlobalIlluminationLOD: 0
+--- !u!114 &7636706418150741118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039680109103812554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
 --- !u!1 &7651667408596029752
 GameObject:
   m_ObjectHideFlags: 0
