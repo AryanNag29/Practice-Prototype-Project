@@ -18,7 +18,6 @@ namespace PrototypeProject
         [SerializeField] private LayerMask _pickObjectMask;
         private StarterAssetsInputs _inputs;
         private ObjectGrabbable _objectGrabbable;
-
         #endregion
 
         #region Variables
@@ -26,6 +25,33 @@ namespace PrototypeProject
         #endregion
 
         #region Functions
+
+        private void OnHitInteractable()
+        {
+            if (_cameraChange.Tpp)
+            {
+                _inputs.interactiveObject = false;
+                ResetOutliner(_currentRenderer);
+            }
+
+            if (_cameraChange.Fpp)
+            {
+                float interactDistance = 3f;
+                if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit, interactDistance))
+                {
+                    //door is detected
+                    if (hit.transform.TryGetComponent(out DoorInteracttion doorDetected))
+                    {
+                        Debug.Log(doorDetected);
+                        if (_inputs.interactiveObject)
+                        {
+                            if(doorDetected._currentCoroutine != null) StopCoroutine(doorDetected._currentCoroutine);
+                            doorDetected._currentCoroutine = StartCoroutine(doorDetected.ToggleDoor());
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// On Hit Grabbable Function
@@ -153,6 +179,7 @@ namespace PrototypeProject
                 _objectGrabbable = null;
             }
 
+            OnHitInteractable();
             OnHitGrabbable();
         }
     }
