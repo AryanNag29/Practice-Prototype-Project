@@ -98,7 +98,7 @@
                 },
                 {
                     "name": "InteractObject",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "8c7926f5-d538-42e0-b293-ea7ee776a668",
                     "expectedControlType": "",
                     "processors": "",

@@ -3284,7 +3284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410590222332355737}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.89959717, y: 0.98, z: 3.3042908}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3292,7 +3292,7 @@ Transform:
   - {fileID: 5719727624680237330}
   - {fileID: 5719727623723607243}
   m_Father: {fileID: 4731543105151221398}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &410590222332355734
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4723,7 +4723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2279372503792700771}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.90200806, y: 0.9779999, z: 6.2470093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4731,7 +4731,7 @@ Transform:
   - {fileID: 2810700232552377575}
   - {fileID: 2810700232950865584}
   m_Father: {fileID: 4731543105151221398}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &2398676730040494072
 GameObject:
   m_ObjectHideFlags: 0
@@ -6023,6 +6023,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
+  openAngle: 90
+  openSpeed: 2
+  isOpen: 0
 --- !u!4 &4605066315055276631
 Transform:
   m_ObjectHideFlags: 0
@@ -6533,7 +6536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5255902637032165511}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.027588, y: 0.98500013, z: 1.9952087}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
@@ -6541,7 +6544,7 @@ Transform:
   - {fileID: 2768865495240108877}
   - {fileID: 648341005994877989}
   m_Father: {fileID: 4731543105151221398}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5255902637032165508
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6655,6 +6658,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
+  openAngle: 90
+  openSpeed: 2
+  isOpen: 0
 --- !u!4 &5304180711875307070
 Transform:
   m_ObjectHideFlags: 0
@@ -11017,6 +11023,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
+  openAngle: 90
+  openSpeed: 2
+  isOpen: 0
 --- !u!1 &6614844443221021504
 GameObject:
   m_ObjectHideFlags: 0
@@ -11724,6 +11733,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
+  openAngle: 90
+  openSpeed: 2
+  isOpen: 0
 --- !u!205 &7636706418150741117
 LODGroup:
   m_ObjectHideFlags: 0
@@ -11756,6 +11768,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 084deb6f642adf049b777c7f87d38303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
+  openAngle: 90
+  openSpeed: 2
+  isOpen: 0
 --- !u!1 &7651667408596029752
 GameObject:
   m_ObjectHideFlags: 0
