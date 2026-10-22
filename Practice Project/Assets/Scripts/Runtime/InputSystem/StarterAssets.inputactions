@@ -95,6 +95,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "InteractObject",
+                    "type": "Button",
+                    "id": "8c7926f5-d538-42e0-b293-ea7ee776a668",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -370,6 +380,17 @@
                     "processors": "",
                     "groups": ";KeyboardMouse",
                     "action": "MoveInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82956c3b-4681-419b-8e49-04a198e16915",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "InteractObject",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
