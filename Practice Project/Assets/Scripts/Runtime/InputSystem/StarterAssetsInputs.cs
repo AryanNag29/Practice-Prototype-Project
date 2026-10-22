@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -16,7 +17,8 @@ namespace PrototypeProject
         public bool fpp;
         public bool tpp;
         public bool pickDrop;
-        public bool InventoryMove;
+        public bool inventoryMove;
+        public bool interactiveObject;
 
         [Header("Movement Settings")] public bool analogMovement;
 
@@ -117,7 +119,7 @@ namespace PrototypeProject
 
         public void MoveInventoryInput(bool newInventoryMoveState)
         {
-            InventoryMove = newInventoryMoveState;
+            inventoryMove = newInventoryMoveState;
         }
         
         //hold button

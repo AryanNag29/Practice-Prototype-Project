@@ -188,9 +188,9 @@ namespace PrototypeProject
         {
             if (objectGrabPointTransform == null) return;
             
-            if (!_inputs.InventoryMove) return;
+            if (!_inputs.inventoryMove) return;
             //This was causing race condition previously 
-            _inputs.InventoryMove = false;
+            _inputs.inventoryMove = false;
             
             //Only works when inventorymove is pressed
             // Search this object AND its children/parents
