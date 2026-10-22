@@ -58,14 +58,6 @@ namespace PrototypeProject
         }
 
 
-        public void OnInteractObject(InputValue value)
-        {
-            if (value.isPressed)
-            {
-                InteractObject(true);
-            }
-        }
-
         public void OnPickDrop(InputValue value)
         {
             if (value.isPressed)
@@ -79,6 +71,11 @@ namespace PrototypeProject
             MoveInventoryInput(value.isPressed);
         }
 
+
+        public void OnInteractObject(InputValue value)
+        {
+            FppInput(value.isPressed);
+        }
 
         //hold button
         public void OnSprint(InputValue value)
