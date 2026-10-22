@@ -26,7 +26,7 @@ namespace PrototypeProject
         public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
-        
+
         //vector 2 movement 
         public void OnMove(InputValue value)
         {
@@ -40,7 +40,7 @@ namespace PrototypeProject
                 LookInput(value.Get<Vector2>());
             }
         }
-        
+
         //tap button
         public void OnJump(InputValue value)
         {
@@ -50,7 +50,6 @@ namespace PrototypeProject
         public void OnTpp(InputValue value)
         {
             TppInput(value.isPressed);
-
         }
 
         public void OnFpp(InputValue value)
@@ -58,9 +57,13 @@ namespace PrototypeProject
             FppInput(value.isPressed);
         }
 
+
         public void OnInteractObject(InputValue value)
         {
-            InteractObject(value.isPressed);
+            if (value.isPressed)
+            {
+                InteractObject(true);
+            }
         }
 
         public void OnPickDrop(InputValue value)
@@ -75,8 +78,8 @@ namespace PrototypeProject
         {
             MoveInventoryInput(value.isPressed);
         }
-        
-        
+
+
         //hold button
         public void OnSprint(InputValue value)
         {
@@ -99,7 +102,7 @@ namespace PrototypeProject
         {
             look = newLookDirection;
         }
-        
+
         //tap button
         public void JumpInput(bool newJumpState)
         {
@@ -110,7 +113,7 @@ namespace PrototypeProject
         {
             tpp = newTppState;
         }
-        
+
 
         public void FppInput(bool newFppState)
         {
@@ -131,7 +134,7 @@ namespace PrototypeProject
         {
             inventoryMove = newInventoryMoveState;
         }
-        
+
         //hold button
         public void SprintInput(bool newSprintState)
         {
