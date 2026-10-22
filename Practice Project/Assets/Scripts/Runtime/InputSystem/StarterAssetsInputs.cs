@@ -58,6 +58,11 @@ namespace PrototypeProject
             FppInput(value.isPressed);
         }
 
+        public void OnInteractObject(InputValue value)
+        {
+            InteractObject(value.isPressed);
+        }
+
         public void OnPickDrop(InputValue value)
         {
             if (value.isPressed)
@@ -110,6 +115,11 @@ namespace PrototypeProject
         public void FppInput(bool newFppState)
         {
             fpp = newFppState;
+        }
+
+        public void InteractObject(bool newInteractiveObject)
+        {
+            interactiveObject = newInteractiveObject;
         }
 
         public void PickDropInput()
