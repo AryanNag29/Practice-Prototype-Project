@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +19,7 @@ namespace PrototypeProject
         [SerializeField] private LayerMask _pickObjectMask;
         private StarterAssetsInputs _inputs;
         private ObjectGrabbable _objectGrabbable;
+
         #endregion
 
         #region Variables
@@ -44,9 +46,18 @@ namespace PrototypeProject
                     {
                         if (_inputs.interactiveObject)
                         {
-                            if(doorDetected._currentCoroutine != null) StopCoroutine(doorDetected._currentCoroutine);
+                            if (doorDetected._currentCoroutine != null) StopCoroutine(doorDetected._currentCoroutine);
                             doorDetected._currentCoroutine = StartCoroutine(doorDetected.ToggleDoor());
+                            //ones toggle make it false
+                            _inputs.interactiveObject = false;
                         }
+
+                        Debug.Log(doorDetected);
+                    }
+                    else
+                    {
+                        //hitting air will not trigger it 
+                        _inputs.interactiveObject = false;
                     }
                 }
             }

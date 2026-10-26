@@ -6,12 +6,13 @@ public class DoorInteracttion : MonoBehaviour
 {
     #region References
 
+    private StarterAssetsInputs _inputs;
     #endregion
 
     #region Variables
 
     public float openAngle = 90f;
-    public float openSpeed = 2.0f;
+    public float openSpeed = 5.0f;
     public bool isOpen = false;
 
     private Quaternion _closedRotation;
@@ -36,7 +37,6 @@ public class DoorInteracttion : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotaion, Time.deltaTime * openSpeed);
             yield return null;
         }
-        Debug.Log(transform.rotation+""+targetRotaion);
         transform.rotation = targetRotaion;
     }
 
@@ -48,6 +48,7 @@ public class DoorInteracttion : MonoBehaviour
         _openRotation = Quaternion.Euler(0f, openAngle, 0f);
         _closedRotation = transform.rotation;
         _currentCoroutine = StartCoroutine(ToggleDoor());
+        _inputs = FindFirstObjectByType<StarterAssetsInputs>();
     }
 
     // Update is called once per frame
