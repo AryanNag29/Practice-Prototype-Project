@@ -28,6 +28,7 @@ public class DoorInteracttion : MonoBehaviour
     public IEnumerator ToggleDoor()
     {
         Quaternion targetRotaion = isOpen ? _closedRotation : _openRotation;
+        
         isOpen = !isOpen;
 
         while (Quaternion.Angle(transform.rotation, targetRotaion) > 0.01f)
@@ -35,7 +36,7 @@ public class DoorInteracttion : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotaion, Time.deltaTime * openSpeed);
             yield return null;
         }
-
+        Debug.Log(transform.rotation+""+targetRotaion);
         transform.rotation = targetRotaion;
     }
 
@@ -44,6 +45,7 @@ public class DoorInteracttion : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _openRotation = Quaternion.Euler(0f, openAngle, 0f);
         _closedRotation = transform.rotation;
         _currentCoroutine = StartCoroutine(ToggleDoor());
     }

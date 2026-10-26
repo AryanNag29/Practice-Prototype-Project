@@ -42,7 +42,6 @@ namespace PrototypeProject
                     //door is detected
                     if (hit.transform.TryGetComponent(out DoorInteracttion doorDetected))
                     {
-                        Debug.Log(doorDetected);
                         if (_inputs.interactiveObject)
                         {
                             if(doorDetected._currentCoroutine != null) StopCoroutine(doorDetected._currentCoroutine);
