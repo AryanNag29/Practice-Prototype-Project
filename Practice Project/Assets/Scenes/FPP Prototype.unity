@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 47698208}
   - component: {fileID: 47698209}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,13 +145,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47698206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.751, y: 1.13697, z: 17.62136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 724914089}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 581651698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &47698208
 MonoBehaviour:
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.StarterAssets::DoorInteracttion
   openAngle: 90
-  openSpeed: 2
+  openSpeed: 3
   isOpen: 0
 --- !u!65 &47698209
 BoxCollider:
@@ -439,6 +439,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!4 &581651698 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2003024448963300533, guid: b72a9598201277f428e356c9885f5af6, type: 3}
+  m_PrefabInstance: {fileID: 1672236431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &601090630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1954,7 +1959,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2003024448963300533, guid: b72a9598201277f428e356c9885f5af6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 47698207}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b72a9598201277f428e356c9885f5af6, type: 3}
 --- !u!1 &1819721399
@@ -5332,4 +5340,3 @@ SceneRoots:
   - {fileID: 1170956888}
   - {fileID: 94010271}
   - {fileID: 1672236431}
-  - {fileID: 47698207}

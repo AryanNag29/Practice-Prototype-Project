@@ -12,7 +12,7 @@ public class DoorInteracttion : MonoBehaviour
     #region Variables
 
     public float openAngle = 90f;
-    public float openSpeed = 5.0f;
+    public float openSpeed = 3.0f;
     public bool isOpen = false;
 
     private Quaternion _closedRotation;
