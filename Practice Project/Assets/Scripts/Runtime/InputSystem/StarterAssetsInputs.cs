@@ -74,7 +74,7 @@ namespace PrototypeProject
 
         public void OnInteractObject(InputValue value)
         {
-            FppInput(value.isPressed);
+            InteractObject(value.isPressed);
         }
 
         //hold button
