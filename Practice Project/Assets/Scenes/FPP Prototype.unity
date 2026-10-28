@@ -959,15 +959,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeProject.FPPTOTPP
   _inputs: {fileID: 5420857362350527664}
-  Fpp: 0
-  Tpp: 1
+  _currentMode: 1
+  distanceLerpValue: 15
   tppDistance: 3
   fppDistance: -0.5
   fovInFpp: 60
   fovInTpp: 40
   sprintFovFpp: 80
   sprintFovTpp: 60
-  focusFovFpp: 20
+  focusFovFpp: 40
   sprintInput: 0
   focusInput: 0
 --- !u!1 &832575517
