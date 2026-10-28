@@ -2,20 +2,40 @@ using System;
 using UnityEngine;
 using Unity.Cinemachine;
 using Unity.Mathematics;
+
 namespace PrototypeProject
 {
+    //enum: replaces the twin bools (FPP/TPP) to prevent invalid states
+    public enum CameraViewMode
+    {
+        FirstPerson,
+        ThirdPerson
+    }
+
+    //Global Event channel so any script can request camera/focus transition
+    public static class CameraEvent
+    {
+        //Evemt for camera view mode of type enum
+        public static event Action<CameraViewMode> OnViewRequested;
+
+        //Event for is camera focusing of bool type
+        public static event Action<bool> OnFocusRequested;
+
+        //Assigning
+        public static void SetViewMode(CameraViewMode mode) => OnViewRequested?.Invoke(mode);
+        public static void SetFocus(bool isFocusing) => OnFocusRequested?.Invoke(isFocusing);
+    }
+
+    [RequireComponent(typeof(CinemachineCamera))]
+    [RequireComponent(typeof(CinemachineThirdPersonFollow))]
     public class FPPTOTPP : MonoBehaviour
     {
-        #region enum CameraViewMode
-
-        
-
-        #endregion
-        
         #region Reference
 
-        private CinemachineCamera _camera;
+        [Header("References")] private CinemachineCamera _camera;
+
         private CinemachineThirdPersonFollow _follow;
+
         //lol now i understand why the fpp to cpp can't get this _input because it's on different folder and i was accessing it with get component method
         [SerializeField] private StarterAssetsInputs _inputs;
 
@@ -24,9 +44,12 @@ namespace PrototypeProject
         #region Variables
 
         //present state of camera
-        public bool Fpp = false;
-        public bool Tpp = true;
+        public bool Fpp => _currentMode == CameraViewMode.FirstPerson;
+        public bool Tpp => _currentMode == CameraViewMode.ThirdPerson;
+        [SerializeField] private CameraViewMode _currentMode = CameraViewMode.ThirdPerson;
+
         private float fovlerpValue = 10.0f;
+        [SerializeField] private float distanceLerpValue = 15.0f;
 
         //camera distance
         [SerializeField] private float tppDistance = 3.0f;
@@ -37,8 +60,8 @@ namespace PrototypeProject
         [SerializeField] private float fovInTpp = 40.0f;
         [SerializeField] private float sprintFovFpp = 80.0f;
         [SerializeField] private float sprintFovTpp = 60.0f;
-        [SerializeField] private float focusFovFpp = 20f;
-        
+        [SerializeField] private float focusFovFpp = 40f;
+
         //Inputs
         [SerializeField] private bool sprintInput;
         [SerializeField] private bool focusInput;
@@ -46,6 +69,7 @@ namespace PrototypeProject
         #endregion
 
         #region Function
+
         /// <summary>
         /// FppToTpp Function: this function switch camera to fpp to tpp and tpp to fpp
         /// storing sprint bool input into sprint to see if player is sprinting (This is for fov change when player runs)
@@ -57,92 +81,113 @@ namespace PrototypeProject
         /// tpp sprint fov change logic
         /// </summary>
         public void FppTOTpp()
-        {   
+        {
+            if (_inputs == null) return;
+
             //value transfer
             sprintInput = _inputs.sprint;
             focusInput = _inputs.focus;
-            
-            // sprintInput = _inputs.sprint;
-            if (_follow.CameraDistance == tppDistance)
+
+            if (_inputs.fpp)
             {
-                if (_inputs.fpp)
-                {
-                    _camera.Lens.FieldOfView = fovInFpp;
-                    _follow.CameraDistance = fppDistance;
-                    Fpp = true;
-                    Tpp = false;
-                }
-                //make the inputs false ones button is used
+                CameraEvent.SetViewMode(CameraViewMode.FirstPerson);
                 _inputs.fpp = false;
             }
-
-            if (_follow.CameraDistance == fppDistance)
+            else if (_inputs.tpp)
             {
-                if (_inputs.tpp)
-                {
-                    _camera.Lens.FieldOfView = fovInTpp;
-                    _follow.CameraDistance = tppDistance;
-                    Fpp = false;
-                    Tpp = true;
-                }
-
+                CameraEvent.SetViewMode(CameraViewMode.ThirdPerson);
                 _inputs.tpp = false;
             }
 
-            //bug here (can't access the _input.sprint) //now fixed it was due to starter input assambly file 
-            if (Fpp)
-            {
-                if (sprintInput && MoveInputReturn())
-                {
-                    _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovFpp, fovlerpValue * Time.deltaTime);
-                }
-                else
-                {
-                    _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, fovlerpValue * Time.deltaTime);
-                }
-            }
+            //Target Calculation & smooth interpolation
+            UpdateCameraOptics();
+        }
+        
+        /// <summary>
+        /// put camera optics
+        /// </summary>
+        private void UpdateCameraOptics()
+        {
+            //determine target distance based on current mode if fpp then fpp distance if not tppdistance
+            float targetDisatance = (_currentMode == CameraViewMode.FirstPerson) ? fppDistance : tppDistance;
 
-            if (Fpp)
+            float targetFov = ResloveTargetFov();
+
+            _follow.CameraDistance =
+                Mathf.Lerp(_follow.CameraDistance, targetDisatance, distanceLerpValue * Time.deltaTime);
+
+            _camera.Lens.FieldOfView = Mathf.Lerp(_camera.Lens.FieldOfView, targetFov, fovlerpValue * Time.deltaTime);
+        }
+
+        /// <summary>
+        /// Resolve TargetFov
+        /// The fov will be one float value at a time right ? so why not one function of float type which return that one fov value at different condition
+        /// if in fpp mode and focus is press return focus fov fpp
+        /// if in fpp mode and sprint is press it will return sprint fov also only sprint when player is not in still 
+        /// if just in fpp then it will return fov in fpp
+        /// same for tpp
+        /// </summary>
+        /// <returns></returns>
+        private float ResloveTargetFov()
+        {
+            //if fpp then it's logic
+            if (_currentMode == CameraViewMode.FirstPerson)
             {
                 if (focusInput)
                 {
-                    _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, focusFovFpp, fovlerpValue * Time.deltaTime);
+                    return focusFovFpp;
                 }
-                else
-                {
-                        _camera.Lens.FieldOfView =
-                            Mathf.Lerp(_camera.Lens.FieldOfView, fovInFpp, fovlerpValue * Time.deltaTime);
-                }
-            }
 
-            if (Tpp)
+                //fpp sprint fov change logic
+
+                if (sprintInput && MoveInputReturn())
+                {
+                    return sprintFovFpp;
+                }
+
+                return fovInFpp;
+            }
+            else //tpp
             {
                 if (sprintInput && MoveInputReturn())
                 {
-                    _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, sprintFovTpp, fovlerpValue * Time.deltaTime);
+                    return sprintFovTpp;
                 }
-                else
-                {
-                    _camera.Lens.FieldOfView =
-                        Mathf.Lerp(_camera.Lens.FieldOfView, fovInTpp, fovlerpValue * Time.deltaTime);
-                }
+
+                return fovInTpp;
             }
         }
-
+        
+        
+        /// <summary>
+        /// moveinputreturn of type bool
+        /// if input = null then return false
+        /// return input.move sqrmagnitude > 0,001f;
+        /// </summary>
+        /// <returns></returns>
         public bool MoveInputReturn()
         {
-            if (_inputs.move.x > 0.01f || _inputs.move.y > 0.01f)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (_inputs == null) return false;
+            return _inputs.move.sqrMagnitude > 0.001f;
+        }
+
+        #endregion
+
+        #region OnEnable/Disable
+
+        private void HandleViewModeRequested(CameraViewMode mode) => _currentMode = mode;
+        private void HandleFocusRequested(bool isFocusing) => focusInput = isFocusing;
+
+        private void OnEnable()
+        {
+            CameraEvent.OnViewRequested += HandleViewModeRequested;
+            CameraEvent.OnFocusRequested += HandleFocusRequested;
+        }
+
+        private void OnDisable()
+        {
+            CameraEvent.OnViewRequested -= HandleViewModeRequested;
+            CameraEvent.OnFocusRequested -= HandleFocusRequested;
         }
 
         #endregion
