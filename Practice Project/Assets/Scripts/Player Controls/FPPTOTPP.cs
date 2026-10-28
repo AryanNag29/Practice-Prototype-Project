@@ -6,6 +6,12 @@ namespace PrototypeProject
 {
     public class FPPTOTPP : MonoBehaviour
     {
+        #region enum CameraViewMode
+
+        
+
+        #endregion
+        
         #region Reference
 
         private CinemachineCamera _camera;
