@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using PrototypeProject;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class DoorInteracttion : MonoBehaviour
     #region References
 
     private StarterAssetsInputs _inputs;
+
     #endregion
 
     #region Variables
@@ -24,12 +26,34 @@ public class DoorInteracttion : MonoBehaviour
 
     #endregion
 
+    #region Event Subscritption
+
+    private void OnEnable()
+    {
+        InteractionEvents.OnDoorInteractRequested += HandleDoorInteraction;
+    }
+
+    private void OnDisable()
+    {
+        InteractionEvents.OnDoorInteractRequested -= HandleDoorInteraction;
+    }
+
+    private void HandleDoorInteraction(DoorInteracttion targetDoor)
+    {
+        //Only toggle if This door interaction is the one the camera raycast Hit
+        if (targetDoor != this) return;
+        if(_currentCoroutine != null) StopCoroutine(_currentCoroutine);
+        _currentCoroutine = StartCoroutine(ToggleDoor());
+    }
+
+    #endregion
+
     #region Functions
 
     public IEnumerator ToggleDoor()
     {
         Quaternion targetRotaion = isOpen ? _closedRotation : _openRotation;
-        
+
         isOpen = !isOpen;
 
         while (Quaternion.Angle(transform.rotation, targetRotaion) > 0.01f)
@@ -37,7 +61,9 @@ public class DoorInteracttion : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotaion, Time.deltaTime * openSpeed);
             yield return null;
         }
+
         transform.rotation = targetRotaion;
+        _currentCoroutine = null;
     }
 
     #endregion
@@ -47,7 +73,6 @@ public class DoorInteracttion : MonoBehaviour
     {
         _openRotation = Quaternion.Euler(0f, openAngle, 0f);
         _closedRotation = transform.rotation;
-        _currentCoroutine = StartCoroutine(ToggleDoor());
         _inputs = FindFirstObjectByType<StarterAssetsInputs>();
     }
 
