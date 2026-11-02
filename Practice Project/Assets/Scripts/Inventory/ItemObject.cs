@@ -1,3 +1,4 @@
+using PrototypeProject;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
@@ -12,10 +13,9 @@ public class ItemObject : MonoBehaviour
 
     public void OnHandlePickupItem()
     {
-        InventorySystem.current.Add(referenceItem);
-        Destroy(gameObject);
+        // Shout into the void: "Someone store me!"
+        InteractionEvents.RequestInventoryStore(this);
     }
 
     #endregion
-    
 }

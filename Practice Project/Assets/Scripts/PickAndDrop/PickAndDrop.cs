@@ -17,6 +17,9 @@ namespace PrototypeProject
         public static event Action<ObjectGrabbable, Transform> OnGrabRequested;
         public static event Action OnDropRequested;
         
+        // The event blueprint
+        public static event Action<ItemObject> OnInventoryStoreRequested;
+        
         //Trigger event
         public static void GrabbableInRange(ObjectGrabbable target) => OnGrabbableInRange?.Invoke(target);
         public static void GrabbableOutOfRange() => OnGrabbableOutOfRange?.Invoke();
@@ -26,6 +29,12 @@ namespace PrototypeProject
             OnGrabRequested?.Invoke(target, grabPoint);
 
         public static void RequestDrop() => OnDropRequested?.Invoke();
+        
+        // The method that triggers it
+        public static void RequestInventoryStore(ItemObject item)
+        {
+            OnInventoryStoreRequested?.Invoke(item);
+        }
     }
 
     //in this we are going to use raycast from camera to object and see if it hits objects

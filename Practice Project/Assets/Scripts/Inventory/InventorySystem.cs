@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using PrototypeProject;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -14,14 +15,39 @@ public class InventorySystem : MonoBehaviour
 
     // this is to call this class as singleton class during runtime
     public static InventorySystem current { get; private set; }
+
     //event
     public event Action OnInventoryChangedEvent;
-    
+
+    #endregion
+
+    #region Event Subscription
+
+    private void OnEnable()
+    {
+        InteractionEvents.OnInventoryStoreRequested += HandleItemStored;
+    }
+
+    private void OnDisable()
+    {
+        InteractionEvents.OnInventoryStoreRequested -= HandleItemStored;
+    }
+
+
+    private void HandleItemStored(ItemObject itemWorldInstance)
+    {
+        // 1. Add the ScriptableObject data to the dictionary/list (using your exact existing Add method)
+        Add(itemWorldInstance.referenceItem);
+
+        // 2. Destroy the physical 3D object in the world now that its data is saved
+        Destroy(itemWorldInstance.gameObject);
+    }
+
     #endregion
 
 
     #region Functions
-    
+
     /// <summary>
     /// we are trying to add an item on our inventory which is present in stack already.
     /// if it doesn't we will create new instance of that item and add it to our inventory
@@ -37,11 +63,12 @@ public class InventorySystem : MonoBehaviour
         {
             InventoryItem newItem = new InventoryItem(referenceData);
             inventory.Add(newItem);
-            m_itemDirectory.Add(referenceData,newItem);
+            m_itemDirectory.Add(referenceData, newItem);
         }
+
         OnInventoryChangedEvent?.Invoke();
     }
-    
+
     /// <summary>
     /// Removing is just the inverse of the add.
     /// and when our stack reach 0 we will remove the item from the inventory
@@ -57,14 +84,14 @@ public class InventorySystem : MonoBehaviour
                 inventory.Remove(value);
                 m_itemDirectory.Remove(referenceData);
             }
+
             OnInventoryChangedEvent?.Invoke();
         }
     }
-    
 
     #endregion
-    
-    
+
+
     private void Awake()
     {
         if (current != null && current != this)
@@ -72,6 +99,7 @@ public class InventorySystem : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         current = this;
         inventory = new List<InventoryItem>();
         m_itemDirectory = new Dictionary<InventoryItemData, InventoryItem>();
@@ -80,12 +108,10 @@ public class InventorySystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
