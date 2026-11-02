@@ -25,12 +25,13 @@ namespace PrototypeProject
 
         //Grab Timer
         private float TimeSinceGrab = 0f;
-
         private bool TimeOverSinceGrab = false;
+
+        //Focus state driven by Camera Event
+        private bool _isFocusing = false;
 
         //Grab sensi
         [SerializeField] private float mouseSensitivity = 0.5f;
-
         [SerializeField] private float controllerSensitivity = 90.0f;
 
         //grab lerp (t)
@@ -43,6 +44,36 @@ namespace PrototypeProject
         private float RotationSpeedYaw = 1f;
         private float RotationSpeedPitch = 1f;
         [SerializeField] private float _threshold = 0.01f;
+
+        #endregion
+
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            InteractionEvents.OnGrabRequested += HandleGrabRequested;
+            InteractionEvents.OnDropRequested += HandleDropRequest;
+        }
+
+        private void OnDisable()
+        {
+            InteractionEvents.OnGrabRequested -= HandleGrabRequested;
+            InteractionEvents.OnDropRequested -= HandleDropRequest;
+        }
+
+        private void HandleGrabRequested(ObjectGrabbable target, Transform grabPoint)
+        {
+            //Ignore event if player grabbed a different object
+            if (target != this) return;
+            Grab(grabPoint);
+        }
+
+        private void HandleDropRequest()
+        {
+            //Ignore event if this object is not currently held
+            if (objectGrabPointTransform == null) return;
+            Drop();
+        }
 
         #endregion
 
@@ -60,9 +91,14 @@ namespace PrototypeProject
         {
             // _rb.isKinematic = true;
             _rb.detectCollisions = false;
-            _playerRigidBodyPush.canPush = false;
+            if (_playerRigidBodyPush != null) _playerRigidBodyPush.canPush = false;
             _rb.useGravity = false;
             this.objectGrabPointTransform = objectGrabPointTransform;
+
+            //Reset timer and set damping ones on Grab
+            TimeSinceGrab = 0f;
+            TimeOverSinceGrab = false;
+            RigidBodyGrabSetting(true);
         }
 
         /// <summary>
@@ -77,35 +113,39 @@ namespace PrototypeProject
             this.objectGrabPointTransform = null;
             _rb.detectCollisions = true;
             _rb.useGravity = true;
-            _playerRigidBodyPush.canPush = true;
+            if (_playerRigidBodyPush != null) _playerRigidBodyPush.canPush = true;
             // _rb.isKinematic = false;
+
+            //Reset timer and restore damping ones on drop
+            TimeSinceGrab = 0f;
+            TimeOverSinceGrab = false;
+            _rb.interpolation = RigidbodyInterpolation.Interpolate;
+            RigidBodyGrabSetting(false);
         }
 
         public void RotateGrabbableObjectOnFocus()
         {
-            if (objectGrabPointTransform != null && !_inputs.focus)
+            // Use _inputs.focus directly
+            if (!_inputs.focus)
             {
                 if (_inputs.look.sqrMagnitude <= _threshold)
                 {
                     TargetYaw = 0.0f;
                     TargetPitch = 0.0f;
                 }
+
+                return;
             }
 
-            if (objectGrabPointTransform != null && _inputs.focus)
+            _rb.freezeRotation = false;
+            if (_inputs.look.sqrMagnitude >= _threshold)
             {
-                _rb.freezeRotation = false;
-                if (_inputs.look.sqrMagnitude >= _threshold)
-                {
-                    float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-                    TargetYaw += _inputs.look.x * RotationSpeedYaw * deltaTimeMultiplier;
-                    TargetPitch += _inputs.look.y * RotationSpeedPitch * deltaTimeMultiplier;
-                }
-
-                transform.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
-                // transform.Rotate(TargetPitch, TargetYaw, 0f);
-                // _rb.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
+                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                TargetYaw += _inputs.look.x * RotationSpeedYaw * deltaTimeMultiplier;
+                TargetPitch += _inputs.look.y * RotationSpeedPitch * deltaTimeMultiplier;
             }
+
+            transform.rotation = Quaternion.Euler(TargetPitch, TargetYaw, 0.0f);
         }
 
         /// <summary>
@@ -116,28 +156,16 @@ namespace PrototypeProject
             get
             {
 #if ENABLE_INPUT_SYSTEM
-                return _playerInput.currentControlScheme == "KeyboardMouse";
+                return _playerInput != null && _playerInput.currentControlScheme == "KeyboardMouse";
 #else
-				return false;
+                return false;
 #endif
             }
         }
 
         public void GrabTransformation()
         {
-            if (objectGrabPointTransform != null && !_inputs.focus && !TimeOverSinceGrab)
-            {
-                _rb.interpolation = RigidbodyInterpolation.Interpolate;
-                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
-                    lerpGrab * Time.deltaTime);
-                transform.position = targetPosition;
-                // _rb.MovePosition(targetPosition);
-                //using current rotation and main camera rotation to object rotation 
-                transform.rotation = _maincamera.transform.rotation * _currentRotation;
-            }
-
-            //Timer which determine if the object positon is where and use lerp according to it
-            if (_inputs.pickDrop)
+            if (!TimeOverSinceGrab)
             {
                 TimeSinceGrab += 2.0f * Time.deltaTime;
                 if (TimeSinceGrab >= 0.65f)
@@ -145,34 +173,45 @@ namespace PrototypeProject
                     TimeOverSinceGrab = true;
                 }
             }
-            else if (!_inputs.pickDrop)
-            {
-                TimeSinceGrab = 0.0f;
-                TimeOverSinceGrab = false;
-            }
 
-            if (objectGrabPointTransform != null && _inputs.pickDrop && TimeOverSinceGrab && !_inputs.focus)
+            // 1. Focus Mode Position & Rotation
+            // Directly checks _inputs.focus
+            if (_inputs.focus && TimeOverSinceGrab)
             {
                 _rb.interpolation = RigidbodyInterpolation.None;
-                transform.position = objectGrabPointTransform.position;
-                //using current rotation and main camera rotation to object rotation 
-                transform.rotation = _maincamera.transform.rotation * _currentRotation;
-            }
 
-            if (objectGrabPointTransform != null && _inputs.focus && _inputs.pickDrop && TimeOverSinceGrab)
-            {
-                _rb.interpolation = RigidbodyInterpolation.None;
+                // Ensure it lerps toward objectGrabPointTransformOnFocus
                 Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransformOnFocus.position,
                     lerpGrab * Time.deltaTime);
                 transform.position = targetPosition;
-                //storing current rotation
+
+                // Store current rotation for when we exit focus
                 _currentRotation = Quaternion.Inverse(_maincamera.transform.rotation) * transform.rotation;
+                return;
             }
+
+            // 2. Normal hold mode (Snapped after initial pull timer complete)
+            if (TimeOverSinceGrab)
+            {
+                _rb.interpolation = RigidbodyInterpolation.None;
+                transform.position = objectGrabPointTransform.position;
+            }
+            // 3. Initial pull towards hand
+            else
+            {
+                _rb.interpolation = RigidbodyInterpolation.Interpolate;
+                Vector3 targetPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position,
+                    lerpGrab * Time.deltaTime);
+                transform.position = targetPosition;
+            }
+
+            // Apply rotation relative to camera for normal holding
+            transform.rotation = _maincamera.transform.rotation * _currentRotation;
         }
 
-        public void RigidBodyGrabSetting()
+        public void RigidBodyGrabSetting(bool isGrabbed)
         {
-            if (_inputs.pickDrop)
+            if (isGrabbed)
             {
                 _rb.linearDamping = 5.0f;
                 _rb.angularDamping = 5.0f;
@@ -186,8 +225,6 @@ namespace PrototypeProject
 
         public void MoveInventory()
         {
-            if (objectGrabPointTransform == null) return;
-
             if (!_inputs.inventoryMove) return;
             //This was causing race condition previously 
             _inputs.inventoryMove = false;
@@ -200,17 +237,12 @@ namespace PrototypeProject
                 item = GetComponentInParent<ItemObject>();
             }
 
-            item.OnHandlePickupItem();
+            if (item != null) item.OnHandlePickupItem();
         }
 
         #endregion
 
-        #region Awake/Fixed Update
-
-        private void LateUpdate()
-        {
-        }
-
+        #region Awake
 
         private void Awake()
         {
@@ -236,7 +268,7 @@ namespace PrototypeProject
             _playerRigidBodyPush = FindFirstObjectByType<BasicRigidBodyPush>();
             //This is a method to find gameObject transform in runtime so you don't have to manually put things on your own
             GameObject targetTransform = GameObject.FindGameObjectWithTag("OnFocusGrabPoint");
-            objectGrabPointTransformOnFocus = targetTransform.transform;
+            if (targetTransform != null) objectGrabPointTransformOnFocus = targetTransform.transform;
 #if ENABLE_INPUT_SYSTEM
             _playerInput = FindFirstObjectByType<PlayerInput>();
 #endif
@@ -246,7 +278,8 @@ namespace PrototypeProject
         // Update is called once per frame
         void Update()
         {
-            RigidBodyGrabSetting();
+            // Early exit: if this object is sitting in the world ungrabbed, skip all math!
+            if (objectGrabPointTransform == null) return;
             RotateGrabbableObjectOnFocus();
             GrabTransformation();
             MoveInventory();
