@@ -104,14 +104,5 @@ public class InventorySystem : MonoBehaviour
         inventory = new List<InventoryItem>();
         m_itemDirectory = new Dictionary<InventoryItemData, InventoryItem>();
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    
 }
