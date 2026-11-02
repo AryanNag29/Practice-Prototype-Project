@@ -9,16 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace PrototypeProject
 {
-    #region Command Pattern
 
-    public interface IPlayerCommand
-    {
-        void Execute(ThirdPersonController actor);
-    }
-    
-    
-
-    #endregion
 
     [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM
