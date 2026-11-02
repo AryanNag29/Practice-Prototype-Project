@@ -4968,6 +4968,7 @@ GameObject:
   - component: {fileID: 8997996945927590520}
   - component: {fileID: 8997996945927590522}
   - component: {fileID: 8997996945927590524}
+  - component: {fileID: 8997996945927590525}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5217,10 +5218,11 @@ MonoBehaviour:
   _objectGrabPointTransform: {fileID: 1061511499}
   _outliner: {fileID: 0}
   _mainCamera: {fileID: 5542111179026866201}
-  _cameraChange: {fileID: 776446908}
   _pickObjectMask:
     serializedVersion: 2
     m_Bits: 1
+  _interactDistance: 3
+  _pickUpDistance: 2
 --- !u!114 &8997996945927590524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5257,6 +5259,20 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+--- !u!114 &8997996945927590525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685847856548044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d17be0491299bd40b08b021944854df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.StarterAssets::PrototypeProject.PlayerInputBrain
+  _body: {fileID: 8997996945927590524}
+  _input: {fileID: 0}
 --- !u!4 &9028441262502989723
 Transform:
   m_ObjectHideFlags: 0
