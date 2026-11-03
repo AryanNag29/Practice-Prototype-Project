@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManaget : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     #region Reference
     
