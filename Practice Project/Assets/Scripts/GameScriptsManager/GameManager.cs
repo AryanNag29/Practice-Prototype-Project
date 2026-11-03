@@ -1,5 +1,7 @@
 using UnityEngine;
-
+/// <summary>
+/// This script is to manage the inventory drawing
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     #region Reference

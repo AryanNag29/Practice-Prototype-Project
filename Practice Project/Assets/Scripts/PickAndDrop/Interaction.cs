@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 
 namespace PrototypeProject
 {
+    /// <summary>
+    /// Events which will go on as player interact
+    /// 
+    /// </summary>
     public static class InteractionEvents
     {
         // Fired when camera raycast enters/exits grabbable range
