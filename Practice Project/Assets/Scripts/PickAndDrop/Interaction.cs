@@ -8,7 +8,7 @@ namespace PrototypeProject
 {
     /// <summary>
     /// Events which will go on as player interact
-    /// 
+    /// Add new events as player have more interactive system
     /// </summary>
     public static class InteractionEvents
     {
@@ -17,24 +17,45 @@ namespace PrototypeProject
         public static event Action OnGrabbableOutOfRange;
 
         // Fired when player presses inputs while in range
-        public static event Action<DoorInteracttion> OnDoorInteractRequested;
         public static event Action<ObjectGrabbable, Transform> OnGrabRequested;
         public static event Action OnDropRequested;
-        
-        // The event blueprint
-        public static event Action<ItemObject> OnInventoryStoreRequested;
-        
-        //Trigger event
-        public static void GrabbableInRange(ObjectGrabbable target) => OnGrabbableInRange?.Invoke(target);
-        public static void GrabbableOutOfRange() => OnGrabbableOutOfRange?.Invoke();
-        public static void RequestDoorInteract(DoorInteracttion door) => OnDoorInteractRequested?.Invoke(door);
 
+        //Fired when camera raycast Enters/exits Door Interaction range
+        public static event Action<DoorInteracttion> OnDoorInteractionInRange;
+        public static event Action OnDoorInteractionOutOfRange;
+
+        //Door interaction event
+        public static event Action<DoorInteracttion> OnDoorInteractRequested;
+
+        // inventory system event
+        public static event Action<ItemObject> OnInventoryStoreRequested;
+
+        //Trigger event
+
+        //Grabbable object range Trigger
+        public static void GrabbableInRange(ObjectGrabbable target) => OnGrabbableInRange?.Invoke(target);
+
+        //Grabbable object out of range Trigger
+        public static void GrabbableOutOfRange() => OnGrabbableOutOfRange?.Invoke();
+
+        //Grab trigger
         public static void RequestGrab(ObjectGrabbable target, Transform grabPoint) =>
             OnGrabRequested?.Invoke(target, grabPoint);
 
+        //drop trigger
         public static void RequestDrop() => OnDropRequested?.Invoke();
-        
-        // The method that triggers it
+
+        //Door Interaction range tigger
+
+        public static void DoorInRange(DoorInteracttion target) => OnDoorInteractionInRange?.Invoke(target);
+
+        public static void DoorOutOfRange() => OnDoorInteractionOutOfRange?.Invoke();
+
+
+        //Door interaction trigger
+        public static void RequestDoorInteract(DoorInteracttion door) => OnDoorInteractRequested?.Invoke(door);
+
+        //Inventory store Trigger
         public static void RequestInventoryStore(ItemObject item)
         {
             OnInventoryStoreRequested?.Invoke(item);
@@ -76,14 +97,20 @@ namespace PrototypeProject
 
         private void OnEnable()
         {
+            //Request for camera event enable
             CameraEvent.OnViewRequested += HandleViewModeChanged;
         }
 
         private void OnDisable()
         {
+            //Request for camera event Disable
             CameraEvent.OnViewRequested -= HandleViewModeChanged;
         }
 
+        /// <summary>
+        /// Handle camera mode if it's tpp or fpp and set the interactive and pickup input according to it
+        /// </summary>
+        /// <param name="newMode"></param>
         private void HandleViewModeChanged(CameraViewMode newMode)
         {
             _currentViewMode = newMode;
@@ -114,13 +141,20 @@ namespace PrototypeProject
 
         private void OnHitInteractable()
         {
+            // compare with camera view event if it's Third person
             if (_currentViewMode == CameraViewMode.ThirdPerson)
             {
                 _inputs.interactiveObject = false;
-                ResetOutliner(_currentRenderer);
+                if (_currentRenderer != null)
+                {
+                    ResetOutliner(_currentRenderer);
+                    _currentRenderer = null; // FORGET THE DOOR
+                }
+
                 return;
             }
 
+            // compare with camera view event if it's First person
             if (_currentViewMode == CameraViewMode.FirstPerson)
             {
                 float interactDistance = 3f;
@@ -129,12 +163,31 @@ namespace PrototypeProject
                     //door is detected
                     if (hit.transform.TryGetComponent(out DoorInteracttion doorDetected))
                     {
+                        _outliner = hit.collider.GetComponentInChildren<Renderer>();
+
+                        // Only update material if this is a NEW door we just looked at
+                        if (_currentRenderer != _outliner)
+                        {
+                            if (_currentRenderer != null) ResetOutliner(_currentRenderer);
+
+                            if (_outliner != null && _outliner.sharedMaterials.Length > 1)
+                            {
+                                Material[] _OutMat = _outliner.materials;
+                                _OutMat[1].SetFloat(OutlinerScaleId, 1.1f);
+                                _outliner.materials = _OutMat;
+
+                                _currentRenderer = _outliner;
+                                InteractionEvents.DoorInRange(doorDetected);
+                            }
+                        }
+
                         if (_inputs.interactiveObject)
                         {
-                            //Fire Door event instade of starting coroutine directly in the script
                             InteractionEvents.RequestDoorInteract(doorDetected);
-                            
-                            //ones toggle make it false
+
+                            ResetOutliner(_currentRenderer);
+                            _currentRenderer = null; // FORGET THE DOOR AFTER INTERACTING
+
                             _inputs.interactiveObject = false;
                         }
                     }
@@ -142,12 +195,22 @@ namespace PrototypeProject
                     {
                         //hitting other object will not trigger it
                         _inputs.interactiveObject = false;
+                        if (_currentRenderer != null)
+                        {
+                            ResetOutliner(_currentRenderer);
+                            _currentRenderer = null; // FORGET THE DOOR
+                        }
                     }
                 }
                 else
                 {
                     //Hitting air will not trigger it
                     _inputs.interactiveObject = false;
+                    if (_currentRenderer != null)
+                    {
+                        ResetOutliner(_currentRenderer);
+                        _currentRenderer = null; // FORGET THE DOOR
+                    }
                 }
             }
         }
@@ -188,6 +251,7 @@ namespace PrototypeProject
                             {
                                 ResetOutliner(_currentRenderer);
                             }
+
                             //Only update material & fire range event ones per new hovered object
                             if (_outliner != null && _outliner.sharedMaterials.Length > 1)
                             {
@@ -205,9 +269,9 @@ namespace PrototypeProject
                                 //no need to do this now directly
                                 /*_objectGrabbable.Grab(_objectGrabPointTransform);*/
                                 ResetOutliner(_currentRenderer);
-                                
+
                                 //Fire Grab event instead of calling _objectGrabbable.Grab() Directly
-                                InteractionEvents.RequestGrab(_objectGrabbable,_objectGrabPointTransform);
+                                InteractionEvents.RequestGrab(_objectGrabbable, _objectGrabPointTransform);
                             }
                         }
                         else
@@ -249,8 +313,12 @@ namespace PrototypeProject
 
             _currentRenderer = null;
             InteractionEvents.GrabbableOutOfRange();
+            InteractionEvents.DoorOutOfRange();
         }
 
+        /// <summary>
+        /// Gizmos to check if the ray is falling on the interactive object
+        /// </summary>
         private void OnDrawGizmos()
         {
             if (Physics.Raycast(_mainCamera.position, _mainCamera.forward, out RaycastHit hit,
