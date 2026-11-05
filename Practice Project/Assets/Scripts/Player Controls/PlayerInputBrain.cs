@@ -65,13 +65,7 @@ namespace PrototypeProject
                 isMouse = _playerInput.currentControlScheme == "KeyboardMouse";
             }
 #endif
-        
-            // DIAGNOSTIC LOG
-            if (_input.look != Vector2.zero)
-            {
-                Debug.Log($"CAMERA IS WORKING: Sending Look {_input.look} | isMouse: {isMouse}");
-            }
-
+            
             IPlayerCommand lookCommand = new LookCommand(_input.look, isFocusing, isMouse);
             lookCommand.Execute(_body);
         }
