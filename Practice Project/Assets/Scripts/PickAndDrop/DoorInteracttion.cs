@@ -42,7 +42,7 @@ public class DoorInteracttion : MonoBehaviour
     {
         //Only toggle if This door interaction is the one the camera raycast Hit
         if (targetDoor != this) return;
-        if(_currentCoroutine != null) StopCoroutine(_currentCoroutine);
+        if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
         _currentCoroutine = StartCoroutine(ToggleDoor());
     }
 
