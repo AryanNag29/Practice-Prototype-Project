@@ -69,7 +69,10 @@ namespace PrototypeProject
 
         [SerializeField] private Transform _objectGrabPointTransform;
         [SerializeField] private Renderer _outliner;
-        private Renderer _currentRenderer;
+        
+        //Create different renderer for different outliner
+        private Renderer _currentGrabRenderer;
+        private Renderer _currentDoorRenderer;
 
         [SerializeField] private Transform _mainCamera;
 
@@ -125,7 +128,7 @@ namespace PrototypeProject
                     _inputs.pickDrop = false;
                 }
 
-                ResetOutlinerGrabbable(_currentRenderer);
+                ResetOutlinerGrabbable(_currentGrabRenderer);
 
                 if (_objectGrabbable != null)
                 {
@@ -145,7 +148,7 @@ namespace PrototypeProject
             if (_currentViewMode == CameraViewMode.ThirdPerson)
             {
                 _inputs.interactiveObject = false;
-                ResetOutlinerDoor(_currentRenderer);
+                ResetOutlinerDoor(_currentDoorRenderer);
             }
 
             // compare with camera view event if it's First person
@@ -159,9 +162,10 @@ namespace PrototypeProject
                         _outliner = hit.collider.GetComponentInChildren<Renderer>();
 
                         // If we hovered over a different object, clear the old outline first
-                        if (_currentRenderer != null && _currentRenderer != _outliner)
+                        if (_currentDoorRenderer != null && _currentDoorRenderer != _outliner)
                         {
-                            ResetOutlinerGrabbable(_currentRenderer);
+                            Debug.Log("_current render != null");
+                            ResetOutlinerGrabbable(_currentDoorRenderer);
                         }
 
                         //Only update material & fire range event ones per new hovered object
@@ -171,15 +175,15 @@ namespace PrototypeProject
                             _OutMat[1].SetFloat(OutlinerScaleId, 1.1f);
                             _outliner.materials = _OutMat;
 
-                            _currentRenderer = _outliner;
+                            _currentDoorRenderer = _outliner;
                             InteractionEvents.DoorInRange(doorDetected);
                         }
 
                         if (_inputs.interactiveObject)
                         {
                             InteractionEvents.RequestDoorInteract(doorDetected);
-                            ResetOutlinerDoor(_currentRenderer);
-                            _currentRenderer = null; // FORGET THE DOOR AFTER INTERACTING
+                            ResetOutlinerDoor(_currentDoorRenderer);
+                            _currentDoorRenderer = null; // FORGET THE DOOR AFTER INTERACTING
                             _inputs.interactiveObject = false;
                         }
                     }
@@ -187,14 +191,14 @@ namespace PrototypeProject
                     {
                         //hitting other object will not trigger it
                         _inputs.interactiveObject = false;
-                        ResetOutlinerDoor(_currentRenderer);
+                        ResetOutlinerDoor(_currentDoorRenderer);
                     }
                 }
                 else
                 {
                     //Hitting air will not trigger it
                     _inputs.interactiveObject = false;
-                    ResetOutlinerDoor(_currentRenderer);
+                    ResetOutlinerDoor(_currentDoorRenderer);
                 }
             }
         }
@@ -212,7 +216,7 @@ namespace PrototypeProject
             if (_currentViewMode == CameraViewMode.ThirdPerson)
             {
                 _inputs.pickDrop = false;
-                ResetOutlinerGrabbable(_currentRenderer);
+                ResetOutlinerGrabbable(_currentGrabRenderer);
             }
 
             if (_currentViewMode == CameraViewMode.FirstPerson)
@@ -231,9 +235,9 @@ namespace PrototypeProject
                             _outliner = hit.collider.GetComponent<Renderer>();
 
                             // If we hovered over a different object, clear the old outline first
-                            if (_currentRenderer != null && _currentRenderer != _outliner)
+                            if (_currentGrabRenderer != null && _currentGrabRenderer != _outliner)
                             {
-                                ResetOutlinerGrabbable(_currentRenderer);
+                                ResetOutlinerGrabbable(_currentGrabRenderer);
                             }
 
                             //Only update material & fire range event ones per new hovered object
@@ -243,7 +247,7 @@ namespace PrototypeProject
                                 _OutMat[1].SetFloat(OutlinerScaleId, 1.1f);
                                 _outliner.materials = _OutMat;
 
-                                _currentRenderer = _outliner;
+                                _currentGrabRenderer = _outliner;
                                 InteractionEvents.GrabbableInRange(detectedGrabbable);
                             }
 
@@ -252,7 +256,7 @@ namespace PrototypeProject
                                 _objectGrabbable = detectedGrabbable;
                                 //no need to do this now directly
                                 /*_objectGrabbable.Grab(_objectGrabPointTransform);*/
-                                ResetOutlinerGrabbable(_currentRenderer);
+                                ResetOutlinerGrabbable(_currentGrabRenderer);
 
                                 //Fire Grab event instead of calling _objectGrabbable.Grab() Directly
                                 InteractionEvents.RequestGrab(_objectGrabbable, _objectGrabPointTransform);
@@ -261,13 +265,13 @@ namespace PrototypeProject
                         else
                         {
                             // Hit something that cannot be grabbed
-                            ResetOutlinerGrabbable(_currentRenderer);
+                            ResetOutlinerGrabbable(_currentGrabRenderer);
                         }
                     }
                     else
                     {
                         // Raycast hit nothing in the air
-                        ResetOutlinerGrabbable(_currentRenderer);
+                        ResetOutlinerGrabbable(_currentGrabRenderer);
                         _inputs.pickDrop = false;
                     }
                 }
@@ -282,6 +286,7 @@ namespace PrototypeProject
 
         /// <summary>
         /// This function is to reset the outliner when raycast hitting air or non grabbable object
+        /// Create different resetoutliner for different objects
         /// </summary>
         /// <param name="targetRenderer"></param>
         private void ResetOutlinerGrabbable(Renderer targetRenderer)
@@ -295,12 +300,13 @@ namespace PrototypeProject
                 targetRenderer.materials = mats;
             }
 
-            _currentRenderer = null;
+            _currentGrabRenderer = null;
             InteractionEvents.GrabbableOutOfRange();
         }
 
         /// <summary>
         /// This function is to reset the outliner when raycast hitting air or non Door object
+        /// Create different resetoutliner for different objects
         /// </summary>
         /// <param name="targetRenderer"></param>
         private void ResetOutlinerDoor(Renderer targetRenderer)
@@ -314,7 +320,7 @@ namespace PrototypeProject
                 targetRenderer.materials = mats;
             }
 
-            _currentRenderer = null;
+            _currentDoorRenderer = null;
             InteractionEvents.DoorOutOfRange();
         }
 
