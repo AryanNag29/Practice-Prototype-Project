@@ -8,6 +8,7 @@ namespace PrototypeProject
     //enum: replaces the twin bools (FPP/TPP) to prevent invalid states
     public enum CameraViewMode
     {
+        //enum which tell player camera is in which state fpp or tpp
         FirstPerson,
         ThirdPerson
     }
@@ -44,6 +45,7 @@ namespace PrototypeProject
         #region Variables
 
         //present state of camera
+        //change fpp bool to true if _currentmode which is a type of enum camera view mdoe if that = firstperson .
         public bool Fpp => _currentMode == CameraViewMode.FirstPerson;
         public bool Tpp => _currentMode == CameraViewMode.ThirdPerson;
         [SerializeField] private CameraViewMode _currentMode = CameraViewMode.ThirdPerson;
@@ -111,7 +113,7 @@ namespace PrototypeProject
             //determine target distance based on current mode if fpp then fpp distance if not tppdistance
             float targetDisatance = (_currentMode == CameraViewMode.FirstPerson) ? fppDistance : tppDistance;
 
-            float targetFov = ResloveTargetFov();
+            float targetFov = ResolveTargetFov();
 
             _follow.CameraDistance =
                 Mathf.Lerp(_follow.CameraDistance, targetDisatance, distanceLerpValue * Time.deltaTime);
@@ -128,7 +130,7 @@ namespace PrototypeProject
         /// same for tpp
         /// </summary>
         /// <returns></returns>
-        private float ResloveTargetFov()
+        private float ResolveTargetFov()
         {
             //if fpp then it's logic
             if (_currentMode == CameraViewMode.FirstPerson)
