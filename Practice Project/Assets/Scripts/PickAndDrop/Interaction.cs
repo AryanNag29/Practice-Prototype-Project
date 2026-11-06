@@ -69,7 +69,7 @@ namespace PrototypeProject
 
         [SerializeField] private Transform _objectGrabPointTransform;
         [SerializeField] private Renderer _outliner;
-        
+
         //Create different renderer for different outliner
         private Renderer _currentGrabRenderer;
         private Renderer _currentDoorRenderer;

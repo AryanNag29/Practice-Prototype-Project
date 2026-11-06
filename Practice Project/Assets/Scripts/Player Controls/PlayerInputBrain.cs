@@ -12,8 +12,8 @@ namespace PrototypeProject
 #endif
     public class PlayerInputBrain : MonoBehaviour
     {
-        [Tooltip("The physical body this brain will control")] 
-        [SerializeField] private ThirdPersonController _body;
+        [Tooltip("The physical body this brain will control")] [SerializeField]
+        private ThirdPersonController _body;
 
         [SerializeField] private StarterAssetsInputs _input;
 #if ENABLE_INPUT_SYSTEM
@@ -39,9 +39,9 @@ namespace PrototypeProject
 
             // 2. CREATE COMMANDS
             IPlayerCommand jumpCommand = new JumpCommand(_input.jump);
-    
+
             // FIX: Consume the jump input immediately so it doesn't get stuck on true
-            _input.jump = false; 
+            _input.jump = false;
 
             IPlayerCommand moveCommand = new MoveCommand(safeMoveInput, _input.sprint);
 
@@ -53,11 +53,11 @@ namespace PrototypeProject
         void LateUpdate()
         {
             if (_body == null) return;
-        
+
             bool isFocusing = (_input.pickDrop && _input.focus);
-        
+
             // FIX: Default to true so mouse input doesn't get crushed by Time.deltaTime
-            bool isMouse = true; 
+            bool isMouse = true;
 
 #if ENABLE_INPUT_SYSTEM
             if (_playerInput != null)
@@ -65,7 +65,7 @@ namespace PrototypeProject
                 isMouse = _playerInput.currentControlScheme == "KeyboardMouse";
             }
 #endif
-            
+
             IPlayerCommand lookCommand = new LookCommand(_input.look, isFocusing, isMouse);
             lookCommand.Execute(_body);
         }
