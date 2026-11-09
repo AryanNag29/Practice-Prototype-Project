@@ -3,11 +3,13 @@ using UnityEngine;
 namespace PrototypeProject
 {
     #region Command Pattern
+
     //The blueprint for all commands. every command must know how to execute itself
     public interface IPlayerCommand
     {
         void Execute(ThirdPersonController body);
     }
+
     //Command: "Walk/Run" in this direction
     public struct MoveCommand : IPlayerCommand
     {
