@@ -698,7 +698,7 @@ MonoBehaviour:
   tppDistance: 3
   fppDistance: -0.5
   fovInFpp: 60
-  fovInTpp: 40
+  fovInTpp: 70
   sprintFovFpp: 80
   sprintFovTpp: 60
   focusFovFpp: 40
@@ -1689,8 +1689,8 @@ MonoBehaviour:
   Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.2
-    FarClipPlane: 500
+    NearClipPlane: 0.01
+    FarClipPlane: 618.6
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
   Damping: {x: 0.1, y: 0.25, z: 0.3}
-  ShoulderOffset: {x: 0.02, y: 0.16, z: 0}
+  ShoulderOffset: {x: 4.75, y: 0.16, z: 0}
   VerticalArmLength: 0
   CameraSide: 0.6
   CameraDistance: 3
@@ -2610,7 +2610,7 @@ Transform:
   m_GameObject: {fileID: 968240467125554260}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0040000007, y: 1.54, z: -3}
+  m_LocalPosition: {x: 0.9500002, y: 1.54, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3260,7 +3260,7 @@ Transform:
   m_GameObject: {fileID: 5542111179026866204}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000010988103, y: 0.000000047938002, z: 5.267477e-16, w: 1}
-  m_LocalPosition: {x: 0.0040000007, y: 1.54, z: -3}
+  m_LocalPosition: {x: 0.9500002, y: 1.54, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3317,8 +3317,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
-  far clip plane: 500
+  near clip plane: 0.01
+  far clip plane: 618.6
   field of view: 40
   orthographic: 0
   orthographic size: 10
